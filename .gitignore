@@ -20,6 +20,7 @@ processor*/
 constant/extendedFeatureEdgeMesh
 *.eMesh
 constant/polyMesh
+constant/cellToRegion
 constant/dynamicMeshDict
 !constant/polyMesh/blockMeshDict
 !0.org/
