@@ -54,7 +54,7 @@ boundaryField
 
     top
     {
-        type            omegaWallFunction;
+        type            fixedValue;
         value           $internalField;
     }
 

@@ -42,7 +42,7 @@ boundaryField
 
     top
     {
-        type            nutkWallFunction;
+        type            calculated;
         value           uniform 0;
     }
 

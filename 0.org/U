@@ -60,8 +60,7 @@ boundaryField
 
     top
     {
-        type            fixedValue;
-        value           uniform (1 0 0);
+        type            zeroGradient;
     }
 
     bottom

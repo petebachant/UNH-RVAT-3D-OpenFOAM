@@ -46,7 +46,6 @@ boundaryField
         value           $internalField;
     }
 
-
     walls
     {
         type            kqRWallFunction;
@@ -55,7 +54,7 @@ boundaryField
 
     top
     {
-        type            kqRWallFunction;
+        type            fixedValue;
         value           $internalField;
     }
 

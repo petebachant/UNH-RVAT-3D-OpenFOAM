@@ -16,7 +16,6 @@ cp -rf 0.org 0
 #mv log.decomposePar log.decomposeParMesh
 #runApplication decomposePar
 
-#cp system/decomposeParDict.scotch system/decomposeParDict
 runParallel `getApplication` $nProc
 runParallel vorticity $nProc
 runParallel R $nProc
@@ -25,7 +24,7 @@ mv log.reconstructParMesh log.reconstructParMesh.pre
 runApplication reconstructParMesh -constant
 runApplication reconstructPar
 
-# rm -rf processor*
+rm -rf processor*
 
 python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
 
