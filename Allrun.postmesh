@@ -13,8 +13,8 @@ cp -rf 0.org 0
 
 ./gendynmeshdict.py
 
-#mv log.decomposePar log.decomposeParMesh
-#runApplication decomposePar
+mv log.decomposePar log.decomposeParMesh
+runApplication decomposePar
 
 runParallel `getApplication` $nProc
 runParallel vorticity $nProc

@@ -36,14 +36,14 @@ boundaryField
 
     blades
     {
-        type            kqRWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 1e-12;
     }
 
     shaft
     {
-        type            kqRWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 1e-12;
     }
 
     walls
