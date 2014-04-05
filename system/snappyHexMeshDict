@@ -119,11 +119,11 @@ castellatedMeshControls
     (
         {
             file        "blades.eMesh";
-            levels ((0.0 4));
+            levels ((0.0 5));
         }
         {
             file        "shaft.eMesh";
-            levels ((0.0 3));
+            levels ((0.0 4));
         }
 /*
         {
@@ -162,11 +162,11 @@ castellatedMeshControls
         }
         blades
         {
-            level       (4 4);
+            level       (5 5);
         }
         shaft
         {
-            level       (3 3);
+            level       (4 4);
         }
 /*
         struts
