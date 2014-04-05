@@ -26,6 +26,10 @@ runApplication reconstructPar
 
 rm -rf processor*
 
+# Calculate vorticity and Reynolds stress for t = 0
+vorticity -time 0
+R -time 0
+
 python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
 
 notify-send "OpenFOAM" "Simulation finished."
