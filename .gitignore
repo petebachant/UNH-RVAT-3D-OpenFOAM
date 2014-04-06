@@ -1,6 +1,5 @@
 *.gz
 log.*
-0/
 oldLogs/
 postProcessing/
 images/
@@ -24,3 +23,4 @@ constant/cellToRegion
 constant/dynamicMeshDict
 !constant/polyMesh/blockMeshDict
 !0.org/
+*.OpenFOAM
