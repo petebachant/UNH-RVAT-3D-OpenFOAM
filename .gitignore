@@ -6,6 +6,7 @@ images/
 video/
 *~
 processor*/
+!0.org/
 0*/
 1*/
 2*/
@@ -18,9 +19,8 @@ processor*/
 9*/
 constant/extendedFeatureEdgeMesh
 *.eMesh
-constant/polyMesh
+constant/polyMesh/*
+!constant/polyMesh/blockMeshDict
 constant/cellToRegion
 constant/dynamicMeshDict
-!constant/polyMesh/blockMeshDict
-!0.org/
 *.OpenFOAM
