@@ -17,7 +17,7 @@ FoamFile
 // Which of the steps to run
 castellatedMesh true;
 snap            true;
-addLayers       true;
+addLayers       false;
 
 
 //Optional: single region surfaces get patch names according to
@@ -214,7 +214,7 @@ castellatedMeshControls
 
     refinementRegions
     {
-/*
+
         turb_zone
         {
             mode        inside;
@@ -227,7 +227,7 @@ castellatedMeshControls
             mode        inside;
             levels      ((1e15 0));
         }
-*/
+
     }
 
     // Mesh selection
@@ -277,7 +277,7 @@ snapControls
 
         // Number of feature edge snapping iterations.
         // Leave out altogether to disable.
-        nFeatureSnapIter 30; // Was 10
+        nFeatureSnapIter 6; // Was 10
 
         // Detect (geometric only) features by sampling the surface
         // (default=false).
