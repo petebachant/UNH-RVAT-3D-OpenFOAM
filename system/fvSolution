@@ -22,7 +22,7 @@ solvers
         tolerance        	0.01; // Was 0.02
         relTol           	0; // Was 0
         smoother         	GaussSeidel; // Was GaussSeidel
-        nPreSweeps       	2; // Was 0
+        nPreSweeps       	0; // Was 0
         nPostSweeps      	2; // 2
         cacheAgglomeration 	true; // Was on
         agglomerator     	faceAreaPair;
