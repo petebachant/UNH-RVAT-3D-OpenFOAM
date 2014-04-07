@@ -264,7 +264,7 @@ snapControls
     // Maximum relative distance for points to be attracted by surface.
     // True distance is this factor times local maximum edge length.
     // Note: changed(corrected) w.r.t 17x! (17x used 2* tolerance)
-    tolerance 2.0;
+    tolerance 4.0;
 
     // Number of mesh displacement relaxation iterations.
     nSolveIter 300;
@@ -277,18 +277,18 @@ snapControls
 
         // Number of feature edge snapping iterations.
         // Leave out altogether to disable.
-        nFeatureSnapIter 50; // Was 10
+        nFeatureSnapIter 10; // Was 10
 
         // Detect (geometric only) features by sampling the surface
         // (default=false).
-        implicitFeatureSnap false;
+        implicitFeatureSnap true;
 
         // Use castellatedMeshControls::features (default = true)
-        explicitFeatureSnap true;
+        explicitFeatureSnap false;
 
         // Detect features between multiple surfaces
         // (only for explicitFeatureSnap, default = false)
-        multiRegionFeatureSnap false;
+        multiRegionFeatureSnap true;
 
 
     // wip: disable snapping to opposite near surfaces (revert to 22x behaviour)
