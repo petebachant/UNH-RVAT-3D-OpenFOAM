@@ -11,8 +11,6 @@ mkdir 0
 blockMesh
 surfaceFeatureExtract
 
-runApplication decomposePar
-
 runApplication snappyHexMesh -overwrite
 
 runApplication renumberMesh -overwrite
