@@ -6,7 +6,6 @@ images/
 video/
 *~
 processor*/
-!0.org/
 0*/
 1*/
 2*/
@@ -17,6 +16,7 @@ processor*/
 7*/
 8*/
 9*/
+!0.org
 constant/extendedFeatureEdgeMesh
 *.eMesh
 constant/polyMesh/*
