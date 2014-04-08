@@ -30,7 +30,7 @@ boundaryField
 
     shaft
     {
-        type            nutUSpaldingWallFunction;
+        type            nutkWallFunction;
         value           uniform 0;
     }
 
