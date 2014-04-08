@@ -214,13 +214,13 @@ castellatedMeshControls
 
     refinementRegions
     {
-
+/*
         AMIsurface
         {
             mode        inside;
             levels      ((1e15 0));
         }
-
+*/
         turb_zone
         {
             mode        inside;
@@ -344,7 +344,7 @@ addLayersControls
     {
         "blades.*"
         {
-            nSurfaceLayers 4;
+            nSurfaceLayers 2;
         }
     }
 
