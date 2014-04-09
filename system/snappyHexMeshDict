@@ -315,7 +315,7 @@ addLayersControls
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
         // outside layer.
-        finalLayerThickness 0.5;
+        finalLayerThickness 0.4;
 
         // Wanted thickness of the layer next to the wall.
         // If relativeSizes this is relative to undistorted size of cell
@@ -344,7 +344,7 @@ addLayersControls
     {
         "blades.*"
         {
-            nSurfaceLayers 6;
+            nSurfaceLayers 4;
         }
     }
 
