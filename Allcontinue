@@ -18,14 +18,11 @@ mv log.reconstructPar oldLogs/log.reconstructPar
 runApplication decomposePar -latestTime
 
 runParallel `getApplication` $nProc
-runParallel vorticity $nProc
-runParallel R $nProc
 
 runApplication reconstructPar
 
-# Calculate vorticity and Reynolds stress for t = 0
-vorticity -time 0
-R -time 0
+runApplication vorticity
+runApplication R
 
 rm -rf processor*
 
