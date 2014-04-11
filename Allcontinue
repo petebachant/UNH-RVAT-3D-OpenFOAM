@@ -12,6 +12,8 @@ mkdir -p oldLogs
 mv log.decomposePar oldLogs/log.decomposePar
 mv log.pimpleDyMFoam oldLogs/log.pimpleDyMFoam
 mv log.reconstructPar oldLogs/log.reconstructPar
+mv log.vorticity oldLogs/log.vorticity
+mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
@@ -21,10 +23,10 @@ runParallel `getApplication` $nProc
 
 runApplication reconstructPar
 
+rm -rf processor*
+
 runApplication vorticity
 runApplication R
-
-rm -rf processor*
 
 python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
 
