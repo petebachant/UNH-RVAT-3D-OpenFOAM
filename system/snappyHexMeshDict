@@ -161,7 +161,7 @@ castellatedMeshControls
         }
         blades
         {
-            level       (5 5);
+            level       (6 6);
         }
         shaft
         {
@@ -344,7 +344,7 @@ addLayersControls
     {
         "blades.*"
         {
-            nSurfaceLayers 4;
+            nSurfaceLayers 3;
         }
     }
 
