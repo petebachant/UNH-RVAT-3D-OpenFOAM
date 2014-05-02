@@ -161,7 +161,7 @@ castellatedMeshControls
         }
         blades
         {
-            level       (6 6);
+            level       (5 5);
         }
         shaft
         {
@@ -213,13 +213,13 @@ castellatedMeshControls
 
     refinementRegions
     {
-
+/*
         turb_zone
         {
             mode        inside;
             levels      ((1e15 1));
         }
-
+*/
 /*
         AMIsurface
         {
@@ -263,7 +263,7 @@ snapControls
     // Maximum relative distance for points to be attracted by surface.
     // True distance is this factor times local maximum edge length.
     // Note: changed(corrected) w.r.t 17x! (17x used 2* tolerance)
-    tolerance 2.0;
+    tolerance 1.0;
 
     // Number of mesh displacement relaxation iterations.
     nSolveIter 300;
@@ -276,18 +276,18 @@ snapControls
 
         // Number of feature edge snapping iterations.
         // Leave out altogether to disable.
-        nFeatureSnapIter 20; // Was 10
+        nFeatureSnapIter 10; // Was 10
 
         // Detect (geometric only) features by sampling the surface
         // (default=false).
-        implicitFeatureSnap true;
+        implicitFeatureSnap false;
 
         // Use castellatedMeshControls::features (default = true)
         explicitFeatureSnap true;
 
         // Detect features between multiple surfaces
         // (only for explicitFeatureSnap, default = false)
-        multiRegionFeatureSnap true;
+        multiRegionFeatureSnap false;
 
 
     // wip: disable snapping to opposite near surfaces (revert to 22x behaviour)
