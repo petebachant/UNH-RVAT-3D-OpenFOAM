@@ -52,13 +52,13 @@ geometry
         type        triSurfaceMesh;
         name        shaft;
     }
-/*
+
     struts_and_hub.stl
     {
         type        triSurfaceMesh;
         name        struts;
     }
-*/
+
     AMIsurface.stl
     {
         type        triSurfaceMesh;
@@ -125,18 +125,14 @@ castellatedMeshControls
             file        "shaft.eMesh";
             levels ((0.0 4));
         }
-/*
         {
             file        "struts_and_hub.eMesh";
             levels ((0.0 4));
         }
-*/
-
         {
             file        "AMIsurface.eMesh";
             levels ((0.0 1));
         }
-
     );
 
 
@@ -167,12 +163,10 @@ castellatedMeshControls
         {
             level       (4 4);
         }
-/*
         struts
         {
-            level       (2 3);
+            level       (4 4);
         }
-*/
     }
 
     // Feature angle:
