@@ -34,6 +34,12 @@ boundaryField
         value           uniform 0;
     }
 
+    struts
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+
     "(inlet|outlet)"
     {
         type            calculated;

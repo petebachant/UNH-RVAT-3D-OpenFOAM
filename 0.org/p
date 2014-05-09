@@ -41,6 +41,11 @@ boundaryField
         type            zeroGradient;
     }
 
+    struts
+    {
+        type            zeroGradient;
+    }
+
     walls
     {
         type            zeroGradient;

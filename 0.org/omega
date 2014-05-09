@@ -46,6 +46,12 @@ boundaryField
         value           $internalField;
     }
 
+    struts
+    {
+        type            omegaWallFunction;
+        value           $internalField;
+    }
+
     walls
     {
         type            omegaWallFunction;

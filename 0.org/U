@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.2.2                                 |
+|  \\    /   O peration     | Version:  2.3.x                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -34,19 +34,19 @@ boundaryField
         value           uniform (0 0 0);
     }
 
-    "blades.*"
+    blades
     {
         type            movingWallVelocity;
         value           uniform (0 0 0);
     }
 
-    "shaft.*"
+    shaft
     {
         type            movingWallVelocity;
         value           uniform (0 0 0);
     }
 
-    "struts.*"
+    struts
     {
         type            movingWallVelocity;
         value           uniform (0 0 0);

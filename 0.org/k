@@ -46,6 +46,12 @@ boundaryField
         value           $internalField;
     }
 
+    struts
+    {
+        type            kqRWallFunction;
+        value           $internalField;
+    }
+
     walls
     {
         type            kqRWallFunction;
