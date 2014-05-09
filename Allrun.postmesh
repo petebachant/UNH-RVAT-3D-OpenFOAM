@@ -9,8 +9,8 @@ nProc=$(getNumberOfProcessors)
 
 ./gendynmeshdict.py
 
-#mv log.decomposePar log.decomposeParMesh
-#runApplication decomposePar
+mv log.decomposePar log.decomposeParMesh
+runApplication decomposePar
 
 runParallel `getApplication` $nProc
 

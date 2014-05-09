@@ -42,6 +42,9 @@ cp -rf 0.org 0
 # Reconstruct the mesh, but leave deconstructed as well
 runApplication reconstructParMesh -constant
 
+rm -rf processor*
+
+#./refinewalls.py
 runApplication checkMesh
 runApplication yPlusRAS
 
