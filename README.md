@@ -14,6 +14,7 @@ mesh4
 Stats using 2.3.0:
 
   * 2754 s to mesh on 6 processes
+  * Solves at around 8 hr/s
   * y+ at blades 5.3 average at last time step
   * 0.31 C_P
   * 1.1 C_D
@@ -25,5 +26,5 @@ Copyright (c) 2014 Peter Bachant
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" />
-</a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+</a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"/>
 Creative Commons Attribution 4.0 International License</a>.
