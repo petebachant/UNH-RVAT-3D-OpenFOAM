@@ -32,9 +32,16 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
     
-def loadwake():
+def loadwake(time):
     """Loads wake data and returns y/R and statistics."""
-    folder = os.listdir("postProcessing/sets")[0]
+    # Figure out if time is an int or float
+    if not isinstance(time, str):
+        if time % 1 == 0:
+            folder = str(int(time))
+        else:
+            folder = str(time)
+    else:
+        folder = time
     flist = os.listdir("postProcessing/sets/"+folder)
     data = {}
     for fname in flist:
@@ -43,6 +50,12 @@ def loadwake():
         data_s = np.loadtxt(fpath, unpack=True)
         data[z_H] = data_s
     return data
+    
+def loadwake_all():
+    times = os.listdir("postProcessing/sets")
+    times = [float(time) for time in times]
+    times.sort()
+    print(times)
     
 def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
     data = loadwake()
@@ -197,7 +210,8 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["meancomboquiv"], save=True, savepath=p)
+#    plotwake(plotlist=["meancomboquiv"], save=True, savepath=p)
+    loadwake_all()
 
 if __name__ == "__main__":
     main()
