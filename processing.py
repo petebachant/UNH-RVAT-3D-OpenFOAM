@@ -47,19 +47,51 @@ def loadwake(time):
     for fname in flist:
         fpath = "postProcessing/sets/"+folder+"/"+fname
         z_H = float(fname.split("_")[1])
-        data_s = np.loadtxt(fpath, unpack=True)
-        data[z_H] = data_s
+        data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
     
 def loadwake_all():
     times = os.listdir("postProcessing/sets")
     times = [float(time) for time in times]
     times.sort()
-    print(times)
+    times = np.asarray(times)
+    data = []
+    for time in times:
+        data.append(loadwake(time))
+    return times, data
+    
+def calcwake(t1=5.0):
+    times = os.listdir("postProcessing/sets")
+    times = [float(time) for time in times]
+    times.sort()
+    times = np.asarray(times)
+    data = loadwake(times[0])
+    y_R = data[0][0]/R
+    z_H = np.asarray(sorted(data.keys()))
+    # Find first timestep from which to average over
+    i = np.where(times==t1)[0][0]
+    t = times[i:]
+    print(t)
+    # Assemble 3-D arrays, with time as first index
+    u = np.zeros((len(t), len(z_H), len(y_R)))
+    v = np.zeros((len(t), len(z_H), len(y_R)))
+    w = np.zeros((len(t), len(z_H), len(y_R)))
+    # Loop through all times
+    for n in range(len(t)):
+        data = loadwake(t[n])
+        for m in range(len(z_H)):
+#            print(data)
+#            print(u[n,m,:])
+            u[n,m,:] = data[z_H[m]][1]
+            v[n,m,:] = data[z_H[m]][2]
+            w[n,m,:] = data[z_H[m]][3]
+    meanu = np.mean(u, axis=0)
+    print(meanu)
+        
     
 def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
-    data = loadwake()
-    y_R = data[0][0]/R
+    data = loadwake_all()
+    y_R = data[0][0][0]/R
     z_H = np.asarray(sorted(data.keys()))
     # Assemble 2-D arrays
     u = np.zeros((len(z_H), len(y_R)))
@@ -211,7 +243,7 @@ def main():
     plt.close("all")
     
 #    plotwake(plotlist=["meancomboquiv"], save=True, savepath=p)
-    loadwake_all()
+    calcwake()
 
 if __name__ == "__main__":
     main()
