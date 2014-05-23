@@ -69,28 +69,20 @@ def calcwake(t1=6.0):
     for n in range(len(t)):
         data = loadwake(t[n])
         for m in range(len(z_H)):
-            print("Loading data from z_H =", z_H[m])
+            print("Loading data from z_H =", str(z_H[m]) + "...")
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
     meanu = np.mean(u, axis=0)
-    print(meanu)
+    return {"meanu" : meanu, "y/R" : y_R, "z/H" : z_H}
         
     
 def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
-    data = loadwake_all()
-    y_R = data[0][0][0]/R
-    z_H = np.asarray(sorted(data.keys()))
+    data = calcwake()
+    y_R = data["y/R"]
+    z_H = data["z/H"]
     # Assemble 2-D arrays
-    u = np.zeros((len(z_H), len(y_R)))
-    v = np.zeros((len(z_H), len(y_R)))
-    w = np.zeros((len(z_H), len(y_R)))
-    xvorticity = np.zeros((len(z_H), len(y_R)))
-    for n in range(len(z_H)):
-        u[n,:] = data[z_H[n]][1]
-        v[n,:] = data[z_H[n]][2]
-        w[n,:] = data[z_H[n]][3]
-        xvorticity[n,:] = data[z_H[n]][4]
+    u = data["meanu"]
     def turb_lines():
         plt.hlines(0.5, -1, 1, linestyles='solid', linewidth=2)
         plt.vlines(-1, 0, 0.5, linestyles='solid', linewidth=2)
@@ -230,8 +222,8 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-#    plotwake(plotlist=["meancomboquiv"], save=True, savepath=p)
-    calcwake()
+    plotwake(plotlist=["meanu"], save=False, savepath=p)
+#    calcwake()
 
 if __name__ == "__main__":
     main()
