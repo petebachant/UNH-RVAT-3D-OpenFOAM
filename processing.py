@@ -50,28 +50,17 @@ def loadwake(time):
         data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
     
-def loadwake_all():
-    times = os.listdir("postProcessing/sets")
-    times = [float(time) for time in times]
-    times.sort()
-    times = np.asarray(times)
-    data = []
-    for time in times:
-        data.append(loadwake(time))
-    return times, data
-    
-def calcwake(t1=5.0):
+def calcwake(t1=6.0):
     times = os.listdir("postProcessing/sets")
     times = [float(time) for time in times]
     times.sort()
     times = np.asarray(times)
     data = loadwake(times[0])
-    y_R = data[0][0]/R
     z_H = np.asarray(sorted(data.keys()))
+    y_R = data[z_H[0]][0]/R
     # Find first timestep from which to average over
     i = np.where(times==t1)[0][0]
     t = times[i:]
-    print(t)
     # Assemble 3-D arrays, with time as first index
     u = np.zeros((len(t), len(z_H), len(y_R)))
     v = np.zeros((len(t), len(z_H), len(y_R)))
@@ -80,8 +69,7 @@ def calcwake(t1=5.0):
     for n in range(len(t)):
         data = loadwake(t[n])
         for m in range(len(z_H)):
-#            print(data)
-#            print(u[n,m,:])
+            print("Loading data from z_H =", z_H[m])
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
