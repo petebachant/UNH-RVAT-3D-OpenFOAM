@@ -83,10 +83,20 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
     z_H = data["z/H"]
     # Assemble 2-D arrays
     u = data["meanu"]
-    def turb_lines():
-        plt.hlines(0.5, -1, 1, linestyles='solid', linewidth=2)
-        plt.vlines(-1, 0, 0.5, linestyles='solid', linewidth=2)
-        plt.vlines(1, 0, 0.5, linestyles='solid', linewidth=2)
+    def turb_lines(half=False):
+        if half:
+            plt.hlines(0.5, -1, 1, linestyles='solid', linewidth=2)
+            plt.vlines(-1, 0, 0.5, linestyles='solid', linewidth=2)
+            plt.vlines(1, 0, 0.5, linestyles='solid', linewidth=2)
+        else:
+            plt.hlines(0.5, -1, 1, linestyles='solid', colors='gray',
+                       linewidth=3)
+            plt.hlines(-0.5, -1, 1, linestyles='solid', colors='gray',
+                       linewidth=3)
+            plt.vlines(-1, -0.5, 0.5, linestyles='solid', colors='gray',
+                       linewidth=3)
+            plt.vlines(1, -0.5, 0.5, linestyles='solid', colors='gray',
+                       linewidth=3)
     if "meanu" in plotlist or "all" in plotlist:
         plt.figure(figsize=(10,5))
         cs = plt.contourf(y_R, z_H, u, 20, cmap=plt.cm.coolwarm)
