@@ -50,7 +50,7 @@ def loadwake(time):
         data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
     
-def calcwake(t1=6.0):
+def calcwake(t1=0.0):
     times = os.listdir("postProcessing/sets")
     times = [float(time) for time in times]
     times.sort()
@@ -69,7 +69,6 @@ def calcwake(t1=6.0):
     for n in range(len(t)):
         data = loadwake(t[n])
         for m in range(len(z_H)):
-            print("Loading data from z_H =", str(z_H[m]) + "...")
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
@@ -78,7 +77,7 @@ def calcwake(t1=6.0):
         
     
 def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
-    data = calcwake()
+    data = calcwake(t1=3.0)
     y_R = data["y/R"]
     z_H = data["z/H"]
     # Assemble 2-D arrays
@@ -98,18 +97,16 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
             plt.vlines(1, -0.5, 0.5, linestyles='solid', colors='gray',
                        linewidth=3)
     if "meanu" in plotlist or "all" in plotlist:
-        plt.figure(figsize=(10,5))
+        plt.figure(figsize=(9,8))
         cs = plt.contourf(y_R, z_H, u, 20, cmap=plt.cm.coolwarm)
         plt.xlabel(r'$y/R$')
         plt.ylabel(r'$z/H$')
         cb = plt.colorbar(cs, shrink=1, extend='both', 
-                          orientation='horizontal', pad=0.2)
+                          orientation='horizontal', pad=0.12)
         cb.set_label(r'$U/U_{\infty}$')
         turb_lines()
         ax = plt.axes()
         ax.set_aspect(2)
-        plt.grid(True)
-        plt.yticks([0,0.13,0.25,0.38,0.5,0.63])
         styleplot()
     if "meanv" in plotlist or "all" in plotlist:
         plt.figure(figsize=(10,5))
@@ -118,7 +115,7 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
         plt.ylabel(r'$z/H$')
         styleplot()
         cb = plt.colorbar(cs, shrink=1, extend='both', 
-                          orientation='horizontal', pad=0.3)
+                          orientation='horizontal', pad=0.22)
         cb.set_label(r'$V/U_{\infty}$')
         #turb_lines()
         ax = plt.axes()
