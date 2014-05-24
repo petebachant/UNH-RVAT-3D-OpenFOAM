@@ -72,16 +72,23 @@ def calcwake(t1=0.0):
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
-    meanu = np.mean(u, axis=0)
-    return {"meanu" : meanu, "y/R" : y_R, "z/H" : z_H}
+    meanu = u.mean(axis=0)
+    meanv = v.mean(axis=0)
+    meanw = w.mean(axis=0)
+    return {"meanu" : meanu,
+            "meanv" : meanv,
+            "meanw" : meanw,
+            "y/R" : y_R, 
+            "z/H" : z_H}
         
     
 def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
-    data = calcwake(t1=3.0)
+    data = calcwake(t1=2.0)
     y_R = data["y/R"]
     z_H = data["z/H"]
-    # Assemble 2-D arrays
     u = data["meanu"]
+    v = data["meanv"]
+    w = data["meanw"]
     def turb_lines(half=False):
         if half:
             plt.hlines(0.5, -1, 1, linestyles='solid', linewidth=2)
@@ -166,8 +173,7 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
         # Add contours of mean velocity
         cs = plt.contourf(y_R, z_H, u, 20, cmap=plt.cm.coolwarm)
         cb = plt.colorbar(cs, shrink=1, extend='both', 
-                          orientation='horizontal', pad=0.12,
-                          ticks=np.round(np.linspace(0.44, 1.12, 10), decimals=2))
+                          orientation='horizontal', pad=0.12)
         cb.set_label(r'$U/U_{\infty}$')
         plt.hold(True)
         # Make quiver plot of v and w velocities
@@ -179,9 +185,9 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
         plt.xlim(-3.66, 3.66)
         plt.ylim(-1.22, 1.22)
         plt.quiverkey(Q, 0.8, 0.22, 0.1, r'$0.1 U_\infty$',
-                   labelpos='E',
-                   coordinates='figure',
-                   fontproperties={'size': 'small'})
+                      labelpos='E',
+                      coordinates='figure',
+                      fontproperties={'size': 'small'})
         plt.hlines(0.5, -1, 1, linestyles='solid', colors='gray',
                    linewidth=3)
         plt.hlines(-0.5, -1, 1, linestyles='solid', colors='gray',
@@ -229,7 +235,7 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["meanu"], save=False, savepath=p)
+    plotwake(plotlist=["meancomboquiv"], save=False, savepath=p)
 #    calcwake()
 
 if __name__ == "__main__":
