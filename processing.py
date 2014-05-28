@@ -65,6 +65,7 @@ def calcwake(t1=0.0):
     u = np.zeros((len(t), len(z_H), len(y_R)))
     v = np.zeros((len(t), len(z_H), len(y_R)))
     w = np.zeros((len(t), len(z_H), len(y_R)))
+    xvorticity = np.zeros((len(t), len(z_H), len(y_R)))
     # Loop through all times
     for n in range(len(t)):
         data = loadwake(t[n])
@@ -72,23 +73,28 @@ def calcwake(t1=0.0):
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
+            xvorticity[n,m,:] = data[z_H[m]][4]
     meanu = u.mean(axis=0)
     meanv = v.mean(axis=0)
     meanw = w.mean(axis=0)
+    xvorticity = xvorticity.mean(axis=0)
     return {"meanu" : meanu,
             "meanv" : meanv,
             "meanw" : meanw,
+            "xvorticity" : xvorticity,
             "y/R" : y_R, 
             "z/H" : z_H}
         
     
-def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
-    data = calcwake(t1=2.0)
+def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="", 
+             savetype=".pdf"):
+    data = calcwake(t1=t1)
     y_R = data["y/R"]
     z_H = data["z/H"]
     u = data["meanu"]
     v = data["meanv"]
     w = data["meanw"]
+    xvorticity = data["xvorticity"]
     def turb_lines(half=False):
         if half:
             plt.hlines(0.5, -1, 1, linestyles='solid', linewidth=2)
@@ -154,20 +160,19 @@ def plotwake(plotlist=["meanu"], save=False, savepath="", savetype=".pdf"):
         if save:
             plt.savefig(savepath+'v-wquiver'+savetype)
     if "xvorticity" in plotlist or "all" in plotlist:
-        plt.figure(figsize=(10,5))
+        plt.figure(figsize=(9,8))
         cs = plt.contourf(y_R, z_H, xvorticity, 10, cmap=plt.cm.coolwarm)
         plt.xlabel(r'$y/R$')
         plt.ylabel(r'$z/H$')
         cb = plt.colorbar(cs, shrink=1, extend='both', 
-                          orientation='horizontal', pad=0.26)
+                          orientation='horizontal', pad=0.12)
         cb.set_label(r"$\Omega_x$")
         turb_lines()
         ax = plt.axes()
         ax.set_aspect(2)
-        plt.yticks([0,0.13,0.25,0.38,0.5,0.63])
         styleplot()
         if save:
-            plt.savefig(savepath+'/xvorticity_AD'+savetype)
+            plt.savefig(savepath+'/xvorticity_3drans'+savetype)
     if "meancomboquiv" in plotlist or "all" in plotlist:
         plt.figure(figsize=(9, 8))
         # Add contours of mean velocity
@@ -235,7 +240,8 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["meancomboquiv"], save=False, savepath=p)
+    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=4.0, 
+             save=False, savepath=p)
 #    calcwake()
 
 if __name__ == "__main__":
