@@ -60,7 +60,7 @@ boundaryField
 
     top
     {
-        type            zeroGradient;
+        type            slip;
     }
 
     bottom
