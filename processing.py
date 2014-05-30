@@ -161,11 +161,13 @@ def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="",
             plt.savefig(savepath+'v-wquiver'+savetype)
     if "xvorticity" in plotlist or "all" in plotlist:
         plt.figure(figsize=(9,8))
-        cs = plt.contourf(y_R, z_H, xvorticity, 10, cmap=plt.cm.coolwarm)
+        cs = plt.contourf(y_R, z_H, xvorticity, 10, cmap=plt.cm.coolwarm,
+                          levels=np.linspace(-2.5,2.5,21))
         plt.xlabel(r'$y/R$')
         plt.ylabel(r'$z/H$')
         cb = plt.colorbar(cs, shrink=1, extend='both', 
                           orientation='horizontal', pad=0.12)
+        cb.set_ticks(np.linspace(-2.5,2.5,11), update_ticks=True)
         cb.set_label(r"$\Omega_x$")
         turb_lines()
         ax = plt.axes()
@@ -240,7 +242,7 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=4.0, 
+    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
              save=False, savepath=p)
 #    calcwake()
 
