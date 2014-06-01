@@ -24,8 +24,7 @@ boundaryField
 
     blades
     {
-        type            nutUSpaldingWallFunction;
-        value           uniform 0;
+        type            calculated;
     }
 
     shaft

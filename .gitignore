@@ -23,5 +23,7 @@ constant/polyMesh/*
 !constant/polyMesh/blockMeshDict
 constant/cellToRegion
 constant/dynamicMeshDict
+constant/y
+constant/yPlus
 *.OpenFOAM
 system/sampleDict
