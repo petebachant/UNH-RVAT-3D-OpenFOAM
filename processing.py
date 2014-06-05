@@ -11,10 +11,12 @@ import matplotlib.pyplot as plt
 import re
 import numpy as np
 import os
-from styleplot import styleplot
+import styleplot
 import sys
 import foampy
 import fdiff
+
+styleplot.setpltparams()
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
@@ -120,13 +122,11 @@ def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="",
         turb_lines()
         ax = plt.axes()
         ax.set_aspect(2)
-        styleplot()
     if "meanv" in plotlist or "all" in plotlist:
         plt.figure(figsize=(10,5))
         cs = plt.contourf(y/0.5, z, v, 20, cmap=plt.cm.coolwarm)
         plt.xlabel(r'$y/R$')
         plt.ylabel(r'$z/H$')
-        styleplot()
         cb = plt.colorbar(cs, shrink=1, extend='both', 
                           orientation='horizontal', pad=0.22)
         cb.set_label(r'$V/U_{\infty}$')
@@ -172,7 +172,7 @@ def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="",
         turb_lines()
         ax = plt.axes()
         ax.set_aspect(2)
-        styleplot()
+        plt.tight_layout()
         if save:
             plt.savefig(savepath+'/xvorticity_3drans'+savetype)
     if "meancomboquiv" in plotlist or "all" in plotlist:
@@ -205,7 +205,7 @@ def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="",
                    linewidth=3)
         ax = plt.axes()
         ax.set_aspect(2.0)
-        styleplot()
+        plt.tight_layout()
         if save:
             plt.savefig(savepath+"\\meancomboquiv_AD"+savetype)
     plt.show()
@@ -232,7 +232,6 @@ def plotexpwake(Re_D, quantity, z_H=0.0, save=False, savepath="",
     plt.xlabel(r"$y/R$")
     plt.ylabel(ylabels[quantity])
     plt.grid(True)
-    styleplot()
 
 def main():
     p = "Google Drive/Research/Papers/JOT CFT near-wake/Figures"
