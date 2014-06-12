@@ -20,6 +20,15 @@ Stats using 2.3.0:
   * 1.1 C_D
   * Large discrepancies between each blade's torque contribution
 
+mesh5
+-----
+Using 2.3.x
+
+  * 0.31 C_P from 361 deg to 10 s
+  * yPlus average is 3.5 at blades
+  * 6 million cells
+  * Strange patterns coming from top BC
+
 License
 -------
 Copyright (c) 2014 Peter Bachant
