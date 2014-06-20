@@ -28,6 +28,7 @@ Using 2.3.x
   * yPlus average is 3.5 at blades
   * 6 million cells
   * Strange patterns coming from top BC
+  * Layers were most likely bad around trailing edge
 
 License
 -------
