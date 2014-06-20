@@ -100,7 +100,7 @@ castellatedMeshControls
     // Number of buffer layers between different levels.
     // 1 means normal 2:1 refinement restriction, larger means slower
     // refinement.
-    nCellsBetweenLevels 1;
+    nCellsBetweenLevels 2;
 
 
     // Explicit feature edge refinement
@@ -207,13 +207,13 @@ castellatedMeshControls
 
     refinementRegions
     {
-
+/*
         turb_zone
         {
             mode        inside;
             levels      ((1e15 1));
         }
-
+*/
 /*
         AMIsurface
         {
