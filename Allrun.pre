@@ -45,7 +45,7 @@ runApplication reconstructParMesh -constant
 rm -rf processor*
 
 runApplication checkMesh
-runApplication yPlusRAS
+runApplication yPlus
 
 notify-send "OpenFOAM" "Meshing finished."
 
