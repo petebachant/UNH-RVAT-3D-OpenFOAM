@@ -5,7 +5,12 @@ Created on Sat Sep  7 21:34:46 2013
 
 @author: pete
 """
-
+from PyQt4 import QtGui
 import foampy
 
-foampy.make_progress_bar()
+if __name__ == '__main__':
+    import sys
+    app = QtGui.QApplication(sys.path)
+    pbarwin = foampy.ProgressBar()
+    pbarwin.show()
+    app.exec_()

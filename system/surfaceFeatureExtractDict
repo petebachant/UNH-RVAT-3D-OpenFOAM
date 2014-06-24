@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.3.x                                 |
+|  \\    /   O peration     | Version:  2.2.0                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -23,12 +23,12 @@ shaft.stl
 {
     #include "surfaceFeatureExtractDictDefaults"
 }
-
+/*
 struts_and_hub.stl
 {
     #include "surfaceFeatureExtractDictDefaults"
 }
-
+*/
 AMIsurface.stl
 {
     #include "surfaceFeatureExtractDictDefaults"

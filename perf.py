@@ -23,9 +23,9 @@ print("Mean tsr:", meantsr)
 # Pick an index to start from for mean calculations and plotting
 # (allow turbine to reach steady state)
 try:
-    i = np.where(np.round(theta) == 361)[0][0]
+    i = np.where(np.round(theta) == 360)[0][0]
 except IndexError:
-    i = 5
+    i = 1
 #i2 = np.where(np.round(theta) == 218)[0][0]
 i2 = -1
 
@@ -44,5 +44,5 @@ plt.plot(theta[i:i2], cp[i:i2])
 plt.title(r"$\lambda = %1.1f$" %meantsr)
 plt.xlabel(r"$\theta$ (degrees)")
 plt.ylabel(r"$C_P$")
-#plt.ylim((-0.2, 0.5))
+#plt.ylim((0, 0.7))
 plt.show()

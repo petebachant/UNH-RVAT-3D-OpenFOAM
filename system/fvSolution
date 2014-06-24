@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.3.x                                 |
+|  \\    /   O peration     | Version:  2.3.0                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -18,22 +18,22 @@ solvers
 {
     pcorr
     {
-        solver           	GAMG;
-        tolerance        	0.01; // Was 0.02
-        relTol           	0; // Was 0
-        smoother         	GaussSeidel; // Was GaussSeidel
-        nPreSweeps       	0; // Was 0
-        nPostSweeps      	2; // 2
-        cacheAgglomeration 	true; // Was on
-        agglomerator     	faceAreaPair;
-        nCellsInCoarsestLevel 	50; // Was 10
-        mergeLevels      	1;
+        solver           GAMG;
+        tolerance        0.02; // Was 0.02
+        relTol           0; // Was 0
+        smoother         GaussSeidel; // Was GaussSeidel
+        nPreSweeps       0; // Was 0
+        nPostSweeps      2; // 2
+        cacheAgglomeration false; // Was on
+        agglomerator     faceAreaPair;
+        nCellsInCoarsestLevel 50; // Was 10
+        mergeLevels      1;
     }
 
     p
     {
         $pcorr;
-        tolerance       1e-6; // 1e-6
+        tolerance       1e-5; // 1e-6
         relTol          0.01; // Was 0.01
     }
 
@@ -65,9 +65,9 @@ solvers
 PIMPLE
 {
     correctPhi          no;
-    nOuterCorrectors    20; // Was 2, set higher for more PIMPLE loops
-    nCorrectors         3; // Was 1
-    nNonOrthogonalCorrectors 1; // Was 0
+    nOuterCorrectors    6; // Was 2, set higher for more PIMPLE loops
+    nCorrectors         4; // Was 1
+    nNonOrthogonalCorrectors 2; // Was 0
     pRefCell        1001;
     pRefValue       0;
 
@@ -91,7 +91,7 @@ relaxationFactors
 {
     fields
     {
-        p               0.7; // 0.3;
+        p               0.8; // 0.3;
     }
     equations
     {

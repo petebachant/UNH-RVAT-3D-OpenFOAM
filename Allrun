@@ -5,4 +5,25 @@ cd ${0%/*} || exit 1    # run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 ./Allrun.pre
-./Allrun.postmesh
+
+# Get the number of processors to run on from system/decomposeParDict
+nProc=$(getNumberOfProcessors)
+
+./gendynmeshdict.py
+
+runApplication decomposePar
+
+runParallel `getApplication` $nProc
+
+runApplication reconstructPar
+
+rm -rf processor*
+
+runApplication vorticity
+runApplication R
+
+python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
+
+notify-send "OpenFOAM" "Simulation finished."
+
+./perf.py
