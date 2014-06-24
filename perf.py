@@ -25,7 +25,7 @@ print("Mean tsr:", meantsr)
 try:
     i = np.where(np.round(theta) == 360)[0][0]
 except IndexError:
-    i = 1
+    i = 5
 #i2 = np.where(np.round(theta) == 218)[0][0]
 i2 = -1
 

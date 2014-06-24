@@ -21,12 +21,12 @@ solvers
         solver           GAMG;
         tolerance        0.02; // Was 0.02
         relTol           0; // Was 0
-        smoother         GaussSeidel; // Was GaussSeidel
+        smoother         DICGaussSeidel; // Was GaussSeidel
         nPreSweeps       0; // Was 0
         nPostSweeps      2; // 2
-        cacheAgglomeration false; // Was on
+        cacheAgglomeration no; // Was on
         agglomerator     faceAreaPair;
-        nCellsInCoarsestLevel 50; // Was 10
+        nCellsInCoarsestLevel 500; // Was 10
         mergeLevels      1;
     }
 
@@ -60,14 +60,32 @@ solvers
         relTol          0;
     }
 
+    nuTilda
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        nSweeps         2;
+        tolerance       1e-08;
+        relTol          0.1;
+    }
+
+    nuTildaFinal
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        nSweeps         2;
+        tolerance       1e-08;
+        relTol          0;
+    }
+
 }
 
 PIMPLE
 {
     correctPhi          no;
-    nOuterCorrectors    6; // Was 2, set higher for more PIMPLE loops
-    nCorrectors         4; // Was 1
-    nNonOrthogonalCorrectors 2; // Was 0
+    nOuterCorrectors    10; // Was 2, set higher for more PIMPLE loops
+    nCorrectors         8; // Was 1
+    nNonOrthogonalCorrectors 3; // Was 0
     pRefCell        1001;
     pRefValue       0;
 
@@ -91,12 +109,12 @@ relaxationFactors
 {
     fields
     {
-        p               0.8; // 0.3;
+        p               0.2; // 0.3;
     }
     equations
     {
-        "(U|k|omega)"      0.8; // 0.7;
-        "(U|k|omega)Final" 1.0; // 1.0;
+        "(U|nuTilda)"      0.5; // 0.7;
+        "(U|nuTilda)Final" 1.0; // 1.0;
     }
 }
 

@@ -4,23 +4,28 @@ cd ${0%/*} || exit 1    # run from this directory
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
-./Allrun.pre
-
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
+
+# runApplication renumberMesh -overwrite
+
+cp -rf 0.org 0
 
 ./gendynmeshdict.py
 
 runApplication decomposePar
 
+#- For parallel running
+ls -d processor* | xargs -i rm -rf ./{}/0 $1
+ls -d processor* | xargs -i cp -r 0.org ./{}/0 $1
+
 runParallel `getApplication` $nProc
+runParallel vorticity $nProc
+runParallel R $nProc
 
 runApplication reconstructPar
 
 rm -rf processor*
-
-runApplication vorticity
-runApplication R
 
 python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
 
