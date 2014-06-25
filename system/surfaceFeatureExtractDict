@@ -14,21 +14,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-blades.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
-
-shaft.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
-
-struts_and_hub.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
-
 AMIsurface.stl
 {
     #include "surfaceFeatureExtractDictDefaults"

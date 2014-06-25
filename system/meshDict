@@ -19,14 +19,14 @@ FoamFile
 
 surfaceFile "constant/triSurface/allEdges.stl";
 
-maxCellSize 0.1;
+maxCellSize 0.05;
 
-boundaryCellSize 0.1;
+boundaryCellSize $maxCellSize;
 
 bladeCellSize 0.004; 
-shaftCellSize 0.01;
-strutCellSize 0.01;
-hubCellSize   0.01;
+shaftCellSize 0.008;
+strutCellSize 0.008;
+hubCellSize   0.008;
 
 localRefinement
 {

@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.2.0                                 |
+|  \\    /   O peration     | Version:  2.3.x                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -58,9 +58,9 @@ patches
             type            patch;
         }
 
-        constructFrom set;
+        constructFrom patches;
 
-        set inletFaces;
+        patches (all_24);
     }
     {
         name outlet;
@@ -70,10 +70,86 @@ patches
             type            patch;
         }
 
-        constructFrom set;
+        constructFrom patches;
 
-        set outletFaces;
+        patches (all_29);
     }
+
+    {
+        name walls;
+
+        patchInfo
+        {
+            type            wall;
+        }
+
+        constructFrom patches;
+
+        patches (all_25 all_27);
+    }
+
+    {
+        name bottom;
+
+        patchInfo
+        {
+            type            wall;
+        }
+
+        constructFrom patches;
+
+        patches (all_28);
+    }
+
+    {
+        name top;
+
+        patchInfo
+        {
+            type            patch;
+        }
+
+        constructFrom patches;
+
+        patches (all_26);
+    }
+
+    {
+        name turbine;
+
+        patchInfo
+        {
+            type            patch;
+        }
+
+        constructFrom patches;
+
+        patches (all_0
+                 all_1
+                 all_2
+                 all_3
+                 all_4
+                 all_5
+                 all_6
+                 all_7
+                 all_8
+                 all_9
+                 all_10
+                 all_11
+                 all_12
+                 all_13
+                 all_14
+                 all_15
+                 all_16
+                 all_17
+                 all_18
+                 all_19
+                 all_20
+                 all_21
+                 all_22
+                 all_23);
+    }
+
 );
 
 // ************************************************************************* //
