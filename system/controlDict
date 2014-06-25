@@ -55,7 +55,7 @@ libs
     "libforces.so"
     "libincompressibleTurbulenceModel.so"
     "libincompressibleRASModels.so"
-    "libMyIncompressibleRASModels.so"
+    "libmyIncompressibleRASModels.so"
 );
 
 functions

@@ -1,6 +1,39 @@
 UNH-RVAT 3-D OpenFOAM case files
 ================================
 
+Meshing procedure
+-----------------
+
+### `cfMesh`
+Run surfaceFeatureEdges [inputfile] [outputfile] to extract edges and patches from input file
+
+#### Patches from raw STL
+all_0    |    lower shaft
+all_1    |    upper shaft
+all_2    |    strut 1
+all_3    |    blade 1
+all_4    |    strut 2
+all_5    |    blade 2
+all_6    |    blade 3
+all_7    |    hub bottom
+all_8    |    hub top
+all_9    |    blade 3 top
+all_10   |    blade 3 bottom
+all_11   |    strut 3
+all_12   |    blade 2 top
+all_13   |    blade 2 bottom
+all_14   |    blade 1 top
+all_15   |    blade 1 bottom
+all_16--21   |    hub sides
+all_22   |    shaft top
+all_23   |    shaft bottom
+all_24   |    inlet
+all_25   |    right wall
+all_26   |    top
+all_27   |    left wall
+all_28   |    bottom
+all_29   |    outlet
+
 mesh1
 -----
 Stats using 2.3.0:

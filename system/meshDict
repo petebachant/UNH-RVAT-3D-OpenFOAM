@@ -1,0 +1,148 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "constant/triSurface/allEdges.stl";
+
+maxCellSize 0.1;
+
+boundaryCellSize 0.1;
+
+bladeCellSize 0.004; 
+shaftCellSize 0.01;
+strutCellSize 0.01;
+hubCellSize   0.01;
+
+localRefinement
+{
+    all_0 // lower shaft
+    {
+        cellSize $shaftCellSize;
+    }
+    all_1 // upper shaft
+    {
+        cellSize $shaftCellSize;
+    }
+    all_2 // strut 1
+    {
+        cellSize $strutCellSize;
+    }
+    all_3 // blade 1
+    {
+        cellSize $bladeCellSize;
+    }
+    all_4 // strut 2
+    {
+        cellSize $strutCellSize;
+    }
+    all_5 // blade 2
+    {
+        cellSize $bladeCellSize;
+    }
+    all_6 // blade 3
+    {
+        cellSize $bladeCellSize;
+    }
+    all_7 // hub bottom
+    {
+        cellSize $hubCellSize;
+    }
+    all_8 // hub top
+    {
+        cellSize $hubCellSize;
+    }
+    all_9 // blade 3 top
+    {
+        cellSize $bladeCellSize;
+    }
+    all_10 // blade 3 bottom
+    {
+        cellSize $bladeCellSize;
+    }
+    all_11 // strut 3
+    {
+        cellSize $strutCellSize;
+    }
+    all_12 // blade 2 top
+    {
+        cellSize $bladeCellSize;
+    }
+    all_13 // blade 2 bottom
+    {
+        cellSize $bladeCellSize;
+    }
+    all_14 // blade 1 top
+    {
+        cellSize $bladeCellSize;
+    }
+    all_15 // blade 1 bottom
+    {
+        cellSize $bladeCellSize;
+    }
+    all_16 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_17 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_18 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_19 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_20 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_21 // hub side
+    {
+        cellSize $hubCellSize;
+    }
+    all_22 // shaft top
+    {
+        cellSize $shaftCellSize;
+    }
+    all_23 // shaft bottom
+    {
+        cellSize $shaftCellSize;
+    }
+}
+
+
+/*
+boundaryLayers
+{
+    //nLayers	5;
+
+    patchBoundaryLayers
+    {
+        vcg_0
+        {
+             nLayers	5;
+             thicknessRatio	1.2;
+        }
+    }
+}
+*/
+
+// ************************************************************************* //
