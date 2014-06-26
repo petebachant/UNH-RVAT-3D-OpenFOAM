@@ -119,7 +119,7 @@ patches
 
         patchInfo
         {
-            type            patch;
+            type            wall;
         }
 
         constructFrom patches;
@@ -135,7 +135,7 @@ patches
 
         patchInfo
         {
-            type            patch;
+            type            wall;
         }
 
         constructFrom patches;
@@ -158,7 +158,7 @@ patches
 
         patchInfo
         {
-            type            patch;
+            type            wall;
         }
 
         constructFrom patches;
