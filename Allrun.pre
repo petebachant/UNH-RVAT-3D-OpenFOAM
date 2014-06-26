@@ -13,7 +13,9 @@ mkdir 0
 # - meshing
 #blockMesh
 #surfaceFeatureEdges constant/triSurface/all.stl constant/triSurface/allEdges.stl
-runApplication cartesianMesh
+runApplication preparePar
+runParallel cartesianMesh $nProc
+runApplication reconstructParMesh -constant
 runApplication checkMesh
 runApplication surfaceFeatureExtract
 
