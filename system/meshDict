@@ -19,11 +19,11 @@ FoamFile
 
 surfaceFile "constant/triSurface/allEdges.stl";
 
-maxCellSize 0.05;
+maxCellSize 0.04;
 
 boundaryCellSize $maxCellSize;
 
-bladeCellSize 0.004; 
+bladeCellSize 0.003; 
 shaftCellSize 0.008;
 strutCellSize 0.008;
 hubCellSize   0.008;
@@ -128,21 +128,62 @@ localRefinement
     }
 }
 
+// all_3|all_5|all_6|all_9|all_10|all_12|all_13|all_14|all_15
 
-/*
+nL 5;
+tR 1.25; 
+
 boundaryLayers
 {
-    //nLayers	5;
-
     patchBoundaryLayers
     {
-        vcg_0
+        all_3
         {
-             nLayers	5;
-             thicknessRatio	1.2;
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_5
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_6
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_9
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_10
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_12
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_13
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_14
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
+        }
+        all_15
+        {
+             nLayers	$nL;
+             thicknessRatio	$tR;
         }
     }
 }
-*/
+
 
 // ************************************************************************* //
