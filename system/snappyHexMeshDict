@@ -218,7 +218,7 @@ snapControls
     tolerance 1.0;
 
     // Number of mesh displacement relaxation iterations.
-    nSolveIter 300;
+    nSolveIter 200;
 
     // Maximum number of snapping relaxation iterations. Should stop
     // before upon reaching a correct mesh.
@@ -228,7 +228,7 @@ snapControls
 
         // Number of feature edge snapping iterations.
         // Leave out altogether to disable.
-        nFeatureSnapIter 15; // Was 10
+        nFeatureSnapIter 10; // Was 10
 
         // Detect (geometric only) features by sampling the surface
         // (default=false).
