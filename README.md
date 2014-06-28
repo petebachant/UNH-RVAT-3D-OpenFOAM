@@ -1,16 +1,21 @@
 UNH-RVAT 3-D OpenFOAM case files
 ================================
 
-mesh1
------
+These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
+`pimpleDyMFoam` solver. Note this is somewhat of my personal scratchpad for 
+figuring out the settings, so this case may not run out of the box on all 
+systems.
+
+## Tags for various meshes
+
+### `mesh1`
 Stats using 2.3.0:
 
   * 5300 s to mesh.
   * High Re near walls. y+ ~ 36. 
   * Solves at about 12 h/s on 4 processes with maxCo = 8.0. 
 
-mesh4
------
+### `mesh2`
 Stats using 2.3.0:
 
   * 2754 s to mesh on 6 processes
@@ -20,8 +25,7 @@ Stats using 2.3.0:
   * 1.1 C_D
   * Large discrepancies between each blade's torque contribution
 
-mesh5
------
+### `mesh5`
 Using 2.3.x
 
   * 0.31 C_P from 361 deg to 10 s
@@ -30,8 +34,7 @@ Using 2.3.x
   * Strange patterns coming from top BC
   * Layers were most likely bad around trailing edge
 
-mesh6
------
+### `mesh6`
 Using 2.3.x-e461dd8f9394
 
   * yPlus average 3.8 at blades at 6 s
@@ -40,9 +43,7 @@ Using 2.3.x-e461dd8f9394
   * Solved at 14 h/s
 
 
-License
--------
-Copyright (c) 2014 Peter Bachant
+## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" />
