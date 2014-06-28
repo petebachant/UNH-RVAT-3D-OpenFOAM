@@ -8,6 +8,9 @@ Meshing procedure
 Run surfaceFeatureEdges [inputfile] [outputfile] to extract edges and patches from input file
 
 #### Patches from raw STL
+
+| patch    |   description  |
+|----------|----------------|
 | all_0    |    lower shaft |
 | all_1    |    upper shaft |
 | all_2    |    strut 1 |
