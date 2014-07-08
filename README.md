@@ -49,7 +49,8 @@ Using 2.3.x-e461dd8f9394
   * 9.2M cells
   * 0.35 C_P from 361 deg to 6 s
   * maxCo = 100
-  * Solved at 28 h/s
+  * Solved at 28 h/s on 6 processors
+  * Meshed in 4000 s
 
 ## License
 
