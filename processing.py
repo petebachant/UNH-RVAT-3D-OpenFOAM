@@ -11,10 +11,9 @@ import matplotlib.pyplot as plt
 import re
 import numpy as np
 import os
-import styleplot
+from pxl import styleplot, fdiff
 import sys
 import foampy
-import fdiff
 
 styleplot.setpltparams()
     
