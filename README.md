@@ -39,9 +39,17 @@ Using 2.3.x-e461dd8f9394
 
   * yPlus average 3.8 at blades at 6 s
   * 5.6M cells
-  * 0.33 C_P from 3361 deg to 6 s
+  * 0.33 C_P from 361 deg to 6 s
   * Solved at 14 h/s
 
+### `mesh7`
+Using 2.3.x-e461dd8f9394
+
+  * yPlus average 2.6 at blades at 6 s
+  * 9.2M cells
+  * 0.35 C_P from 361 deg to 6 s
+  * maxCo = 100
+  * Solved at 28 h/s
 
 ## License
 
