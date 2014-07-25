@@ -24,7 +24,7 @@ exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 R = 0.5
 U = 1.0
 U_infty = 1.0
-H = 0.05
+H = 1.0
 D = 1.0
 A = H*D
 area = A
@@ -73,6 +73,7 @@ def calc_perf(plot=False, verbose=True, inertial=False):
         plt.xlabel(r"$\theta$ (degrees)")
         plt.ylabel(r"$C_P$")
         #plt.ylim((0, 1.0))
+        plt.tight_layout()
         plt.show()
     if i != 5:
         return {"C_P" : meancp, 
