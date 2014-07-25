@@ -23,9 +23,11 @@ exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 # Some constants
 R = 0.5
 U = 1.0
+U_infty = 1.0
 H = 0.05
 D = 1.0
 A = H*D
+area = A
 rho = 1000.0
 
 ylabels = {"meanu" : r"$U/U_\infty$",
@@ -33,6 +35,53 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanv" : r"$V/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
+           
+def calc_perf(plot=False, verbose=True, inertial=False):
+    t, torque, drag = foampy.load_all_torque_drag()
+    _t, theta, omega = foampy.load_theta_omega(t_interp=t)
+    # Compute tip speed ratio
+    tsr = omega*R/U_infty
+    # Pick an index to start from for mean calculations and plotting
+    # (allow turbine to reach steady state)
+    try:
+        i = np.where(np.round(theta) == 360)[0][0]
+    except IndexError:
+        print("Target index not found")
+        i = 5
+    i2 = None
+    # Compute mean TSR
+    meantsr = np.mean(tsr[i:i2])
+    if inertial:
+        inertia = 10 # guess from SolidWorks model
+        inertial_torque = inertia*fdiff.second_order_diff(omega, t)
+        torque -= inertial_torque
+    # Compute power coefficient
+    power = torque*omega
+    cp = power/(0.5*rho*area*U_infty**3)
+    meancp = np.mean(cp[i:i2])
+    # Compute drag coefficient
+    cd = drag/(0.5*rho*area*U_infty**2)
+    meancd = np.mean(cd[i:i2])
+    if verbose:
+        print("Mean TSR =", meantsr)
+        print("Mean C_P =", meancp)
+        print("Mean C_D =", meancd)
+    if plot:
+        plt.close('all')
+        plt.plot(theta[i:i2], cp[i:i2])
+        plt.title(r"$\lambda = %1.1f$" %meantsr)
+        plt.xlabel(r"$\theta$ (degrees)")
+        plt.ylabel(r"$C_P$")
+        #plt.ylim((0, 1.0))
+        plt.show()
+    if i != 5:
+        return {"C_P" : meancp, 
+                "C_D" : meancd, 
+                "TSR" : meantsr}
+    else:
+        return {"C_P" : "nan", 
+                "C_D" : "nan", 
+                "TSR" : "nan"}
     
 def loadwake(time):
     """Loads wake data and returns y/R and statistics."""
@@ -256,7 +305,8 @@ def main():
 #    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
 #             save=False, savepath=p)
 #    calcwake()
-    plot_wake_profile()
+#    plot_wake_profile()
+    calc_perf()
 
 if __name__ == "__main__":
     main()
