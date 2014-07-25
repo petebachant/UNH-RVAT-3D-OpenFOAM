@@ -52,7 +52,7 @@ def calc_perf(plot=False, verbose=True, inertial=False):
     # Compute mean TSR
     meantsr = np.mean(tsr[i:i2])
     if inertial:
-        inertia = 10 # guess from SolidWorks model
+        inertia = 3 # guess from SolidWorks model
         inertial_torque = inertia*fdiff.second_order_diff(omega, t)
         torque -= inertial_torque
     # Compute power coefficient
@@ -307,7 +307,7 @@ def main():
 #             save=False, savepath=p)
 #    calcwake()
 #    plot_wake_profile()
-    calc_perf()
+    calc_perf(plot=True, inertial=True)
 
 if __name__ == "__main__":
     main()
