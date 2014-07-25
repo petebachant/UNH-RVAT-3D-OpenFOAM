@@ -27,3 +27,4 @@ constant/y
 constant/yPlus
 *.OpenFOAM
 system/sampleDict
+__pycache__/
