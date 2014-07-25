@@ -8,14 +8,15 @@ by Pete Bachant (petebachant@gmail.com)
 """
 from __future__ import division, print_function
 import matplotlib.pyplot as plt
-import re
 import numpy as np
 import os
 from pxl import styleplot, fdiff
 import sys
 import foampy
+import pandas as pd
 
-styleplot.setpltparams()
+#import seaborn
+styleplot.setpltparams(latex=True)
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
@@ -60,8 +61,7 @@ def calcwake(t1=0.0):
     z_H = np.asarray(sorted(data.keys()))
     y_R = data[z_H[0]][0]/R
     # Find first timestep from which to average over
-    i = np.where(times==t1)[0][0]
-    t = times[i:]
+    t = times[times >= t1]
     # Assemble 3-D arrays, with time as first index
     u = np.zeros((len(t), len(z_H), len(y_R)))
     v = np.zeros((len(t), len(z_H), len(y_R)))
@@ -85,7 +85,20 @@ def calcwake(t1=0.0):
             "xvorticity" : xvorticity,
             "y/R" : y_R, 
             "z/H" : z_H}
-        
+
+def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath="",
+                      savetype=".pdf"):
+    """Plots a 2-D wake profile for a given quantity"""
+    data = calcwake(t1=t1)
+    y_R = data["y/R"]
+    z_H = data["z/H"]
+    df = pd.DataFrame(data[quantity], index=z_H, columns=y_R)
+    d = df.loc[0, :]
+    plt.figure()
+    plt.plot(y_R, d.values)
+    plt.xlabel("$y/R$")
+    plt.ylabel("$U/U_\infty$")
+    plt.show()
     
 def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="", 
              savetype=".pdf"):
@@ -240,9 +253,10 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
-             save=False, savepath=p)
+#    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
+#             save=False, savepath=p)
 #    calcwake()
+    plot_wake_profile()
 
 if __name__ == "__main__":
     main()
