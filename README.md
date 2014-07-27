@@ -48,7 +48,7 @@ Using 2.3.x-e461dd8f9394
   * yPlus average 2.6 at blades at 6 s
   * 9.2M cells
   * 0.35 C_P from 361 deg to 6 s
-  * maxCo = 100
+  * maxCo = 100, C_P went to 0.32 for maxCo = 80--60
   * Solved at 28 h/s on 6 processors
   * Meshed in 4000 s
 
