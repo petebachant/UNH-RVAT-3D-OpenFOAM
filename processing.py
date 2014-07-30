@@ -16,7 +16,7 @@ import foampy
 import pandas as pd
 
 #import seaborn
-styleplot.setpltparams(latex=True)
+styleplot.setpltparams(latex=False)
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
@@ -24,7 +24,7 @@ exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 R = 0.5
 U = 1.0
 U_infty = 1.0
-H = 1.0
+H = 0.5
 D = 1.0
 A = H*D
 area = A
