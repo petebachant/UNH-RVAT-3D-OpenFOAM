@@ -36,21 +36,17 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
            
-def calc_perf(plot=False, verbose=True, inertial=False):
+def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
     t, torque, drag = foampy.load_all_torque_drag()
     _t, theta, omega = foampy.load_theta_omega(t_interp=t)
+    reached_theta_0 = True
+    if theta.max() < theta_0:
+        theta_0 = 1
+        reached_theta_0 = False
     # Compute tip speed ratio
     tsr = omega*R/U_infty
-    # Pick an index to start from for mean calculations and plotting
-    # (allow turbine to reach steady state)
-    try:
-        i = np.where(np.round(theta) == 360)[0][0]
-    except IndexError:
-        print("Target index not found")
-        i = 5
-    i2 = None
     # Compute mean TSR
-    meantsr = np.mean(tsr[i:i2])
+    meantsr = np.mean(tsr[theta >= theta_0])
     if inertial:
         inertia = 3 # guess from SolidWorks model
         inertial_torque = inertia*fdiff.second_order_diff(omega, t)
@@ -58,24 +54,24 @@ def calc_perf(plot=False, verbose=True, inertial=False):
     # Compute power coefficient
     power = torque*omega
     cp = power/(0.5*rho*area*U_infty**3)
-    meancp = np.mean(cp[i:i2])
+    meancp = np.mean(cp[theta >= theta_0])
     # Compute drag coefficient
     cd = drag/(0.5*rho*area*U_infty**2)
-    meancd = np.mean(cd[i:i2])
+    meancd = np.mean(cd[theta >= theta_0])
     if verbose:
         print("Mean TSR =", meantsr)
         print("Mean C_P =", meancp)
         print("Mean C_D =", meancd)
     if plot:
         plt.close('all')
-        plt.plot(theta[i:i2], cp[i:i2])
+        plt.plot(theta[5:], cp[5:])
         plt.title(r"$\lambda = %1.1f$" %meantsr)
         plt.xlabel(r"$\theta$ (degrees)")
         plt.ylabel(r"$C_P$")
         #plt.ylim((0, 1.0))
         plt.tight_layout()
         plt.show()
-    if i != 5:
+    if reached_theta_0:
         return {"C_P" : meancp, 
                 "C_D" : meancd, 
                 "TSR" : meantsr}
