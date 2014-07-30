@@ -76,7 +76,7 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 1000000;
+    maxLocalCells 10000000;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
@@ -100,7 +100,7 @@ castellatedMeshControls
     // Number of buffer layers between different levels.
     // 1 means normal 2:1 refinement restriction, larger means slower
     // refinement.
-    nCellsBetweenLevels 2;
+    nCellsBetweenLevels 1;
 
 
     // Explicit feature edge refinement
@@ -304,12 +304,12 @@ addLayersControls
     // - overall thickness and expansionRatio
 
         // Expansion factor for layer mesh
-        expansionRatio 1.25;
+        expansionRatio 1.2;
 
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
         // outside layer.
-        finalLayerThickness 0.5;
+        finalLayerThickness 0.6;
 
         // Wanted thickness of the layer next to the wall.
         // If relativeSizes this is relative to undistorted size of cell
@@ -338,7 +338,7 @@ addLayersControls
     {
         blades
         {
-            nSurfaceLayers 16;
+            nSurfaceLayers 20;
         }
     }
 
