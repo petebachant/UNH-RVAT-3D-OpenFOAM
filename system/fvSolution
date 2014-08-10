@@ -26,7 +26,7 @@ solvers
         nPostSweeps      	2; // 2
         cacheAgglomeration 	true; // Was on
         agglomerator     	faceAreaPair;
-        nCellsInCoarsestLevel 	50; // Was 10
+        nCellsInCoarsestLevel 	100; // Was 10
         mergeLevels      	1;
     }
 
@@ -91,11 +91,11 @@ relaxationFactors
 {
     fields
     {
-        p               1; // 0.3;
+        p               0.7; // 0.3;
     }
     equations
     {
-        "(U|k|omega)"      1; // 0.7;
+        "(U|k|omega)"      0.8; // 0.7;
         "(U|k|omega)Final" 1; // 1.0;
     }
 }

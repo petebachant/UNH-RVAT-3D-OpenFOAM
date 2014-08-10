@@ -52,6 +52,18 @@ Using 2.3.x-e461dd8f9394
   * Solved at 28 h/s on 6 processors
   * Meshed in 4000 s
 
+### `mesh8`
+Using 2.3.x-80038b51334b
+
+  * yPlus 3.0 at blades at 5.95 s.
+  * 8.4M cells (symmetryPlane).
+  * 0.31 C_P from 360 degrees to 6 s.
+  * maxCo = 100, varied throughout run, though. 
+  * Solved at 60 h/s.
+  * Meshed in about an hour.
+  * Lots of torque variation between blades.
+  * Vorticity shedding from shaft looks like the timestep is too large.
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
