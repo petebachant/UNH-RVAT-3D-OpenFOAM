@@ -2,9 +2,10 @@
 cd ${0%/*} || exit 1    	# run from this directory
 
 #SBATCH --time=4:00:00 		# WALLTIME
-#SBATCH -N 8 			# Number of nodes
+#SBATCH -N8 			# Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM-mesh
 #SBATCH --account=FY140434	# WC ID 
+#SBATCH -p ec			# Queue name
 
 nodes=$SLURM_JOB_NUM_NODES 	# Number of nodes
 cores=8 			# 8 cores/node
