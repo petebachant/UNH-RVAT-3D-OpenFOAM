@@ -6,6 +6,13 @@ These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
 figuring out the settings, so this case may not run out of the box on all 
 systems.
 
+## Running on Sandia's RedMesa
+Checkout files from the `redmesa` branch, and execute a script with `sbatch`, 
+e.g.
+'''
+sbatch Allrun.pre
+'''
+
 ## Tags for various meshes
 
 ### `mesh1`
