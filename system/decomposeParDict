@@ -28,9 +28,9 @@ simpleCoeffs
 
 hierarchicalCoeffs
 {
-    n               (1 1 24);
+    n               (2 2 6);
     delta           0.001;
-    order           xyz;
+    order           zyx;
 }
 
 manualCoeffs
