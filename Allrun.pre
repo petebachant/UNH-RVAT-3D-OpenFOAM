@@ -10,8 +10,8 @@ nProc=$(getNumberOfProcessors)
 mkdir 0
 
 # - meshing
-blockMesh
-surfaceFeatureExtract
+runApplication blockMesh
+runApplication surfaceFeatureExtract
 
 runApplication decomposePar
 
