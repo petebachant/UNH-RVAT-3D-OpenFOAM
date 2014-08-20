@@ -1,5 +1,4 @@
-#!/bin/sh
-cd ${0%/*} || exit 1    # run from this directory
+#!/bin/bash
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
@@ -46,8 +45,6 @@ rm -rf processor*
 
 runApplication checkMesh
 runApplication yPlus
-
-notify-send "OpenFOAM" "Meshing finished."
 
 # - test by running moveDynamicMesh
 #runApplication moveDynamicMesh -checkAMI
