@@ -31,7 +31,5 @@ rm -rf processor*
 runApplication checkMesh
 runApplication yPlus
 
-notify-send "OpenFOAM" "Turbine meshing finished."
-
 # - test by running moveDynamicMesh
 #runApplication moveDynamicMesh -checkAMI
