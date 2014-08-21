@@ -10,3 +10,4 @@ cleanCase
 \rm -rf constant/extendedFeatureEdgeMesh/
 \rm -f constant/triSurface/*.eMesh*
 \rm -rf oldLogs
+\rm constant/polyMesh/boundary
