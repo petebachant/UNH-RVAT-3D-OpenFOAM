@@ -28,3 +28,4 @@ constant/yPlus
 *.OpenFOAM
 system/sampleDict
 __pycache__/
+system/decomposeParDict

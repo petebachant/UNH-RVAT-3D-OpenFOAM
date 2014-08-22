@@ -1,5 +1,5 @@
 #!/bin/sh
-#cd ${0%/*} || exit 1    # run from this directory
+cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
@@ -13,6 +13,7 @@ mkdir 0
 runApplication blockMesh
 runApplication surfaceFeatureExtract
 
+cp system/decomposeParDict.default system/decomposeParDict
 runApplication decomposePar
 
 runParallel snappyHexMesh $nProc -overwrite -dict system/snappyHexMeshDict.turbine
@@ -30,6 +31,3 @@ rm -rf processor*
 
 runApplication checkMesh
 runApplication yPlus
-
-# - test by running moveDynamicMesh
-#runApplication moveDynamicMesh -checkAMI

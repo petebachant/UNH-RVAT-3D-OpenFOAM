@@ -1,14 +1,26 @@
 #!/bin/sh
-#cd ${0%/*} || exit 1    # run from this directory
+cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
+cp system/decomposeParDict.AMIMesh system/decomposeParDict
+mv log.decomposePar log.decomposePar.0
+runApplication decomposePar
+
+nProc=$(getNumberOfProcessors)
+
 mv log.snappyHexMesh log.snappyHexMesh.0
-runApplication snappyHexMesh -overwrite -dict system/snappyHexMeshDict.AMI
+runParallel snappyHexMesh $nProc -overwrite -dict system/snappyHexMeshDict.AMI
 
-runApplication topoSet
+runParallel topoSet $nProc
 
-runApplication createPatch -overwrite
+runParallel createPatch $nProc -overwrite
 
-runApplication renumberMesh -overwrite
+runParallel renumberMesh $nProc -overwrite
+
+#runParallel moveDynamicMesh $nProc -checkAMI
+
+mv log.reconstructParMesh log.reconstructParMesh.0
+runApplication reconstructParMesh -constant
+
