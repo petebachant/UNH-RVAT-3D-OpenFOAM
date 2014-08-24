@@ -150,7 +150,6 @@ castellatedMeshControls
         AMIsurface
         {
             level       (0 0);
-            faceType    boundary; // was boundary
             cellZone    AMIsurface;
             faceZone    AMIsurface;
             cellZoneInside  inside;
