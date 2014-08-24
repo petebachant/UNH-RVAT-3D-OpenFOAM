@@ -49,8 +49,8 @@ cp -rf 0.org 0
 
 # - create the AMI faces by creating baffles, and then splitting the mesh
 
-runParallel $nProc createBaffles -overwrite
-runParallel $nProc mergeOrSplitBaffles -split -overwrite
+runParallel createBaffles $nProc -overwrite
+runParallel mergeOrSplitBaffles $nProc -split -overwrite
 
 runParallel checkMesh $nProc
 runParallel yPlus $nProc
