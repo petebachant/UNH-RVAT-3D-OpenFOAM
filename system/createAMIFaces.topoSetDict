@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.2.x                                 |
+|  \\    /   O peration     | Version:  2.3.x                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -24,9 +24,9 @@ actions
         source  cylinderToCell;
         sourceInfo
         {
-            p1      (0 0 -0.75);
-            p2      (0 0  0.75);
-            radius  0.65;
+            p1      (0 0 -1.22);
+            p2      (0 0  1.22);
+            radius  0.75;
         }
     }
     {
