@@ -59,10 +59,10 @@ geometry
         name        struts;
     }
 
-    AMIsurface.stl
+    AMISurface.stl
     {
         type        triSurfaceMesh;
-        name        AMIsurface;
+        name        AMISurface;
     }
 };
 
@@ -130,7 +130,7 @@ castellatedMeshControls
             levels ((0.0 4));
         }
         {
-            file        "AMIsurface.eMesh";
+            file        "AMISurface.eMesh";
             levels ((0.0 1));
         }
     );
@@ -147,11 +147,11 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        AMIsurface
+        AMISurface
         {
             level       (0 0);
-            cellZone    AMIsurface;
-            faceZone    AMIsurface;
+            cellZone    AMISurface;
+            faceZone    AMISurface;
             cellZoneInside  inside;
         }
         blades
@@ -214,7 +214,7 @@ castellatedMeshControls
         }
 
 /*
-        AMIsurface
+        AMISurface
         {
             mode        inside;
             levels      ((1e15 0));
