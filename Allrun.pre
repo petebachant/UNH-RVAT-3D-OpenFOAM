@@ -1,4 +1,10 @@
 #!/bin/sh
+#SBATCH --time=4:00:00 		# WALLTIME
+#SBATCH -N3 			# Number of nodes
+#SBATCH --job-name UNH-RVAT-OpenFOAM-mesh
+#SBATCH --account=FY140434	# WC ID 
+#SBATCH -p ec			# Queue name
+
 cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
