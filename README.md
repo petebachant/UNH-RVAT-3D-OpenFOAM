@@ -6,13 +6,6 @@ These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
 figuring out the settings, so this case may not run out of the box on all 
 systems.
 
-## Running on Sandia's RedMesa
-Checkout files from the `redmesa` branch, and execute a script with `sbatch`, 
-e.g.
-'''
-sbatch Allrun.pre
-'''
-
 ## Tags for various meshes
 
 ### `mesh1`
@@ -58,6 +51,18 @@ Using 2.3.x-e461dd8f9394
   * maxCo = 100, C_P went to 0.32 for maxCo = 80--60
   * Solved at 28 h/s on 6 processors
   * Meshed in 4000 s
+
+### `mesh8`
+Using 2.3.x-80038b51334b
+
+  * yPlus 3.0 at blades at 5.95 s.
+  * 8.4M cells (symmetryPlane).
+  * 0.31 C_P from 360 degrees to 6 s.
+  * maxCo = 100, varied throughout run, though. 
+  * Solved at 60 h/s.
+  * Meshed in about an hour.
+  * Lots of torque variation between blades.
+  * Vorticity shedding from shaft looks like the timestep is too large.
 
 ## License
 
