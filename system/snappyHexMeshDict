@@ -59,10 +59,10 @@ geometry
         name        struts;
     }
 
-    AMIsurface.stl
+    AMISurface.stl
     {
         type        triSurfaceMesh;
-        name        AMIsurface;
+        name        AMISurface;
     }
 };
 
@@ -76,7 +76,7 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 10000000;
+    maxLocalCells 1000000;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
@@ -100,7 +100,7 @@ castellatedMeshControls
     // Number of buffer layers between different levels.
     // 1 means normal 2:1 refinement restriction, larger means slower
     // refinement.
-    nCellsBetweenLevels 1;
+    nCellsBetweenLevels 2;
 
 
     // Explicit feature edge refinement
@@ -119,7 +119,7 @@ castellatedMeshControls
     (
         {
             file        "blades.eMesh";
-            levels ((0.0 6));
+            levels ((0.0 5));
         }
         {
             file        "shaft.eMesh";
@@ -130,7 +130,7 @@ castellatedMeshControls
             levels ((0.0 4));
         }
         {
-            file        "AMIsurface.eMesh";
+            file        "AMISurface.eMesh";
             levels ((0.0 1));
         }
     );
@@ -147,17 +147,16 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        AMIsurface
+        AMISurface
         {
             level       (0 0);
-            faceType    boundary; // was boundary
-            cellZone    AMIsurface;
-            faceZone    AMIsurface;
+            cellZone    AMISurface;
+            faceZone    AMISurface;
             cellZoneInside  inside;
         }
         blades
         {
-            level       (6 6);
+            level       (5 5);
         }
         shaft
         {
@@ -215,7 +214,7 @@ castellatedMeshControls
         }
 
 /*
-        AMIsurface
+        AMISurface
         {
             mode        inside;
             levels      ((1e15 0));
@@ -309,7 +308,7 @@ addLayersControls
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
         // outside layer.
-        finalLayerThickness 0.6;
+        finalLayerThickness 0.5;
 
         // Wanted thickness of the layer next to the wall.
         // If relativeSizes this is relative to undistorted size of cell
@@ -338,7 +337,7 @@ addLayersControls
     {
         blades
         {
-            nSurfaceLayers 10;
+            nSurfaceLayers 16;
         }
     }
 
