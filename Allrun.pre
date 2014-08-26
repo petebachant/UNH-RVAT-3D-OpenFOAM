@@ -43,7 +43,7 @@ runParallel createPatch $nProc -overwrite
 runParallel renumberMesh $nProc -overwrite
 
 #- For non-parallel running
-#cp -r 0.org 0 > /dev/null 2>&1
+cp -r 0.org 0 > /dev/null 2>&1
 
 #- For parallel running
 ls -d processor* | xargs -i rm -rf ./{}/0 $1
