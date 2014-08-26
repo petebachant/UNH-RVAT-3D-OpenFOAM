@@ -304,7 +304,7 @@ addLayersControls
     // - overall thickness and expansionRatio
 
         // Expansion factor for layer mesh
-        expansionRatio 1.25;
+        expansionRatio 1.2;
 
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
