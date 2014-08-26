@@ -29,7 +29,7 @@ struts_and_hub.stl
     #include "surfaceFeatureExtractDictDefaults"
 }
 
-AMISurface.stl
+AMIsurface.stl
 {
     #include "surfaceFeatureExtractDictDefaults"
 }

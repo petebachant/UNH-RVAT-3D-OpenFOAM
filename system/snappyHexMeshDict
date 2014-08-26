@@ -59,10 +59,10 @@ geometry
         name        struts;
     }
 
-    AMISurface.stl
+    AMIsurface.stl
     {
         type        triSurfaceMesh;
-        name        AMISurface;
+        name        AMIsurface;
     }
 };
 
@@ -130,7 +130,7 @@ castellatedMeshControls
             levels ((0.0 4));
         }
         {
-            file        "AMISurface.eMesh";
+            file        "AMIsurface.eMesh";
             levels ((0.0 1));
         }
     );
@@ -147,11 +147,12 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        AMISurface
+        AMIsurface
         {
             level       (0 0);
-            cellZone    AMISurface;
-            faceZone    AMISurface;
+            faceType    boundary; // was boundary
+            cellZone    AMIsurface;
+            faceZone    AMIsurface;
             cellZoneInside  inside;
         }
         blades
@@ -206,15 +207,15 @@ castellatedMeshControls
 
     refinementRegions
     {
-
+/*
         turb_zone
         {
             mode        inside;
             levels      ((1e15 1));
         }
-
+*/
 /*
-        AMISurface
+        AMIsurface
         {
             mode        inside;
             levels      ((1e15 0));
@@ -325,7 +326,7 @@ addLayersControls
     // cannot be above minThickness do not add layer.
     // If relativeSizes this is relative to undistorted size of cell
     // outside layer..
-    minThickness 0.1;
+    minThickness 0.25;
 
 
     // Per final patch (so not geometry!) the layer information
@@ -337,7 +338,7 @@ addLayersControls
     {
         blades
         {
-            nSurfaceLayers 16;
+            nSurfaceLayers 18;
         }
     }
 
