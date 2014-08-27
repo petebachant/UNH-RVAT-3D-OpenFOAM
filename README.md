@@ -64,6 +64,11 @@ Using 2.3.x-80038b51334b
   * Lots of torque variation between blades.
   * Vorticity shedding from shaft looks like the timestep is too large.
 
+### `mesh9`
+
+  * Made to run on RedMesa
+  * Solves at about 5 h/s on 32 processes and maxCo = 30.
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
