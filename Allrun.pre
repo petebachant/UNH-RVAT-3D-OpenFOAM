@@ -4,6 +4,8 @@ cd ${0%/*} || exit 1    # run from this directory
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
+cp system/decomposeParDict.mesh system/decomposeParDict
+
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
 
@@ -11,10 +13,9 @@ nProc=$(getNumberOfProcessors)
 mkdir 0
 
 # - meshing
-blockMesh
-surfaceFeatureExtract
+runApplication blockMesh
+runApplication surfaceFeatureExtract
 
-cp system/decomposeParDict.mesh system/decomposeParDict
 runApplication decomposePar
 
 runParallel snappyHexMesh $nProc -overwrite
