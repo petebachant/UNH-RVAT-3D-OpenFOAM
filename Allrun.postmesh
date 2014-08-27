@@ -23,15 +23,7 @@ runApplication decomposePar
 
 runParallel `getApplication` $nProc
 
-runApplication reconstructPar
-
-rm -rf processor*
-
-runApplication yPlus -latestTime
-runApplication vorticity
-runApplication R
-
-./gensampledict.py
-sample
+mv log.yPlus log.yPlus.0
+runParallel yPlus $nProc -latestTime
 
 python -c "import processing; processing.log_perf()"
