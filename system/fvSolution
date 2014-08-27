@@ -26,7 +26,7 @@ solvers
         nPostSweeps      	2; // 2
         cacheAgglomeration 	true; // Was on
         agglomerator     	faceAreaPair;
-        nCellsInCoarsestLevel 	100; // Was 10
+        nCellsInCoarsestLevel 	50; // Was 10
         mergeLevels      	1;
     }
 
@@ -64,11 +64,11 @@ solvers
 
 PIMPLE
 {
-    correctPhi          yes;
+    correctPhi          no;
     nOuterCorrectors    20; // Was 2, set higher for more PIMPLE loops
     nCorrectors         3; // Was 1
     nNonOrthogonalCorrectors 1; // Was 0
-    pRefCell        0;
+    pRefCell        1001;
     pRefValue       0;
 
     residualControl
@@ -96,7 +96,7 @@ relaxationFactors
     equations
     {
         "(U|k|omega)"      0.8; // 0.7;
-        "(U|k|omega)Final" 1; // 1.0;
+        "(U|k|omega)Final" 1.0; // 1.0;
     }
 }
 

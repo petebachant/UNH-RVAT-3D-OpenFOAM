@@ -8,26 +8,24 @@ by Pete Bachant (petebachant@gmail.com)
 """
 from __future__ import division, print_function
 import matplotlib.pyplot as plt
+import re
 import numpy as np
 import os
-from pxl import styleplot, fdiff
+import styleplot
 import sys
 import foampy
-import pandas as pd
+import fdiff
 
-#import seaborn
-styleplot.setpltparams(latex=False)
+styleplot.setpltparams()
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
 # Some constants
 R = 0.5
 U = 1.0
-U_infty = 1.0
-H = 0.5
+H = 0.05
 D = 1.0
 A = H*D
-area = A
 rho = 1000.0
 
 ylabels = {"meanu" : r"$U/U_\infty$",
@@ -35,51 +33,6 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanv" : r"$V/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
-           
-def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
-    t, torque, drag = foampy.load_all_torque_drag()
-    _t, theta, omega = foampy.load_theta_omega(t_interp=t)
-    reached_theta_0 = True
-    if theta.max() < theta_0:
-        theta_0 = 1
-        reached_theta_0 = False
-    # Compute tip speed ratio
-    tsr = omega*R/U_infty
-    # Compute mean TSR
-    meantsr = np.mean(tsr[theta >= theta_0])
-    if inertial:
-        inertia = 3 # guess from SolidWorks model
-        inertial_torque = inertia*fdiff.second_order_diff(omega, t)
-        torque -= inertial_torque
-    # Compute power coefficient
-    power = torque*omega
-    cp = power/(0.5*rho*area*U_infty**3)
-    meancp = np.mean(cp[theta >= theta_0])
-    # Compute drag coefficient
-    cd = drag/(0.5*rho*area*U_infty**2)
-    meancd = np.mean(cd[theta >= theta_0])
-    if verbose:
-        print("Performance from {} degrees onward:".format(theta_0))
-        print("Mean TSR =", meantsr)
-        print("Mean C_P =", meancp)
-        print("Mean C_D =", meancd)
-    if plot:
-        plt.close('all')
-        plt.plot(theta[5:], cp[5:])
-        plt.title(r"$\lambda = %1.1f$" %meantsr)
-        plt.xlabel(r"$\theta$ (degrees)")
-        plt.ylabel(r"$C_P$")
-        #plt.ylim((0, 1.0))
-        plt.tight_layout()
-        plt.show()
-    if reached_theta_0:
-        return {"C_P" : meancp, 
-                "C_D" : meancd, 
-                "TSR" : meantsr}
-    else:
-        return {"C_P" : "nan", 
-                "C_D" : "nan", 
-                "TSR" : "nan"}
     
 def loadwake(time):
     """Loads wake data and returns y/R and statistics."""
@@ -108,7 +61,8 @@ def calcwake(t1=0.0):
     z_H = np.asarray(sorted(data.keys()))
     y_R = data[z_H[0]][0]/R
     # Find first timestep from which to average over
-    t = times[times >= t1]
+    i = np.where(times==t1)[0][0]
+    t = times[i:]
     # Assemble 3-D arrays, with time as first index
     u = np.zeros((len(t), len(z_H), len(y_R)))
     v = np.zeros((len(t), len(z_H), len(y_R)))
@@ -132,20 +86,7 @@ def calcwake(t1=0.0):
             "xvorticity" : xvorticity,
             "y/R" : y_R, 
             "z/H" : z_H}
-
-def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath="",
-                      savetype=".pdf"):
-    """Plots a 2-D wake profile for a given quantity"""
-    data = calcwake(t1=t1)
-    y_R = data["y/R"]
-    z_H = data["z/H"]
-    df = pd.DataFrame(data[quantity], index=z_H, columns=y_R)
-    d = df.loc[0, :]
-    plt.figure()
-    plt.plot(y_R, d.values)
-    plt.xlabel("$y/R$")
-    plt.ylabel("$U/U_\infty$")
-    plt.show()
+        
     
 def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="", 
              savetype=".pdf"):
@@ -292,88 +233,6 @@ def plotexpwake(Re_D, quantity, z_H=0.0, save=False, savepath="",
     plt.ylabel(ylabels[quantity])
     plt.grid(True)
 
-def get_ncells(logname="log.checkMesh", keyword="cells"):
-    if keyword == "cells":
-        keyword = "cells:"
-    with open(logname) as f:
-        for line in f.readlines():
-            ls = line.split()
-            if ls and ls[0] == keyword:
-                value = ls[1]
-                return int(value)
-                
-def get_yplus(logname="log.yPlus"):
-    with open(logname) as f:
-        lines = f.readlines()
-        for n in range(len(lines)):
-            ls = lines[n].split()
-            if ls and ls[-1] == "blades":
-                nstart = n
-                break
-    line = lines[n+3]
-    line = line.split()
-    return {"min" : float(line[3]),
-            "max" : float(line[5]),
-            "mean" : float(line[7])}
-            
-def get_nx():
-    blocks = foampy.dictionaries.read_text("constant/polyMesh/blockMeshDict", 
-                                           "blocks")
-    nx = int(blocks[3].replace("(", "").split()[0])
-    return nx
-    
-def get_ddt_scheme():
-    block = foampy.dictionaries.read_text("system/fvSchemes", 
-                                          "ddtSchemes")
-    val = block[2].replace(";", "").split()[1]
-    return val
-    
-def get_max_courant_no():
-    if foampy.dictionaries.read_single_line_value("controlDict", 
-                                                  "adjustTimeStep",
-                                                  valtype=str) == "yes":
-        return foampy.dictionaries.read_single_line_value("controlDict", 
-                                                          "maxCo")
-    else:
-        return "nan"
-        
-def get_deltat():
-    if foampy.dictionaries.read_single_line_value("controlDict", 
-                                                  "adjustTimeStep",
-                                                  valtype=str) == "no":
-        return foampy.dictionaries.read_single_line_value("controlDict", 
-                                                          "deltaT")
-    else:
-        return "nan"
-
-def log_perf(logname="all_perf.csv", mode="a", verbose=True):
-    """Logs mean performance calculations to CSV file. If file exists, data
-    is appended."""
-    if not os.path.isdir("processed"):
-        os.mkdir("processed")
-    with open("processed/" + logname, mode) as f:
-        if os.stat("processed/" + logname).st_size == 0:
-            f.write("dt,maxco,nx,ncells,tsr,cp,cd,yplus_min,yplus_max,yplus_mean,ddt_scheme\n")
-        data = calc_perf(verbose=verbose)
-        ncells = get_ncells()
-        yplus = get_yplus()
-        nx = get_nx()
-        maxco = get_max_courant_no()
-        dt = get_deltat()
-        ddt_scheme = get_ddt_scheme()
-        f.write("{dt},{maxco},{nx},{ncells},{tsr},{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n"\
-                .format(dt=dt,
-                        maxco=maxco,
-                        nx=nx,
-                        ncells=ncells,
-                        tsr=data["TSR"],
-                        cp=data["C_P"],
-                        cd=data["C_D"],
-                        ypmin=yplus["min"],
-                        ypmax=yplus["max"],
-                        ypmean=yplus["mean"],
-                        ddt_scheme=ddt_scheme))
-
 def main():
     p = "Google Drive/Research/Papers/JOT CFT near-wake/Figures"
     if "linux" in sys.platform:
@@ -382,11 +241,9 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-#    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
-#             save=False, savepath=p)
+    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
+             save=False, savepath=p)
 #    calcwake()
-#    plot_wake_profile()
-    calc_perf(plot=True, inertial=True)
 
 if __name__ == "__main__":
     main()

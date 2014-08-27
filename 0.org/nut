@@ -47,13 +47,14 @@ boundaryField
 
     top
     {
-        type            nutkWallFunction;
+        type            calculated;
         value           uniform 0;
     }
 
     bottom
     {
-        type            symmetryPlane;
+        type            nutkWallFunction;
+        value           uniform 0;
     }
 
     walls

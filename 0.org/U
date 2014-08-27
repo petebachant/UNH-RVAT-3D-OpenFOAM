@@ -60,25 +60,25 @@ boundaryField
 
     top
     {
-        type            fixedValue;
-        value           uniform (1 0 0);
+        type            slip;
     }
 
     bottom
     {
-        type            symmetryPlane;
+        type            fixedValue;
+        value           uniform (1 0 0);
     }
 
     AMI1
     {
-        type  		    cyclicAMI;
-        value   	    $internalField;
+        type  		cyclicAMI;
+        value   	$internalField;
     }
 
     AMI2
     {
-        type  		    cyclicAMI;
-        value   	    $internalField;
+        type  		cyclicAMI;
+        value   	$internalField;
     }
 
     "proc.*"

@@ -53,12 +53,13 @@ boundaryField
 
     top
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           $internalField;
     }
 
     bottom
     {
-        type            symmetryPlane;
+        type            zeroGradient;
     }
 
     AMI1

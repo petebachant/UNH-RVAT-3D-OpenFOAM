@@ -60,25 +60,26 @@ boundaryField
 
     top
     {
-        type            kqRWallFunction;
+        type            fixedValue;
         value           $internalField;
     }
 
     bottom
     {
-        type            symmetryPlane;
+        type            kqRWallFunction;
+        value           $internalField;
     }
 
     AMI1
     {
-        type  		    cyclicAMI;
-        value   	    $internalField;
+        type  		cyclicAMI;
+        value   	$internalField;
     }
 
     AMI2
     {
-        type  		    cyclicAMI;
-        value   	    $internalField;
+        type  		cyclicAMI;
+        value   	$internalField;
     }
 
     "proc.*"

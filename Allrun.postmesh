@@ -1,6 +1,5 @@
 #!/bin/sh
-
-#cd ${0%/*} || exit 1    # run from this directory
+cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
@@ -25,8 +24,8 @@ runApplication R
 ./gensampledict.py
 sample
 
-#python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
+python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
 
-#notify-send "OpenFOAM" "Simulation finished."
+notify-send "OpenFOAM" "Simulation finished."
 
 ./perf.py

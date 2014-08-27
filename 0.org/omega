@@ -60,13 +60,14 @@ boundaryField
 
     top
     {
-        type            omegaWallFunction;
+        type            fixedValue;
         value           $internalField;
     }
 
     bottom
     {
-        type            symmetryPlane;
+        type            omegaWallFunction;
+        value           $internalField;
     }
 
     AMI1
