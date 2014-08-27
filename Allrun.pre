@@ -14,6 +14,7 @@ mkdir 0
 blockMesh
 surfaceFeatureExtract
 
+cp system/decomposeParDict.mesh system/decomposeParDict
 runApplication decomposePar
 
 runParallel snappyHexMesh $nProc -overwrite
