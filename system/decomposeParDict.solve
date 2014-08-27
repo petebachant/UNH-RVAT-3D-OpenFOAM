@@ -15,27 +15,8 @@ FoamFile
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains 24;
+numberOfSubdomains 80;
 
-method          hierarchical;
-// method          ptscotch;
-
-simpleCoeffs
-{
-    n               (4 1 1);
-    delta           0.001;
-}
-
-hierarchicalCoeffs
-{
-    n               (1 1 $numberOfSubdomains);
-    delta           0.001;
-    order           xyz;
-}
-
-manualCoeffs
-{
-    dataFile        "cellDecomposition";
-}
+method		scotch;
 
 // ************************************************************************* //
