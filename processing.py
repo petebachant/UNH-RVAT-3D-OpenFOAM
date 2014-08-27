@@ -59,8 +59,8 @@ def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
     cd = drag/(0.5*rho*area*U_infty**2)
     meancd = np.mean(cd[theta >= theta_0])
     if verbose:
-        print("Performance from {:.1f}-{:.1f} degrees:".format(theta_0, 
-                                                               theta.max()))
+        print("Performance from {:.1f}--{:.1f} degrees:".format(theta_0, 
+                                                                theta.max()))
         print("Mean TSR = {:.3f}".format(meantsr))
         print("Mean C_P = {:.3f}".format(meancp))
         print("Mean C_D = {:.3f}".format(meancd))
