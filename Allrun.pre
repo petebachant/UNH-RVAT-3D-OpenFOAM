@@ -52,4 +52,4 @@ runApplication yPlus
 notify-send "OpenFOAM" "Meshing finished."
 
 # - test by running moveDynamicMesh
-#runApplication moveDynamicMesh -checkAMI
+runApplication moveDynamicMesh -checkAMI
