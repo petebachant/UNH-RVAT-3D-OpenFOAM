@@ -1,12 +1,10 @@
 #!/bin/sh
 
-#SBATCH --time=6:00:00      # WALLTIME
-#SBATCH -N 10 	            # Number of nodes
+#SBATCH --time=12:00:00     # WALLTIME
+#SBATCH -N 12 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
 #SBATCH --account=FY140434  # WC ID 
 #SBATCH -p ec               # Queue name
-
-cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
@@ -15,6 +13,10 @@ cp system/decomposeParDict.solve system/decomposeParDict
 
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
+
+# Reset initial fields
+\rm -rf 0
+cp -rf 0.org 0
 
 ./gendynmeshdict.py
 
