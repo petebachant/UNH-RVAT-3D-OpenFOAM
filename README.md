@@ -69,19 +69,19 @@ Using 2.3.x-80038b51334b
   * Made to run on RedMesa
   * Solves at about 5 h/s on 32 processes and maxCo = 30.
 
-|         | `nX` | `nZ` | `nCells` | `bladeRefinement` | `nLayers` | `expansionRatio` | Notes |
-|---------|------|------|----------|-------------------|-----------|------------------|-------|
-| `mesh1` | 
-| `mesh2` |
-| `mesh3` |
-| `mesh4` | 
-| `mesh5` |
-| `mesh6` |
-| `mesh7` | 
-| `mesh8` |
-| `mesh9` |
-| `mesh10`| 
-| `mesh11`|
+|         | `nX` | `nZ` | `nCells` | `bladeRefinement` | `nLayers` | `expansionRatio` |   Notes   |
+|---------|------|------|----------|-------------------|-----------|------------------|-----------|
+| `mesh1` | 90   |  60  |          |        5          |    N/A    |       N/A        | No struts |
+| `mesh2` | 110  |  65  |          |        5          |     4     |       1.3        | No struts |
+| `mesh3` | 110  |  65  |          |                   |           |                  |           |
+| `mesh4` |      |      |          |                   |           |                  |           |
+| `mesh5` |      |      |          |                   |           |                  |           |
+| `mesh6` |      |      |          |                   |           |                  |           |
+| `mesh7` |      |      |          |                   |           |                  |           |
+| `mesh8` |      |      |          |                   |           |                  |           |
+| `mesh9` |      |      |          |                   |           |                  |           |
+| `mesh10`|      |      |          |                   |           |                  |           | 
+| `mesh11`|      |      |          |                   |           |                  |           |
 
 ## License
 
