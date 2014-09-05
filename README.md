@@ -69,6 +69,21 @@ Using 2.3.x-80038b51334b
   * Made to run on RedMesa
   * Solves at about 5 h/s on 32 processes and maxCo = 30.
 
+|         | `nX` | `nZ` | `nCells` | `bladeRefinement` | `nLayers` | `expansionRatio` | Notes |
+|---------|------|------|----------|-------------------|-----------|------------------|-------|
+| `mesh1` | 
+| `mesh2` |
+| `mesh3` |
+| `mesh4` | 
+| `mesh5` |
+| `mesh6` |
+| `mesh7` | 
+| `mesh8` |
+| `mesh9` |
+| `mesh10`| 
+| `mesh11`|
+| `mesh12`|
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
