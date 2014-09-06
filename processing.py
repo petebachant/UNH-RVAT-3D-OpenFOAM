@@ -316,22 +316,28 @@ def get_yplus(logname="log.yPlus"):
             "max" : float(line[5]),
             "mean" : float(line[7])}
             
-def get_nx():
+def get_nx_nz():
     blocks = foampy.dictionaries.read_text("constant/polyMesh/blockMeshDict", 
                                            "blocks")
     nx = int(blocks[3].replace("(", "").split()[0])
-    return nx
+    nz = int(blocks[3].replace("(", "").split()[2])
+    return nx, nz
+
+def get_nlayers_expratio():
+    nlayers = foampy.dictionaries.read_single_line_value("snappyHexMeshDict",
+            "nSurfaceLayers", valtype=int)
+    expratio = foampy.dictionaries.read_single_line_value("snappyHexMeshDict",
+            "expansionRatio")
+    return nlayers, expratio
     
 def get_ddt_scheme():
-    block = foampy.dictionaries.read_text("system/fvSchemes", 
-                                          "ddtSchemes")
+    block = foampy.dictionaries.read_text("system/fvSchemes", "ddtSchemes")
     val = block[2].replace(";", "").split()[1]
     return val
     
 def get_max_courant_no():
     if foampy.dictionaries.read_single_line_value("controlDict", 
-                                                  "adjustTimeStep",
-                                                  valtype=str) == "yes":
+            "adjustTimeStep", valtype=str) == "yes":
         return foampy.dictionaries.read_single_line_value("controlDict", 
                                                           "maxCo")
     else:
@@ -353,19 +359,25 @@ def log_perf(logname="all_perf.csv", mode="a", verbose=True):
         os.mkdir("processed")
     with open("processed/" + logname, mode) as f:
         if os.stat("processed/" + logname).st_size == 0:
-            f.write("dt,maxco,nx,ncells,tsr,cp,cd,yplus_min,yplus_max,yplus_mean,ddt_scheme\n")
+            f.write("dt,maxco,nx,nz,ncells,nlayers,expratio,tsr,cp,cd,"\
+                    + "yplus_min,yplus_max,yplus_mean,ddt_scheme\n")
         data = calc_perf(verbose=verbose)
         ncells = get_ncells()
         yplus = get_yplus()
-        nx = get_nx()
+        nx, nz = get_nx_nz()
+        nlayers, expratio = get_nlayers_expratio()
         maxco = get_max_courant_no()
         dt = get_deltat()
         ddt_scheme = get_ddt_scheme()
-        f.write("{dt},{maxco},{nx},{ncells},{tsr},{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n"\
+        f.write("{dt},{maxco},{nx},{nz},{ncells},{nlayers},{expratio},{tsr},"\
+                + "{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n"\
                 .format(dt=dt,
                         maxco=maxco,
                         nx=nx,
+                        nz=nz,
                         ncells=ncells,
+                        nlayers=nlayers,
+                        expratio=expratio,
                         tsr=data["TSR"],
                         cp=data["C_P"],
                         cd=data["C_D"],
