@@ -320,7 +320,7 @@ def get_nx_nz():
     blocks = foampy.dictionaries.read_text("constant/polyMesh/blockMeshDict", 
                                            "blocks")
     nx = int(blocks[3].replace("(", "").split()[0])
-    nz = int(blocks[3].replace("(", "").split()[2])
+    nz = int(blocks[3].replace(")", "").split()[2])
     return nx, nz
 
 def get_nlayers_expratio():
