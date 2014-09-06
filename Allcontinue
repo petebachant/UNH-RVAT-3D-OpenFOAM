@@ -25,14 +25,8 @@ runApplication reconstructPar
 
 rm -rf processor*
 
-runApplication vorticity
-runApplication R
-
 ./gensampledict.py
 sample
 
-python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
+python -c "import processing; processing.log_perf()"
 
-notify-send "OpenFOAM" "Simulation finished."
-
-./perf.py
