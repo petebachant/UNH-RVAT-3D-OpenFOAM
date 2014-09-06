@@ -369,22 +369,22 @@ def log_perf(logname="all_perf.csv", mode="a", verbose=True):
         maxco = get_max_courant_no()
         dt = get_deltat()
         ddt_scheme = get_ddt_scheme()
-        f.write("{dt},{maxco},{nx},{nz},{ncells},{nlayers},{expratio},{tsr},"\
-                + "{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n"\
-                .format(dt=dt,
-                        maxco=maxco,
-                        nx=nx,
-                        nz=nz,
-                        ncells=ncells,
-                        nlayers=nlayers,
-                        expratio=expratio,
-                        tsr=data["TSR"],
-                        cp=data["C_P"],
-                        cd=data["C_D"],
-                        ypmin=yplus["min"],
-                        ypmax=yplus["max"],
-                        ypmean=yplus["mean"],
-                        ddt_scheme=ddt_scheme))
+        val_string = "{dt},{maxco},{nx},{nz},{ncells},{nlayers},{expratio},{tsr},"\
+                + "{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n" 
+        f.write(val_string.format(dt=dt,
+                                  maxco=maxco,
+                                  nx=nx,
+                                  nz=nz,
+                                  ncells=ncells,
+                                  nlayers=nlayers,
+                                  expratio=expratio,
+                                  tsr=data["TSR"],
+                                  cp=data["C_P"],
+                                  cd=data["C_D"],
+                                  ypmin=yplus["min"],
+                                  ypmax=yplus["max"],
+                                  ypmean=yplus["mean"],
+                                  ddt_scheme=ddt_scheme))
 
 def main():
     p = "Google Drive/Research/Papers/JOT CFT near-wake/Figures"
