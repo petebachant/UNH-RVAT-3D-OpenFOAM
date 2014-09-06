@@ -71,7 +71,7 @@ Using 2.3.x-80038b51334b
 
 |         | `nX` | `nZ` | `nCells` | `bladeRefinement` | `nLayers` | `expansionRatio` |   Notes   |
 |---------|------|------|----------|-------------------|-----------|------------------|-----------|
-| `mesh1` | 90   |  60  |          |        5          |    N/A    |       N/A        | No struts |
+| `mesh1` | 90   |  60  |   1.9M   |        5          |    N/A    |       N/A        | No struts |
 | `mesh2` | 110  |  65  |          |        5          |     4     |       1.3        | No struts |
 | `mesh3` | 110  |  65  |          |                   |           |                  |           |
 | `mesh4` |      |      |          |                   |           |                  |           |
