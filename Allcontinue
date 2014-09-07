@@ -9,6 +9,8 @@
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
+cp system/decomposeParDict.solve system/decomposeParDict
+
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
 
@@ -30,8 +32,8 @@ runApplication reconstructPar
 
 rm -rf processor*
 
-./gensampledict.py
-sample
+#./gensampledict.py
+#sample
 
 python -c "import processing; processing.log_perf()"
 
