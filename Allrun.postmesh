@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #SBATCH --time=12:00:00     # WALLTIME
-#SBATCH -N 12 	            # Number of nodes
+#SBATCH -N 20 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
 #SBATCH --account=FY140434  # WC ID 
 #SBATCH -p ec               # Queue name
