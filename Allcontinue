@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#SBATCH --time=12:00:00     # WALLTIME
-#SBATCH -N 12 	            # Number of nodes
+#SBATCH --time=6:00:00     # WALLTIME
+#SBATCH -N24 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
 #SBATCH --account=FY140434  # WC ID 
 #SBATCH -p ec               # Queue name
@@ -24,16 +24,9 @@ mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
-runApplication decomposePar -latestTime
+#runApplication decomposePar -latestTime
 
 runParallel `getApplication` $nProc
-
-runApplication reconstructPar
-
-rm -rf processor*
-
-#./gensampledict.py
-#sample
 
 python -c "import processing; processing.log_perf()"
 
