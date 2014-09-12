@@ -1,11 +1,16 @@
 #!/bin/sh
-cd ${0%/*} || exit 1    # run from this directory
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
+cp system/decomposeParDict.solve system/decomposeParDict
+
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
+
+# Reset initial fields
+\rm -rf 0
+cp -rf 0.org 0
 
 ./gendynmeshdict.py
 
@@ -14,18 +19,7 @@ runApplication decomposePar
 
 runParallel `getApplication` $nProc
 
-runApplication reconstructPar
+mv log.yPlus log.yPlus.0
+runParallel yPlus $nProc -latestTime
 
-rm -rf processor*
-
-runApplication vorticity
-runApplication R
-
-./gensampledict.py
-sample
-
-python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
-
-notify-send "OpenFOAM" "Simulation finished."
-
-./perf.py
+python -c "import processing; processing.log_perf()"

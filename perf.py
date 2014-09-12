@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Created on Thu Aug  8 09:22:09 2013
@@ -7,4 +7,4 @@ Created on Thu Aug  8 09:22:09 2013
 """
 from processing import calc_perf
 
-calc_perf(plot=True)
+calc_perf(plot=False)
