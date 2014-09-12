@@ -52,6 +52,38 @@ Using 2.3.x-e461dd8f9394
   * Solved at 28 h/s on 6 processors
   * Meshed in 4000 s
 
+### `mesh8`
+Using 2.3.x-80038b51334b
+
+  * yPlus 3.0 at blades at 5.95 s.
+  * 8.4M cells (symmetryPlane).
+  * 0.31 C_P from 360 degrees to 6 s.
+  * maxCo = 100, varied throughout run, though. 
+  * Solved at 60 h/s.
+  * Meshed in about an hour.
+  * Lots of torque variation between blades.
+  * Vorticity shedding from shaft looks like the timestep is too large.
+
+### `mesh9`
+
+  * Made to run on RedMesa
+  * Solves at about 5 h/s on 32 processes and maxCo = 30.
+
+|         | `nX` | `nZ` | `nCells` | `bladeRefinement` | `nLayers` | `expansionRatio` |   Notes   |
+|---------|------|------|----------|-------------------|-----------|------------------|-----------|
+| `mesh1` | 90   |  60  |   1.9M   |        5          |    N/A    |       N/A        | No struts |
+| `mesh2` | 110  |  65  |          |        5          |     4     |       1.3        | No struts |
+| `mesh3` | 110  |  65  |          |                   |           |                  |           |
+| `mesh4` |      |      |          |                   |           |                  |           |
+| `mesh5` | 72   |  40  |    6M    |        5          |    14     |       1.3        |           |
+| `mesh6` |      |      |   5.6M   |                   |           |                  |           |
+| `mesh7` |      |      |   9.2M   |                   |           |                  |           |
+| `mesh8` |      |      |   8.4M   |                   |           |                  | symmetry plane |
+| `mesh9` |  90  |  50  |          |        5          |    18     |       1.2        | `turb_zone` level 2 refinement. |
+| `mesh10`|  45  |  25  |          |        6          |           |                  |           | 
+| `mesh11`|  54  |  25  |          |        6          |    18     |       1.2        |           |
+| `mesh12`|  60  |  25  |  12.5M   |        6          |    18     |       1.2        | `yPlusMean = 4.6` at start |
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
