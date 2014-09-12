@@ -23,7 +23,7 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         6.0;
+endTime         10.0;
 
 deltaT          1e-2;
 
@@ -47,7 +47,7 @@ runTimeModifiable true;
 
 adjustTimeStep  yes;
 
-maxCo           60.0;
+maxCo           30.0;
 
 libs
 (
@@ -55,7 +55,7 @@ libs
     "libforces.so"
     "libincompressibleTurbulenceModel.so"
     "libincompressibleRASModels.so"
-//  "libmyIncompressibleRASModels.so"
+//    "libmyIncompressibleRASModels.so"
 );
 
 functions

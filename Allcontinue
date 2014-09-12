@@ -1,8 +1,15 @@
 #!/bin/sh
-cd ${0%/*} || exit 1    # run from this directory
+
+#SBATCH --time=6:00:00     # WALLTIME
+#SBATCH -N24 	            # Number of nodes
+#SBATCH --job-name UNH-RVAT-OpenFOAM
+#SBATCH --account=FY140434  # WC ID 
+#SBATCH -p ec               # Queue name
 
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+cp system/decomposeParDict.solve system/decomposeParDict
 
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
@@ -17,22 +24,9 @@ mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
-runApplication decomposePar -latestTime
+#runApplication decomposePar -latestTime
 
 runParallel `getApplication` $nProc
 
-runApplication reconstructPar
+python -c "import processing; processing.log_perf()"
 
-rm -rf processor*
-
-runApplication vorticity
-runApplication R
-
-./gensampledict.py
-sample
-
-python "/home/pete/Google Drive/Python/OpenFOAM/send_email.py"
-
-notify-send "OpenFOAM" "Simulation finished."
-
-./perf.py

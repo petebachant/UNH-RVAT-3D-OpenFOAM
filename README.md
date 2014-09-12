@@ -80,9 +80,8 @@ Using 2.3.x-80038b51334b
 | `mesh7` |      |      |   9.2M   |                   |           |                  |           |
 | `mesh8` |      |      |   8.4M   |                   |           |                  | symmetry plane |
 | `mesh9` |  90  |  50  |          |        5          |    18     |       1.2        | `turb_zone` level 2 refinement. |
-| `mesh10`|  45  |  25  |          |        6          |           |                  |           | 
+| `mesh10`|  45  |  25  |   9.1M   |        6          |    18     |       1.2        |           | 
 | `mesh11`|  54  |  25  |          |        6          |    18     |       1.2        |           |
-| `mesh12`|  60  |  25  |  12.5M   |        6          |    18     |       1.2        | `yPlusMean = 4.6` at start |
 
 ## License
 
