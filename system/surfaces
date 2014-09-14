@@ -13,7 +13,7 @@ surfaces
     outputControl   outputTime;
 
     surfaceFormat   vtk;
-    fields          (p U Q);
+    fields          (p U Q magVorticity);
 
     interpolationScheme cellPoint;
 
@@ -24,6 +24,14 @@ surfaces
             type            isoSurface;
             isoField        Q;
             isoValue        1000;
+            interpolate     true;
+        }
+
+        isoVorticity
+        {
+            type            isoSurface;
+            isoField        magVorticity;
+            isoValue        6;
             interpolate     true;
         }
 

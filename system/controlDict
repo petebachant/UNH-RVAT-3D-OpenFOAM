@@ -61,6 +61,7 @@ functions
 {
     #include "readFields"
     #include "Q"
+    #include "vorticity"
     #include "surfaces"
 
     forces
