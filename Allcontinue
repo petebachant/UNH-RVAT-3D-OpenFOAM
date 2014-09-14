@@ -17,7 +17,7 @@ mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
-if [ -d "processor0" ]; then
+if [ ! -d "processor0" ]; then
     mv log.decomposePar oldLogs/log.decomposePar
     runApplication decomposePar -latestTime
 fi
