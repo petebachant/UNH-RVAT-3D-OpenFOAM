@@ -10,7 +10,6 @@ nProc=$(getNumberOfProcessors)
 
 # Move previous logs to oldLogs directory
 mkdir -p oldLogs
-mv log.decomposePar oldLogs/log.decomposePar
 mv log.pimpleDyMFoam oldLogs/log.pimpleDyMFoam
 mv log.reconstructPar oldLogs/log.reconstructPar
 mv log.vorticity oldLogs/log.vorticity
@@ -18,7 +17,10 @@ mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
-#runApplication decomposePar -latestTime
+if [ -d "processor0" ]; then
+    mv log.decomposePar oldLogs/log.decomposePar
+    runApplication decomposePar -latestTime
+fi
 
 runParallel `getApplication` $nProc
 
