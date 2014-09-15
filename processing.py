@@ -14,9 +14,9 @@ from pxl import styleplot, fdiff
 import sys
 import foampy
 import pandas as pd
+from matplotlib import style
 
-#import seaborn
-styleplot.setpltparams(latex=True)
+plt.style.use("ggplot")
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
