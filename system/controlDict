@@ -59,6 +59,10 @@ libs
 
 functions
 {
+    #include "readFields"
+    #include "Q"
+    #include "surfaces"
+
     forces
     {
         type                forces;
