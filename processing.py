@@ -16,7 +16,7 @@ import foampy
 import pandas as pd
 from matplotlib import style
 
-plt.style.use("ggplot")
+plt.style.use("fivethirtyeight")
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
