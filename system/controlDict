@@ -55,11 +55,14 @@ libs
     "libforces.so"
     "libincompressibleTurbulenceModel.so"
     "libincompressibleRASModels.so"
-//    "libmyIncompressibleRASModels.so"
 );
 
 functions
 {
+    #include "readFields"
+    #include "Q"
+    #include "surfaces"
+
     forces
     {
         type                forces;
