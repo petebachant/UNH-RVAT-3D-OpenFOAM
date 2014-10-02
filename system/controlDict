@@ -25,11 +25,11 @@ stopAt          endTime;
 
 endTime         10.0;
 
-deltaT          0.0015;
+deltaT          0.002;
 
-writeControl    adjustableRunTime;
+writeControl    runTime;
 
-writeInterval   0.05; // Was 0.05
+writeInterval   0.02;
 
 purgeWrite      0;
 
@@ -37,7 +37,7 @@ writeFormat     binary;
 
 writePrecision  10;
 
-writeCompression uncompressed;
+writeCompression compressed;
 
 timeFormat      general;
 
@@ -55,7 +55,6 @@ libs
     "libforces.so"
     "libincompressibleTurbulenceModel.so"
     "libincompressibleRASModels.so"
-//    "libmyIncompressibleRASModels.so"
 );
 
 functions
