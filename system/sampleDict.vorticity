@@ -18,10 +18,7 @@ surfaceFormat vtk;
 
 interpolationScheme cellPoint; 
 
-fields 
-(
-    p U magVorticity
-);
+fields (U);
 
 surfaces
 (
