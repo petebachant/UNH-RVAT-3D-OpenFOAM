@@ -1,37 +1,22 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2.3.x                                 |
+|  \\    /   O peration     | Version:  2.3.0                                 |
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
-FoamFile
-{
-    version     2.0;
-    format      ascii;
-    class       dictionary;
-    object      surfaceFeatureExtractDict;
-}
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-blades.stl
+// Calculate Q (from U)
+Q
 {
-    #include "surfaceFeatureExtractDictDefaults"
-}
+    // Where to load it from
+    functionObjectLibs ("libutilityFunctionObjects.so");
 
-shaft.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
+    type Q;
+
+    // Output every
+    outputControl outputTime;
 }
 
-struts_and_hub.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
-
-AMIsurface.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
 
 // ************************************************************************* //

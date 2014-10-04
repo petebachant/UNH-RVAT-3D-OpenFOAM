@@ -64,11 +64,11 @@ solvers
 
 PIMPLE
 {
-    correctPhi          yes;
+    correctPhi          no;
     nOuterCorrectors    20; // Was 2, set higher for more PIMPLE loops
     nCorrectors         3; // Was 1
     nNonOrthogonalCorrectors 1; // Was 0
-    pRefCell        0;
+    pRefCell        1001;
     pRefValue       0;
 
     residualControl
@@ -91,12 +91,12 @@ relaxationFactors
 {
     fields
     {
-        p               1; // 0.3;
+        p               0.7; // 0.3;
     }
     equations
     {
-        "(U|k|omega)"      1; // 0.7;
-        "(U|k|omega)Final" 1; // 1.0;
+        "(U|k|omega)"      0.8; // 0.7;
+        "(U|k|omega)Final" 1.0; // 1.0;
     }
 }
 

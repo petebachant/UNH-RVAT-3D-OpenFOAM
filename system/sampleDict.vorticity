@@ -10,28 +10,25 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      surfaceFeatureExtractDict;
+    object      sampleDict;
 }
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-blades.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
+surfaceFormat vtk; 
 
-shaft.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
+interpolationScheme cellPoint; 
 
-struts_and_hub.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
+fields (U);
 
-AMIsurface.stl
-{
-    #include "surfaceFeatureExtractDictDefaults"
-}
+surfaces
+(
+    isoVorticity
+    {
+        type            isoSurface;
+        isoField        magVorticity;
+        isoValue        6;
+        interpolate     true;
+    }
+);
 
-// ************************************************************************* //
+// *********************************************************************** // 

@@ -10,62 +10,13 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      blockMeshDict;
+    object      decomposeParDict;
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-convertToMeters 1;
+numberOfSubdomains 192;
 
-vertices
-(
-    ( 2.16 -1.83 0) // 0
-    ( 2.16  1.83 0) // 1
-    (-1.50  1.83 0) // 2
-    (-1.50 -1.83 0) // 3
-    ( 2.16 -1.83  1.22) // 4
-    ( 2.16  1.83  1.22) // 5
-    (-1.50  1.83  1.22) // 6
-    (-1.50 -1.83  1.22) // 7 
-);
-blocks
-(
-    hex (0 1 2 3 4 5 6 7)
-    (75 75 23)
-    simpleGrading (1 1 1)
-);
-
-patches
-(
-    patch inlet
-    (
-        (2 6 7 3) // (0 4 5 1)
-    )
-    patch outlet
-    (
-        (0 4 5 1) // (2 6 7 3)
-    )
-    wall walls
-    (
-        (1 5 6 2)
-        (4 0 3 7)
-    )
-    wall top
-    (
-        (4 7 6 5)
-    )
-    symmetryPlane bottom
-    (
-        (0 1 2 3)
-    )
-);
-
-edges
-(
-);
-
-mergePatchPairs
-(
-);
+method		scotch;
 
 // ************************************************************************* //

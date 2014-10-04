@@ -59,10 +59,10 @@ geometry
         name        struts;
     }
 
-    AMISurface.stl
+    AMIsurface.stl
     {
         type        triSurfaceMesh;
-        name        AMISurface;
+        name        AMIsurface;
     }
 };
 
@@ -119,7 +119,7 @@ castellatedMeshControls
     (
         {
             file        "blades.eMesh";
-            levels ((0.0 5));
+            levels ((0.0 6));
         }
         {
             file        "shaft.eMesh";
@@ -130,8 +130,8 @@ castellatedMeshControls
             levels ((0.0 4));
         }
         {
-            file        "AMISurface.eMesh";
-            levels ((0.0 1));
+            file        "AMIsurface.eMesh";
+            levels ((0.0 0));
         }
     );
 
@@ -147,16 +147,17 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        AMISurface
+        AMIsurface
         {
             level       (0 0);
-            cellZone    AMISurface;
-            faceZone    AMISurface;
+            faceType    boundary; // was boundary
+            cellZone    AMIsurface;
+            faceZone    AMIsurface;
             cellZoneInside  inside;
         }
         blades
         {
-            level       (5 5);
+            level       (6 6);
         }
         shaft
         {
@@ -210,11 +211,11 @@ castellatedMeshControls
         turb_zone
         {
             mode        inside;
-            levels      ((1e15 1));
+            levels      ((1e15 2));
         }
 
 /*
-        AMISurface
+        AMIsurface
         {
             mode        inside;
             levels      ((1e15 0));
@@ -303,7 +304,7 @@ addLayersControls
     // - overall thickness and expansionRatio
 
         // Expansion factor for layer mesh
-        expansionRatio 1.25;
+        expansionRatio 1.2;
 
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
@@ -325,7 +326,7 @@ addLayersControls
     // cannot be above minThickness do not add layer.
     // If relativeSizes this is relative to undistorted size of cell
     // outside layer..
-    minThickness 0.1;
+    minThickness 0.25;
 
 
     // Per final patch (so not geometry!) the layer information
@@ -337,7 +338,7 @@ addLayersControls
     {
         blades
         {
-            nSurfaceLayers 16;
+            nSurfaceLayers 20;
         }
     }
 
