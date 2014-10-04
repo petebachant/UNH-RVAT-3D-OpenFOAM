@@ -18,6 +18,7 @@ runParallel vorticity $nProc
 runParallel sample $nProc -dict system/sampleDict.vorticity
 
 # Create sample sets of velocity
+mv log.sample log.sample.vorticity
 ./gensampledict.py
 runParallel sample $nProc
 
