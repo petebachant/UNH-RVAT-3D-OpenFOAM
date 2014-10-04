@@ -59,11 +59,6 @@ libs
 
 functions
 {
-    #include "readFields"
-    #include "Q"
-    #include "vorticity"
-    #include "surfaces"
-
     forces
     {
         type                forces;
