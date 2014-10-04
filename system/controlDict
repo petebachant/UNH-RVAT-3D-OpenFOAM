@@ -37,7 +37,7 @@ writeFormat     binary;
 
 writePrecision  10;
 
-writeCompression compressed;
+writeCompression uncompressed;
 
 timeFormat      general;
 
@@ -59,11 +59,6 @@ libs
 
 functions
 {
-    #include "readFields"
-    #include "Q"
-    #include "vorticity"
-    #include "surfaces"
-
     forces
     {
         type                forces;
