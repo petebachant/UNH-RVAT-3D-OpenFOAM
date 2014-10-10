@@ -41,7 +41,7 @@ def get_local_dir_list():
                 f in ["constant", "postProcessing"]:
             if os.path.isdir(f):
                 local_dir_list.append(f)
-    return local_dir_list
+    return sorted(local_dir_list)
 
 def get_dropbox_contents(client, dbdir):
     try:
