@@ -4,7 +4,7 @@ Created on Thu Oct  9 20:17:56 2014
 
 @author: pete
 
-This script will upload case results to Dropbox, ans needs an access
+This script will upload case results to Dropbox, and needs an access
 token to do so.
 """
 from __future__ import division, print_function
@@ -56,7 +56,7 @@ def compress_dir(dir):
     subprocess.call(["tar", "-czvf", dir+".gz", dir])
         
 if __name__ == "__main__":
-    # Call the case the subfolder where this script is located
+    # Name the case the subfolder where this script is located
     casename = os.path.dirname(os.path.realpath(__file__)).split("/")[-1]
     # Path for files on Dropbox
     dbdir = os.path.join("/OpenFOAM/solvedCases", casename)
