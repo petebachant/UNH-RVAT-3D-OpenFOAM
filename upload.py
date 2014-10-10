@@ -80,7 +80,7 @@ if __name__ == "__main__":
             compress_dir(d)
             print("Uploading '{}'...".format(f))
             upload_file(f)
-            print("Deleting local copy of {}...".format(f))
+            print("Deleting local copy of '{}'...".format(f))
             os.remove(f)
         else:
             print("'{}' already uploaded".format(f))
