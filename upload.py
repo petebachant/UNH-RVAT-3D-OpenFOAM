@@ -16,10 +16,16 @@ import json
 import os
 import re
 
-def upload_file(filename):    
+def upload_file(client, filename, dbdir):
+    size = os.path.getsize(filename)
     with open(filename, "rb") as f:
-        response = client.put_file(os.path.join(dbdir, filename), f, 
-                                   overwrite=True)
+        uploader = client.get_chunked_uploader(f, size)
+        while uploader.offset < size:
+            try:
+                upload = uploader.upload_chunked()
+            except ErrorResponse, e:
+                print(e)
+    uploader.finish(os.path.join(dbdir, filename))
 
 def get_token():
     with open(os.path.join(os.path.expanduser("~"), ".dropboxrc")) as f:
@@ -79,7 +85,7 @@ if __name__ == "__main__":
             print("Compressing '{}'...".format(d))
             compress_dir(d)
             print("Uploading '{}'...".format(f))
-            upload_file(f)
+            upload_file(client, f, dbdir)
             print("Deleting local copy of '{}'...".format(f))
             os.remove(f)
         else:
