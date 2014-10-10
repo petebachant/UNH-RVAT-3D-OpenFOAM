@@ -23,7 +23,7 @@ def upload_file(client, filename, dbdir):
         while uploader.offset < size:
             try:
                 upload = uploader.upload_chunked()
-            except ErrorResponse, e:
+            except ErrorResponse as e:
                 print(e)
     uploader.finish(os.path.join(dbdir, filename))
 
