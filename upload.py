@@ -63,6 +63,7 @@ def get_dropbox_filelist(client, dbdir):
 def compress_dir(directory, files=["U", "p", "k", "constant", "polyMesh"]):
     with tarfile.open(directory+".gz", "w:gz") as tf:
         for f in files:
+            print("Adding {} to {}".format(f, directory + ".gz"))
             tf.add(os.path.join(directory, f))
         
 if __name__ == "__main__":
@@ -85,11 +86,11 @@ if __name__ == "__main__":
     for d in local_dirs:
         f = d + ".gz"
         if not f in db_files:
-            print("Compressing '{}'...".format(d))
+            print("Compressing '{}'".format(d))
             compress_dir(d)
-            print("Uploading '{}'...".format(f))
+            print("Uploading '{}'".format(f))
             upload_file(client, f, dbdir)
-            print("Deleting local copy of '{}'...".format(f))
+            print("Deleting local copy of '{}'".format(f))
             os.remove(f)
         else:
             print("'{}' already uploaded".format(f))
