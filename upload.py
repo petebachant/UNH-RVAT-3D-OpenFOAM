@@ -12,6 +12,7 @@ from __future__ import division, print_function
 from dropbox.client import DropboxClient
 from dropbox.rest import ErrorResponse
 import subprocess
+import tarfile
 import json
 import os
 import re
@@ -59,8 +60,10 @@ def get_dropbox_filelist(client, dbdir):
         dbfilelist.append(str(f["path"].split("/")[-1]))
     return dbfilelist
         
-def compress_dir(dir):
-    subprocess.call(["tar", "-czvf", dir+".gz", dir])
+def compress_dir(directory, files=["U", "p", "k", "constant", "polyMesh"]):
+    with tarfile.open(directory+".gz", "w:gz") as tf:
+        for f in files:
+            tf.add(os.path.join(directory, f))
         
 if __name__ == "__main__":
     # Name the case the subfolder where this script is located
