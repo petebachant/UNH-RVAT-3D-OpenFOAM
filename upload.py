@@ -86,11 +86,11 @@ if __name__ == "__main__":
     for d in local_dirs:
         f = d + ".gz"
         if not f in db_files:
-            print("Compressing '{}'".format(d))
+            print("Compressing {}".format(d))
             compress_dir(d)
-            print("Uploading '{}'".format(f))
+            print("Uploading {}".format(f))
             upload_file(client, f, dbdir)
-            print("Deleting local copy of '{}'".format(f))
+            print("Deleting local copy of {}".format(f))
             os.remove(f)
         else:
-            print("'{}' already uploaded".format(f))
+            print("{} already uploaded".format(f))
