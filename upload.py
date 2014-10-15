@@ -60,7 +60,7 @@ def get_dropbox_filelist(client, dbdir):
         dbfilelist.append(str(f["path"].split("/")[-1]))
     return dbfilelist
         
-def compress_dir(directory, files=["U", "p", "k", "constant", "polyMesh"]):
+def compress_dir(directory, files=["U", "p", "k", "uniform", "polyMesh"]):
     with tarfile.open(directory+".gz", "w:gz") as tf:
         for f in files:
             print("Adding {} to {}".format(f, directory + ".gz"))
