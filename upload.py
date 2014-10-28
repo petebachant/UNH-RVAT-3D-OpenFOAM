@@ -39,8 +39,8 @@ def get_local_dir_list():
     local_dir_list = []
     for f in local_items:
         if re.match("^\d+$", f) or re.match("^\d+\.\d+$", f) or \
-                f in ["constant", "postProcessing"]:
-            if os.path.isdir(f):
+                f in ["constant", "postProcessing", "log.pimpleDyMFoam"]:
+            if os.path.isdir(f) or f == "log.pimpleDyMFoam":
                 local_dir_list.append(f)
     return sorted(local_dir_list)
 
@@ -86,16 +86,22 @@ if __name__ == "__main__":
     db_files = get_dropbox_filelist(client, dbdir)
     
     for d in local_dirs:
-        f = d + ".gz"
+        if d != "log.pimpleDyMFoam":
+            f = d + ".gz"
+        else:
+            f = d
         if not f in db_files:
             print("Compressing {}".format(d))
-            if f != "constant.gz" and f != "postProcessing.gz":
+            if f != "constant.gz" and f != "postProcessing.gz" and f != "log.pimpleDyMFoam":
                 compress_dir(d, files=["U", "p", "k", "uniform", "polyMesh"])
+            elif f == "log.pimpleDyMFoam":
+                pass
             else:
                 compress_dir(d)
             print("Uploading {}".format(f))
             upload_file(client, f, dbdir)
-            print("Deleting local copy of {}".format(f))
-            os.remove(f)
+            if f != "log.pimpleDyMFoam":
+                print("Deleting local copy of {}".format(f))
+                os.remove(f)
         else:
             print("{} already uploaded".format(f))
