@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Processing for UNH-RVAT 3D OpenFOAM simulation.
@@ -10,13 +10,12 @@ from __future__ import division, print_function
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from pxl import styleplot, fdiff
+from pxl import fdiff
 import sys
 import foampy
 import pandas as pd
 
-#import seaborn
-styleplot.setpltparams(latex=True)
+plt.style.use("fivethirtyeight")
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
@@ -122,7 +121,10 @@ def calcwake(t1=0.0):
             u[n,m,:] = data[z_H[m]][1]
             v[n,m,:] = data[z_H[m]][2]
             w[n,m,:] = data[z_H[m]][3]
-            xvorticity[n,m,:] = data[z_H[m]][4]
+            try:
+                xvorticity[n,m,:] = data[z_H[m]][4]
+            except IndexError:
+                pass
     meanu = u.mean(axis=0)
     meanv = v.mean(axis=0)
     meanw = w.mean(axis=0)
@@ -148,7 +150,7 @@ def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath=""
     plt.ylabel("$U/U_\infty$")
     plt.show()
     
-def plotwake(plotlist=["meanu"], t1=3.0, save=False, savepath="", 
+def plotwake(plotlist=["meancomboquiv"], t1=3.0, save=False, savepath="", 
              savetype=".pdf"):
     data = calcwake(t1=t1)
     y_R = data["y/R"]
@@ -395,11 +397,11 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-#    plotwake(plotlist=["xvorticity", "meancomboquiv"], t1=3.0, 
-#             save=False, savepath=p)
+    plotwake(plotlist=["meancomboquiv"], t1=3.0, 
+             save=False, savepath=p)
 #    calcwake()
 #    plot_wake_profile()
-    calc_perf(plot=True, inertial=True)
+#    calc_perf(plot=True, inertial=True)
 
 if __name__ == "__main__":
     main()
