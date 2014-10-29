@@ -15,7 +15,7 @@ import foampy
 # Input parameters
 setformat = "raw"
 interpscheme = "cellPoint"
-fields = ["U", "vorticity"]
+fields = ["U"]
 x = 1.0
 ymax = 1.83
 ymin = -1.83
