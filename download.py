@@ -41,7 +41,7 @@ def get_dropbox_filelist(client, dbdir):
     dbfilelist = []
     for f in dbcontents:
         dbfilelist.append(str(f["path"].split("/")[-1]))
-    return dbfilelist
+    return sorted(dbfilelist)
         
 def uncompress_file(filename):
     with tarfile.open(filename, "r:gz") as tf:
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         if not f in local_items and not f[:-3] in local_items:
             print("Downloading {}".format(f))
             download_file(client, f, directory=dbdir)
-            if f[:-3] == ".gz":
+            if f[-3:] == ".gz":
                 print("Uncompressing {}".format(f))
                 uncompress_file(f)
                 print("Deleting local copy of {}".format(f))
