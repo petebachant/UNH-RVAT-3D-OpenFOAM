@@ -30,3 +30,4 @@ system/sampleDict
 __pycache__/
 system/decomposeParDict
 slurm*
+*.pyc
