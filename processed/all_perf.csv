@@ -1,0 +1,2 @@
+dt,maxco,nx,nz,ncells,nlayers,expratio,tsr,cp,cd,yplus_min,yplus_max,yplus_mean,ddt_scheme
+0.002,nan,70,13,8335326,20,1.2,1.898524283563579,0.3295100885418544,1.0570441555426724,2.354990558,114.3286643,3.801388722,Euler
