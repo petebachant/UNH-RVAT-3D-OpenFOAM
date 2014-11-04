@@ -15,7 +15,7 @@ import sys
 import foampy
 import pandas as pd
 
-plt.style.use("fivethirtyeight")
+plt.style.use("system/plotstyle.mplstyle")
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
@@ -238,22 +238,20 @@ def plotwake(plotlist=["meancomboquiv"], t1=3.0, save=False, savepath="",
         if save:
             plt.savefig(savepath+'/xvorticity_3drans'+savetype)
     if "meancomboquiv" in plotlist or "all" in plotlist:
-        plt.figure(figsize=(9, 8))
+        plt.figure(figsize=(9, 5))
         # Add contours of mean velocity
         cs = plt.contourf(y_R, z_H, u, 20, cmap=plt.cm.coolwarm)
         cb = plt.colorbar(cs, shrink=1, extend='both', 
-                          orientation='horizontal', pad=0.12)
+                          orientation='horizontal', pad=0.16)
         cb.set_label(r'$U/U_{\infty}$')
         plt.hold(True)
         # Make quiver plot of v and w velocities
         Q = plt.quiver(y_R, z_H, v, w, angles='xy', width=0.0022)
         plt.xlabel(r'$y/R$')
         plt.ylabel(r'$z/H$')
-        #plt.ylim(-0.2, 0.78)
-        #plt.xlim(-3.2, 3.2)
         plt.xlim(-3.66, 3.66)
-        plt.ylim(-1.22, 1.22)
-        plt.quiverkey(Q, 0.8, 0.22, 0.1, r'$0.1 U_\infty$',
+        plt.ylim(0, 1.22)
+        plt.quiverkey(Q, 0.8, 0.28, 0.1, r'$0.1 U_\infty$',
                       labelpos='E',
                       coordinates='figure',
                       fontproperties={'size': 'small'})
