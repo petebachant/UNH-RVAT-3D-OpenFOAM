@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#SBATCH --time=6:00:00     # WALLTIME
+#SBATCH --time=48:00:00     # WALLTIME
 #SBATCH -N24 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
 #SBATCH --account=FY140434  # WC ID 
@@ -19,12 +19,10 @@ mkdir -p oldLogs
 mv log.decomposePar oldLogs/log.decomposePar
 mv log.pimpleDyMFoam oldLogs/log.pimpleDyMFoam
 mv log.reconstructPar oldLogs/log.reconstructPar
-mv log.vorticity oldLogs/log.vorticity
-mv log.R oldLogs/log.R
 
 ./gendynmeshdict.py
 
-#runApplication decomposePar -latestTime
+runApplication decomposePar -latestTime
 
 runParallel `getApplication` $nProc
 
