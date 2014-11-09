@@ -22,7 +22,7 @@ mv log.reconstructPar oldLogs/log.reconstructPar
 
 ./gendynmeshdict.py
 
-runApplication decomposePar -latestTime
+#runApplication decomposePar -latestTime
 
 runParallel `getApplication` $nProc
 
