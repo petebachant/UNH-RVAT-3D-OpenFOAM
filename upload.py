@@ -42,6 +42,7 @@ def get_local_dir_list():
                 f in ["constant", "postProcessing", "log.pimpleDyMFoam"]:
             if os.path.isdir(f) or f == "log.pimpleDyMFoam":
                 local_dir_list.append(f)
+    local_dir_list.remove("0")
     return sorted(local_dir_list)
 
 def get_dropbox_contents(client, dbdir):
