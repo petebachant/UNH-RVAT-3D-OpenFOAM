@@ -41,11 +41,12 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 """
 
-ypoints = np.array([-1.5, -1.375, -1.25, 1.0])
+ypoints = np.array([-1.5, -1.375, -1.25, -1.125])
 ypoints = np.append(ypoints, np.arange(-1, -0.799, 0.1))
 ypoints = np.append(ypoints, np.arange(-.75, -0.001, 0.05))
 ypoints = np.append(ypoints, 0.0)
 ypoints = np.append(ypoints, -np.flipud(ypoints[:-1]))
+ypoints = np.round(ypoints, decimals=6)
 
 setblock = """    profile_{z_H}
     {{ 
@@ -87,6 +88,10 @@ def make_all_text():
     txt += "// *********************************************************************** // \n"
     return txt
     
+def test_block():
+    print(len(ypoints))
+    print(make_setblock(-1.0))
+    
 def test_output():
     print(make_all_text())
 
@@ -98,3 +103,4 @@ def main():
 if __name__ == "__main__":
     main()
 #    test_output()
+#    test_block()
