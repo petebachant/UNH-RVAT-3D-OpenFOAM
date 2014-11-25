@@ -17,12 +17,12 @@ setformat = "raw"
 interpscheme = "cellPoint"
 fields = ["U"]
 x = 1.0
-ymax = 1.83
-ymin = -1.83
-ny = 41
-zmax = 1.21999
-zmin = -1.21999
-nz = 21
+ymax = 1.5
+ymin = -1.5
+ny = 121
+zmax = 1.125
+zmin = -1.125
+nz = 19
 
 header = r"""/*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
@@ -41,42 +41,23 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 """
 
-ypoints = np.array([-1.5, -1.375, -1.25, -1.125])
-ypoints = np.append(ypoints, np.arange(-1, -0.799, 0.1))
-ypoints = np.append(ypoints, np.arange(-.75, -0.001, 0.05))
-ypoints = np.append(ypoints, 0.0)
-ypoints = np.append(ypoints, -np.flipud(ypoints[:-1]))
-ypoints = np.round(ypoints, decimals=6)
 
-setblock = """    profile_{z_H}
-    {{ 
-        type        cloud; 
-        axis        y; 
-        points      ({points}
-                    );
-    }}"""
-    
-def make_pointlist(x, ylist, z):
-    pointlist=""
-    point = "\n                        ({x} {y} {z})"
-    for y in ylist:
-        pointlist += point.format(x=x, y=y, z=z)
-    return pointlist
-    
-def make_setblock(z_H):
-    pointlist = make_pointlist(x, ypoints, z_H)
-    return setblock.format(z_H=z_H, points=pointlist)
-    
-def make_all_text():
-    z_array = np.arange(-1.125, 1.126, 0.125)
+def main():
+    z_array = np.linspace(zmin, zmax, nz)
     
     txt = header + "\n" 
     txt += "setFormat " + setformat + "; \n\n"
     txt += "interpolationScheme " + interpscheme + "; \n\n"
-    txt += "sets \n( \n"
+    txt += "sets \n ( \n"
     
     for z in z_array:
-        txt += make_setblock(z) + "\n\n"
+        txt += "    " + "profile_" + str(z) + "\n"
+        txt += "    { \n"
+        txt += "        type        uniform; \n"
+        txt += "        axis        y; \n"
+        txt += "        start       (" + str(x) + " " + str(ymin) + " " + str(z) + ");\n"
+        txt += "        end         (" + str(x) + " " + str(ymax) + " " + str(z) + ");\n"
+        txt += "        nPoints     " + str(ny) + ";\n    }\n\n"
         
     txt += ");\n\n"
     txt += "fields \n(\n"
@@ -86,21 +67,9 @@ def make_all_text():
         
     txt += "); \n\n"
     txt += "// *********************************************************************** // \n"
-    return txt
     
-def test_block():
-    print(len(ypoints))
-    print(make_setblock(-1.0))
-    
-def test_output():
-    print(make_all_text())
-
-def main():
-    txt = make_all_text()
     with open("system/sampleDict", "w") as f:
         f.write(txt)
 
 if __name__ == "__main__":
     main()
-#    test_output()
-#    test_block()
