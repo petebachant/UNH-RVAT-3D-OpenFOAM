@@ -17,25 +17,26 @@ FoamFile
 
 dimensions      [0 2 -1 0 0 0 0];
 
-internalField   uniform 0; // Was 1e-7
+internalField   uniform 1e-7;
 
 boundaryField
 {
 
     blades
     {
-        type            calculated;
+        type            nutUSpaldingWallFunction;
+        value           uniform 0;
     }
 
     shaft
-    {
-        type            nutkWallFunction;
+    {    
+        type            nutUSpaldingWallFunction;
         value           uniform 0;
     }
 
     struts
     {
-        type            nutkWallFunction;
+        type            nutUSpaldingWallFunction;
         value           uniform 0;
     }
 
@@ -53,13 +54,13 @@ boundaryField
 
     bottom
     {
-        type            nutkWallFunction;
+        type            nutUSpaldingWallFunction;
         value           uniform 0;
     }
 
     walls
     {
-        type            nutkWallFunction;
+        type            nutUSpaldingWallFunction;
         value           uniform 0;
     }
 
