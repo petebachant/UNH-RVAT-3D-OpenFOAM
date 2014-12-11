@@ -44,7 +44,7 @@ solvers
         relTol          0; // Was 0
     }
 
-    "(U|k|omega)"
+    "(U|k|omega|nuTilda)"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
@@ -52,7 +52,7 @@ solvers
         relTol          0.1;
     }
 
-    "(U|k|omega)Final"
+    "(U|k|omega|nuTilda)Final"
     {
         solver          smoothSolver;
         smoother        symGaussSeidel;
@@ -95,8 +95,8 @@ relaxationFactors
     }
     equations
     {
-        "(U|k|omega)"      0.8; // 0.7;
-        "(U|k|omega)Final" 1.0; // 1.0;
+        "(U|k|omega|nuTilda)"      0.8; // 0.7;
+        "(U|k|omega|nuTilda)Final" 1.0; // 1.0;
     }
 }
 

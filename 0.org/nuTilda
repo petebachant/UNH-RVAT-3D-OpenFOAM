@@ -10,13 +10,13 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      omega;
+    object      nuTilda;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 -1 0 0 0 0];
+dimensions      [0 2 -1 0 0 0 0];
 
-internalField   uniform 1.414;
+internalField   uniform 0.14;
 
 boundaryField
 {
@@ -36,50 +36,50 @@ boundaryField
 
     blades
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     shaft
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     struts
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     walls
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     top
     {
         type            fixedValue;
-        value           $internalField;
+        value           uniform 0;
     }
 
     bottom
     {
-        type            omegaWallFunction;
-        value           $internalField;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     AMI1
     {
-        type  		cyclicAMI;
-        value   	$internalField;
+        type  		    cyclicAMI;
+        value   	    $internalField;
     }
 
     AMI2
     {
-        type  		cyclicAMI;
-        value   	$internalField;
+        type  		    cyclicAMI;
+        value   	    $internalField;
     }
 
     "proc.*"
