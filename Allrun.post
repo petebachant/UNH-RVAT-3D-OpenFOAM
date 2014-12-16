@@ -12,13 +12,5 @@
 # Get the number of processors to run on from system/decomposeParDict
 nProc=$(getNumberOfProcessors)
 
-# Calculate vorticity fields
-runParallel vorticity $nProc
-# Sample vorticity iso-surfaces
-runParallel sample $nProc -dict system/sampleDict.vorticity
-
-# Create sample sets of velocity
-mv log.sample log.sample.vorticity
-./gensampledict.py
-runParallel sample $nProc
+runParallel R $nProc
 

@@ -9,4 +9,4 @@
 # Source tutorial run functions
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
-runApplication reconstructPar -newTimes
+mpiexec -npernode 1 reconstructPar -newTimes
