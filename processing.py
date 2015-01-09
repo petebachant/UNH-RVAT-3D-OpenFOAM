@@ -80,6 +80,9 @@ def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
         return {"C_P" : "nan", 
                 "C_D" : "nan", 
                 "TSR" : "nan"}
+
+def plot_perf():
+    calc_perf(plot=True)
     
 def loadwake(time):
     """Loads wake data and returns y/R and statistics."""
@@ -115,14 +118,15 @@ def calcwake(t1=0.0):
     w = np.zeros((len(t), len(z_H), len(y_R)))
     xvorticity = np.zeros((len(t), len(z_H), len(y_R)))
     # Loop through all times
-    for n in range(len(t)):
+    for n, t_i in enumerate(t):
+        print("Loading data for t = {}".format(t_i))
         data = loadwake(t[n])
-        for m in range(len(z_H)):
-            u[n,m,:] = data[z_H[m]][1]
-            v[n,m,:] = data[z_H[m]][2]
-            w[n,m,:] = data[z_H[m]][3]
+        for m, z_H_i in enumerate(z_H):
+            u[n,m,:] = data[z_H_i][1]
+            v[n,m,:] = data[z_H_i][2]
+            w[n,m,:] = data[z_H_i][3]
             try:
-                xvorticity[n,m,:] = data[z_H[m]][4]
+                xvorticity[n,m,:] = data[z_H_i][4]
             except IndexError:
                 pass
     meanu = u.mean(axis=0)
