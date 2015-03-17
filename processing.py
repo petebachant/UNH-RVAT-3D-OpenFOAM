@@ -154,7 +154,7 @@ def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath=""
     plt.ylabel("$U/U_\infty$")
     plt.show()
     
-def plotwake(plotlist=["meancomboquiv"], t1=3.0, save=False, savepath="", 
+def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="", 
              savetype=".pdf"):
     data = calcwake(t1=t1)
     y_R = data["y/R"]
@@ -241,7 +241,7 @@ def plotwake(plotlist=["meancomboquiv"], t1=3.0, save=False, savepath="",
         plt.tight_layout()
         if save:
             plt.savefig(savepath+'/xvorticity_3drans'+savetype)
-    if "meancomboquiv" in plotlist or "all" in plotlist:
+    if "meancontquiv" in plotlist or "all" in plotlist:
         plt.figure(figsize=(9, 5))
         # Add contours of mean velocity
         cs = plt.contourf(y_R, z_H, u, 20, cmap=plt.cm.coolwarm)
@@ -271,7 +271,7 @@ def plotwake(plotlist=["meancomboquiv"], t1=3.0, save=False, savepath="",
         ax.set_aspect(2.0)
         plt.tight_layout()
         if save:
-            plt.savefig(savepath+"\\meancomboquiv_AD"+savetype)
+            plt.savefig(savepath+"/meancontquiv"+savetype)
     plt.show()
         
 def plotexpwake(Re_D, quantity, z_H=0.0, save=False, savepath="", 
@@ -399,7 +399,7 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["meancomboquiv"], t1=3.0, 
+    plotwake(plotlist=["meancontquiv"], t1=3.0, 
              save=False, savepath=p)
 #    calcwake()
 #    plot_wake_profile()
