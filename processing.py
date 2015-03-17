@@ -155,7 +155,7 @@ def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath=""
     plt.show()
     
 def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="", 
-             savetype=".pdf"):
+             savetype=".pdf", show=False):
     data = calcwake(t1=t1)
     y_R = data["y/R"]
     z_H = data["z/H"]
@@ -272,7 +272,8 @@ def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="",
         plt.tight_layout()
         if save:
             plt.savefig(savepath+"/meancontquiv"+savetype)
-    plt.show()
+    if show:
+        plt.show()
         
 def plotexpwake(Re_D, quantity, z_H=0.0, save=False, savepath="", 
                 savetype=".pdf", newfig=True, marker="--ok",
