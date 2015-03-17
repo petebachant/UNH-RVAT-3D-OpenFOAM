@@ -31,3 +31,7 @@ __pycache__/
 system/decomposeParDict
 slurm*
 *.pyc
+processed/mean_u.csv
+processed/mean_v.csv
+processed/mean_w.csv
+processed/xvorticity.csv
