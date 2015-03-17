@@ -99,7 +99,7 @@ def loadwake(time):
         data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
     
-def calcwake(t1=0.0):
+def calcwake(t1=0.0, save=False):
     times = os.listdir("postProcessing/sets")
     times = [float(time) for time in times]
     times.sort()
@@ -115,7 +115,8 @@ def calcwake(t1=0.0):
     w = np.zeros((len(t), len(z_H), len(y_R)))
     xvorticity = np.zeros((len(t), len(z_H), len(y_R)))
     # Loop through all times
-    for n in range(len(t)):
+    for n, t_i in enumerate(t):
+        print("Loading sampled velocity data for t = {}".format(t_i))
         data = loadwake(t[n])
         for m in range(len(z_H)):
             u[n,m,:] = data[z_H[m]][1]
@@ -129,6 +130,15 @@ def calcwake(t1=0.0):
     meanv = v.mean(axis=0)
     meanw = w.mean(axis=0)
     xvorticity = xvorticity.mean(axis=0)
+    if save:
+        df = pd.DataFrame(meanu, index=z_H, columns=y_R)
+        df.to_csv("processed/mean_u.csv")
+        df = pd.DataFrame(meanv, index=z_H, columns=y_R)
+        df.to_csv("processed/mean_v.csv")
+        df = pd.DataFrame(meanw, index=z_H, columns=y_R)
+        df.to_csv("processed/mean_w.csv")
+        df = pd.DataFrame(xvorticity, index=z_H, columns=y_R)
+        df.to_csv("processed/xvorticity.csv")
     return {"meanu" : meanu,
             "meanv" : meanv,
             "meanw" : meanw,
@@ -265,6 +275,7 @@ def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="",
                    linewidth=3)
         ax = plt.axes()
         ax.set_aspect(2.0)
+#        plt.yticks([0.0, 0.13, 0.25, 0.38, 0.5, 0.63, 0.75, 0.88, 1.0, 1.13])
         plt.tight_layout()
         if save:
             plt.savefig(savepath+"/meancontquiv"+savetype)
@@ -396,9 +407,9 @@ def main():
         p = "C:/Users/Pete/" + p
     plt.close("all")
     
-    plotwake(plotlist=["meancontquiv"], t1=3.0, 
-             save=False, savepath=p)
-#    calcwake()
+#    plotwake(plotlist=["meancontquiv"], t1=3.0, 
+#             save=False, savepath=p)
+    calcwake(t1=3.0, save=True)
 #    plot_wake_profile()
 #    calc_perf(plot=True, inertial=True)
 
