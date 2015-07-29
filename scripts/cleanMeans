@@ -3,11 +3,11 @@
 while :
 do
     echo "Deleting unnecessary mean fields"
-    find -name pMean.gz -not -path "./10*" -not -path "./9.98*" -delete
-    find -name UMean.gz -not -path "./10*" -not -path "./9.98*" -delete
-    find -name UPrime2Mean.gz -not -path "./10*" -not -path "./9.98*" -delete
-    find -name nutMean.gz -not -path "./10*" -not -path "./9.98*" -delete
-    find -name kMean.gz -not -path "./10*" -not -path "./9.98*" -delete
+    find -name pMean -not -path "./10*" -not -path "./9.98*" -delete
+    find -name UMean -not -path "./10*" -not -path "./9.98*" -delete
+    find -name UPrime2Mean -not -path "./10*" -not -path "./9.98*" -delete
+    find -name nutMean -not -path "./10*" -not -path "./9.98*" -delete
+    find -name kMean -not -path "./10*" -not -path "./9.98*" -delete
     sleep 5
 done 
 
