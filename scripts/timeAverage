@@ -1,0 +1,4 @@
+#!/bin/sh
+
+execFlowFunctionObjects -dict system/controlDict.average -time 5: | tee log.fieldAverage
+

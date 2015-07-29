@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ ! -f 10/UMean.gz ]
+then
+    scripts/timeAverage
+fi
+
+execFlowFunctionObjects -dict system/controlDict.recovery -latestTime | tee log.recovery
+sample -latestTime | tee log.sample
+funkyDoCalc system/funkyDoCalcDict -latestTime | tee log.funkyDoCalc
+
+# ----------------------------------------------------------------- end-of-file
