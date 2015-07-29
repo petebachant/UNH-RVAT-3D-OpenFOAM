@@ -6,18 +6,29 @@ These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
 figuring out the settings, so this case may not run as-is on all 
 systems.
 
+## Usage
+
+  * The mesh is generated with `scripts/Allrun.pre`.
+  * The simulation is run with `scripts/Allrun.postmesh`
+  * Turbine performance can be displayed with `python scripts/perf.py`
+  * Post-processing is done with `scrips/Allrun.post`
+
+
 ## Dependencies
 
 ### Running
+
   * OpenFOAM 2.3.x
   * foamPy (available via `pip install foampy`)
   
 ### Post-processing
+
   * swak4Foam
   * [OpenFOAM 2.3.x with modified `execFlowFunctionObjects`](https://github.com/petebachant/OpenFOAM-2.3.x/tree/functionObjMeshMotion)
   * NumPy
   * matplotlib
   * pandas
+
 
 ## License
 
