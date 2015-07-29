@@ -8,10 +8,11 @@ systems.
 
 ## Usage
 
+  * All commands should be run from the top-level directory.
   * The mesh is generated with `scripts/Allrun.pre`.
-  * The simulation is run with `scripts/Allrun.postmesh`
-  * Turbine performance can be displayed with `python scripts/perf.py`
-  * Post-processing is done with `scrips/Allrun.post`
+  * The simulation is run with `scripts/Allrun.postmesh`.
+  * Turbine performance can be displayed with `python scripts/perf.py`.
+  * Post-processing is done with `scripts/Allrun.post`.
 
 
 ## Dependencies
