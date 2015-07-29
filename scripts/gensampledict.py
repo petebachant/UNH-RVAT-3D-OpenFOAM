@@ -1,10 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Generate sampleDict for multiple cross-stream profiles
-
-by Pete Bachant (petebachant@gmail.com)
-
 """
 from __future__ import division, print_function
 import numpy as np
@@ -15,7 +12,7 @@ import foampy
 # Input parameters
 setformat = "raw"
 interpscheme = "cellPoint"
-fields = ["U"]
+fields = ["UMean"]
 x = 1.0
 ymax = 1.5
 ymin = -1.5
