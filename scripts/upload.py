@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct  9 20:17:56 2014
-
-@author: pete
-
 This script will upload case results to Dropbox, and needs an access
 token to do so.
 """
