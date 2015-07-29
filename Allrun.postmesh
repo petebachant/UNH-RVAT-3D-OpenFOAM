@@ -18,7 +18,7 @@ nProc=$(getNumberOfProcessors)
 \rm -rf 0
 cp -rf 0.org 0
 
-./gendynmeshdict.py
+python scripts/gendynmeshdict.py
 
 mv log.decomposePar log.decomposeParMesh
 runApplication decomposePar
