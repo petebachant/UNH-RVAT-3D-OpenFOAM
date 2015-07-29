@@ -20,7 +20,7 @@ mv log.decomposePar oldLogs/log.decomposePar
 mv log.pimpleDyMFoam oldLogs/log.pimpleDyMFoam
 mv log.reconstructPar oldLogs/log.reconstructPar
 
-./gendynmeshdict.py
+python scripts/gendynmeshdict.py
 
 #runApplication decomposePar -latestTime
 
