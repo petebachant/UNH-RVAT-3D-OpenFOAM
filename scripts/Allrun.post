@@ -1,12 +1,13 @@
 #!/bin/sh
 
-if [ ! -f 10/UMean.gz ]
+if [ ! -f 10/UMean ]
 then
     scripts/timeAverage
 fi
 
-execFlowFunctionObjects -dict system/controlDict.recovery -latestTime | tee log.recovery
+execFlowFunctionObjects -noFlow -dict system/controlDict.recovery -latestTime | tee log.recovery
+python scripts/gensampledict.py
 sample -latestTime | tee log.sample
-funkyDoCalc system/funkyDoCalcDict -latestTime | tee log.funkyDoCalc
+funkyDoCalc system/funkyDoCalcDict.0 -latestTime | tee log.funkyDoCalc.0
+funkyDoCalc system/funkyDoCalcDict.1 -latestTime | tee log.funkyDoCalc.1
 
-# ----------------------------------------------------------------- end-of-file
