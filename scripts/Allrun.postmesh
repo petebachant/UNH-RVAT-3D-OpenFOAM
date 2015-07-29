@@ -28,4 +28,4 @@ runParallel `getApplication` $nProc
 mv log.yPlus log.yPlus.0
 runParallel yPlus $nProc -latestTime
 
-python -c "import processing; processing.log_perf()"
+#python -c "from modules import processing; processing.log_perf()"

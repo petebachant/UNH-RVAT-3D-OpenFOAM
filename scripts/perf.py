@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug  8 09:22:09 2013
-
-@author: pete
+This script calculates turbine performance and prints to the terminal.
 """
-from processing import calc_perf
+from modules.processing import calc_perf
 
 calc_perf(plot=False)

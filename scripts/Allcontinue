@@ -26,5 +26,5 @@ python scripts/gendynmeshdict.py
 
 runParallel `getApplication` $nProc
 
-python -c "import processing; processing.log_perf()"
+# python -c "from modules import processing; processing.log_perf()"
 
