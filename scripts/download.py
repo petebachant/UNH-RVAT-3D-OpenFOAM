@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@author: pete
-
 This script will download case results from Dropbox, and needs an access
 token to do so. The case will need to have the same name as the top-level
-directory.
+directory. Note that the script should be run from the top-level directory,
+not the scripts directory.
 """
 from __future__ import division, print_function
 from dropbox.client import DropboxClient

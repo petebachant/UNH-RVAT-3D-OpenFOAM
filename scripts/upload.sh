@@ -8,4 +8,4 @@
 
 source activate py27
 
-mpiexec -npernode 1 ./upload.py 
+mpiexec -npernode 1 python scripts/upload.py 
