@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Processing for UNH-RVAT 3D OpenFOAM simulation.
-
-by Pete Bachant (petebachant@gmail.com)
-
 """
+
 from __future__ import division, print_function
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,8 +12,6 @@ from pxl import fdiff
 import sys
 import foampy
 import pandas as pd
-
-plt.style.use("system/plotstyle.mplstyle")
     
 exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
 
