@@ -12,8 +12,7 @@ from pxl import fdiff
 import sys
 import foampy
 import pandas as pd
-    
-exp_path = "/media/pete/External 2/Research/Experiments/2014 Spring RVAT Re dep"
+
 
 # Some constants
 R = 0.5
@@ -266,29 +265,6 @@ def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="",
             plt.savefig(savepath+"/meancontquiv"+savetype)
     if show:
         plt.show()
-        
-def plotexpwake(Re_D, quantity, z_H=0.0, save=False, savepath="", 
-                savetype=".pdf", newfig=True, marker="--ok",
-                fill="none", figsize=(10, 5)):
-    """Plots the transverse wake profile of some quantity. These can be
-      * meanu
-      * meanv
-      * meanw
-      * stdu
-    """
-    U = Re_D/1e6
-    label = "Exp."
-    folder = exp_path + "/Wake/U_" + str(U) + "/Processed/"
-    z_H_arr = np.load(folder + "z_H.npy")
-    i = np.where(z_H_arr==z_H)
-    q = np.load(folder + quantity + ".npy")[i]
-    y_R = np.load(folder + "y_R.npy")[i]
-    if newfig:
-        plt.figure(figsize=figsize)
-    plt.plot(y_R, q/U, marker, markerfacecolor=fill, label=label)
-    plt.xlabel(r"$y/R$")
-    plt.ylabel(ylabels[quantity])
-    plt.grid(True)
 
 def plot_turb_lines(half=False):
     if half:
