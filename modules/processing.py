@@ -135,53 +135,6 @@ def load_k_profile(z_H=0.0):
         df["k_total"] = df.k_resolved
     return df
     
-def calcwake(t1=0.0, save=False):
-    times = os.listdir("postProcessing/sets")
-    times = [float(time) for time in times]
-    times.sort()
-    times = np.asarray(times)
-    data = loadwake(times[0])
-    z_H = np.asarray(sorted(data.keys()))
-    y_R = data[z_H[0]][0]/R
-    # Find first timestep from which to average over
-    t = times[times >= t1]
-    # Assemble 3-D arrays, with time as first index
-    u = np.zeros((len(t), len(z_H), len(y_R)))
-    v = np.zeros((len(t), len(z_H), len(y_R)))
-    w = np.zeros((len(t), len(z_H), len(y_R)))
-    xvorticity = np.zeros((len(t), len(z_H), len(y_R)))
-    # Loop through all times
-    for n, t_i in enumerate(t):
-        print("Loading sampled velocity data for t = {}".format(t_i))
-        data = loadwake(t[n])
-        for m, z_H_i in enumerate(z_H):
-            u[n,m,:] = data[z_H_i][1]
-            v[n,m,:] = data[z_H_i][2]
-            w[n,m,:] = data[z_H_i][3]
-            try:
-                xvorticity[n,m,:] = data[z_H_i][4]
-            except IndexError:
-                pass
-    meanu = u.mean(axis=0)
-    meanv = v.mean(axis=0)
-    meanw = w.mean(axis=0)
-    xvorticity = xvorticity.mean(axis=0)
-    if save:
-        df = pd.DataFrame(meanu, index=z_H, columns=y_R)
-        df.to_csv("processed/mean_u.csv")
-        df = pd.DataFrame(meanv, index=z_H, columns=y_R)
-        df.to_csv("processed/mean_v.csv")
-        df = pd.DataFrame(meanw, index=z_H, columns=y_R)
-        df.to_csv("processed/mean_w.csv")
-        df = pd.DataFrame(xvorticity, index=z_H, columns=y_R)
-        df.to_csv("processed/xvorticity.csv")
-    return {"meanu" : meanu,
-            "meanv" : meanv,
-            "meanw" : meanw,
-            "xvorticity" : xvorticity,
-            "y/R" : y_R, 
-            "z/H" : z_H}
-    
 def get_ncells(logname="log.checkMesh", keyword="cells"):
     if keyword == "cells":
         keyword = "cells:"
