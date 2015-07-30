@@ -99,6 +99,7 @@ def load_u_profile(z_H=0.0):
     Loads data from the sampled mean velocity and returns it as a pandas
     `DataFrame`.
     """
+    z_H = float(z_H)
     timedirs = os.listdir("postProcessing/sets")
     latest_time = max(timedirs)
     fname = "profile_{}_UMean.xy".format(z_H)
@@ -114,6 +115,7 @@ def load_k_profile(z_H=0.0):
     Loads data from the sampled `UPrime2Mean` and `kMean` (if available) and
     returns it as a pandas `DataFrame`.
     """
+    z_H = float(z_H)
     df = pd.DataFrame()
     timedirs = os.listdir("postProcessing/sets")
     latest_time = max(timedirs)
