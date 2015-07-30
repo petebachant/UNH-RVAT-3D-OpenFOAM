@@ -135,6 +135,57 @@ def load_k_profile(z_H=0.0):
         df["k_total"] = df.k_resolved
     return df
     
+def load_vel_map(component="u"):
+    """
+    Loads all mean streamwise velocity profiles. Returns a `DataFrame` with
+    `z_H` as the index and `y_R` as columns.
+    """
+    # Define columns in set raw data file
+    columns = dict(u=1, v=2, w=3)
+    sets_dir = os.path.join("postProcessing", "sets")
+    latest_time = max(os.listdir(sets_dir))
+    data_dir = os.path.join(sets_dir, latest_time) 
+    flist = os.listdir(data_dir)
+    z_H = []
+    for fname in flist:
+        if "UMean" in fname:
+            z_H.append(float(fname.split("_")[1]))
+    z_H.sort()
+    z_H.reverse()
+    vel = []
+    for zi in z_H:
+        fname = "profile_{}_UMean.xy".format(zi)
+        rawdata = np.loadtxt(os.path.join(data_dir, fname), unpack=True)
+        vel.append(rawdata[columns[component]])
+    y_R = rawdata[0]/R
+    vel = np.array(vel).reshape((len(z_H), len(y_R)))
+    df = pd.DataFrame(vel, index=z_H, columns=y_R)
+    return df
+    
+def load_k_map(amount="total"):
+    """
+    Loads all TKE profiles. Returns a `DataFrame` with `z_H` as the index and 
+    `y_R` as columns.
+    """
+    sets_dir = os.path.join("postProcessing", "sets")
+    latest_time = max(os.listdir(sets_dir))
+    data_dir = os.path.join(sets_dir, latest_time) 
+    flist = os.listdir(data_dir)
+    z_H = []
+    for fname in flist:
+        if "UPrime2Mean" in fname:
+            z_H.append(float(fname.split("_")[1]))
+    z_H.sort()
+    z_H.reverse()
+    k = []
+    for z_H_i in z_H:
+        dfi = load_k_profile(z_H_i)
+        k.append(dfi["k_" + amount].values)
+    y_R = dfi.y_R.values
+    k = np.array(k).reshape((len(z_H), len(y_R)))
+    df = pd.DataFrame(k, index=z_H, columns=y_R)
+    return df
+    
 def get_ncells(logname="log.checkMesh", keyword="cells"):
     if keyword == "cells":
         keyword = "cells:"
