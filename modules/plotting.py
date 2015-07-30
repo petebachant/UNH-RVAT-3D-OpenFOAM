@@ -89,11 +89,9 @@ def plot_exp_lines():
 def plot_meancontquiv(save=False, show=False, savetype=".pdf", 
                       cb_orientation="vertical"):
     """Plot mean contours/quivers of velocity."""
-    if not os.path.isfile("processed/mean_u.csv"):
-        calcwake(t1=3.0, save=True)
-    mean_u = pd.read_csv("processed/mean_u.csv", index_col=0)
-    mean_v = pd.read_csv("processed/mean_v.csv", index_col=0)
-    mean_w = pd.read_csv("processed/mean_w.csv", index_col=0)
+    mean_u = load_vel_map("u")
+    mean_v = load_vel_map("v")
+    mean_w = load_vel_map("w")
     y_R = np.round(np.asarray(mean_u.columns.values, dtype=float), decimals=4)
     z_H = np.asarray(mean_u.index.values, dtype=float)
     plt.figure(figsize=(10,6))
