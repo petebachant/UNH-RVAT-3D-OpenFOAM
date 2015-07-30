@@ -97,6 +97,45 @@ def loadwake(time):
         data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
     
+def load_u_profile(z_H=0.0):
+    """
+    Loads data from the sampled mean velocity and returns it as a pandas
+    `DataFrame`.
+    """
+    timedirs = os.listdir("postProcessing/sets")
+    latest_time = max(timedirs)
+    fname = "profile_{}_UMean.xy".format(z_H)
+    data = np.loadtxt(os.path.join("postProcessing", "sets", latest_time,
+                      fname), unpack=True)
+    df = pd.DataFrame()
+    df["y_R"] = data[0]/R
+    df["u"] = data[1]
+    return df
+    
+def load_k_profile(z_H=0.0):
+    """
+    Loads data from the sampled `UPrime2Mean` and `kMean` (if available) and
+    returns it as a pandas `DataFrame`.
+    """
+    df = pd.DataFrame()
+    timedirs = os.listdir("postProcessing/sets")
+    latest_time = max(timedirs)
+    fname_u = "profile_{}_UPrime2Mean.xy".format(z_H)
+    fname_k = "profile_{}_kMean.xy".format(z_H)
+    data = np.loadtxt(os.path.join("postProcessing", "sets", latest_time,
+                      fname_u), unpack=True)
+    df["y_R"] = data[0]/R
+    df["k_resolved"] = 0.5*(data[1] + data[4] + data[6])
+    try:
+        data = np.loadtxt(os.path.join("postProcessing", "sets", latest_time,
+                          fname_k), unpack=True)
+        df["k_modeled"] = data[1]
+        df["k_total"] = df.k_modeled + df.k_resolved
+    except FileNotFoundError:
+        df["k_modeled"] = np.zeros(len(df.y_R))*np.nan
+        df["k_total"] = df.k_resolved
+    return df
+    
 def calcwake(t1=0.0, save=False):
     times = os.listdir("postProcessing/sets")
     times = [float(time) for time in times]
