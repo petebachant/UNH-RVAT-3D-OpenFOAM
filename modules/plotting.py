@@ -39,6 +39,23 @@ def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures",
             os.makedirs(savedir)
         plt.savefig(os.path.join(savedir, 
                     "u_profile_{}_SA".format(z_H) + savetype))
+                    
+def plot_k_profile(z_H=0.0, amount="total", newfig=True, save=False):
+    """Plot turbulence kinetic energy profile."""
+    df = load_k_profile(z_H)
+    if newfig:
+        plt.figure()
+    k = df["k_{}".format(amount)]
+    plt.plot(df.y_R, k/U_infty**2, "k", label="SA (2-D)")
+    plt.xlabel(r"$y/R$")
+    plt.ylabel(r"$k/U_\infty^2$")
+    plt.grid(True)
+    plt.tight_layout()
+    if save:
+        if not os.path.isdir(savedir):
+            os.makedirs(savedir)
+        plt.savefig(os.path.join(savedir, "k_{}_profile_{}_SA{}".format(
+                amount, z_H, savetype)))
     
 def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="", 
              savetype=".pdf", show=False):
