@@ -23,19 +23,22 @@ ylabels = {"meanu" : r"$U/U_\infty$",
 def plot_perf():
     calc_perf(plot=True)
 
-def plot_wake_profile(quantity="meanu", z_H=0.0, t1=3.0, save=False, savepath="",
-                      savetype=".pdf"):
-    """Plots a 2-D wake profile for a given quantity"""
-    data = calcwake(t1=t1)
-    y_R = data["y/R"]
-    z_H = data["z/H"]
-    df = pd.DataFrame(data[quantity], index=z_H, columns=y_R)
-    d = df.loc[0, :]
-    plt.figure()
-    plt.plot(y_R, d.values)
-    plt.xlabel("$y/R$")
-    plt.ylabel("$U/U_\infty$")
-    plt.show()
+def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures", 
+                   savetype=".pdf"):
+    """Plot mean streamwise velocity profile."""
+    df = load_u_profile(z_H)
+    if newfig:
+        plt.figure()
+    plt.plot(df.y_R, df.u/U_infty, "k", label="SA (3-D)")
+    plt.xlabel(r"$y/R$")
+    plt.ylabel(r"$U/U_\infty$")
+    plt.grid(True)
+    plt.tight_layout()
+    if save:
+        if not os.path.isdir(savedir):
+            os.makedirs(savedir)
+        plt.savefig(os.path.join(savedir, 
+                    "u_profile_{}_SA".format(z_H) + savetype))
     
 def plotwake(plotlist=["meancontquiv"], t1=3.0, save=False, savepath="", 
              savetype=".pdf", show=False):
