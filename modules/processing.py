@@ -439,20 +439,6 @@ def log_perf(logname="all_perf.csv", mode="a", verbose=True):
                                   ypmean=yplus["mean"],
                                   ddt_scheme=ddt_scheme))
 
-def main():
-    p = "Google Drive/Research/Papers/JOT CFT near-wake/Figures"
-    if "linux" in sys.platform:
-        p = "/home/pete/" + p
-    elif "win" in sys.platform:
-        p = "C:/Users/Pete/" + p
-    plt.close("all")
-    
-#    plotwake(plotlist=["meancontquiv"], t1=3.0, 
-#             save=False, savepath=p)
-#    calcwake(t1=3.0, save=True)
-#    plot_wake_profile()
-#    calc_perf(plot=True, inertial=True)
-    plot_meancontquiv(show=True)
 
 if __name__ == "__main__":
-    main()
+    pass
