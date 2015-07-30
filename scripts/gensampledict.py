@@ -12,7 +12,7 @@ import foampy
 # Input parameters
 setformat = "raw"
 interpscheme = "cellPoint"
-fields = ["UMean"]
+fields = ["UMean", "UPrime2Mean", "kMean"]
 x = 1.0
 ymax = 1.5
 ymin = -1.5
