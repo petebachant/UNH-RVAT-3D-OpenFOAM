@@ -5,6 +5,20 @@ This script will download case results from Dropbox, and needs an access
 token to do so. The case will need to have the same name as the top-level
 directory. Note that the script should be run from the top-level directory,
 not the scripts directory.
+
+This script should be run with Python 2.7. With Anaconda, first create a 
+conda env:
+```
+conda create -n dropbox python=2.7
+source activate dropbox
+pip install dropbox
+```
+
+Then run the script (from the top-level case directory):
+```
+source activate dropbox # Only necessary if a new terminal
+python scripts/download.py
+```
 """
 from __future__ import division, print_function
 from dropbox.client import DropboxClient
@@ -22,7 +36,11 @@ def download_file(client, filename, directory="/"):
     out.close()
 
 def get_token():
-    with open(os.path.join(os.path.expanduser("~"), ".dropboxrc")) as f:
+    rcpath = os.path.join(os.path.expanduser("~"),
+                          "Google Drive",
+                          "Settings and Presets",
+                          ".dropboxrc")
+    with open(rcpath) as f:
         token = json.load(f)["token"]
     return token
 
@@ -47,10 +65,10 @@ def uncompress_file(filename):
         tf.extractall()
         
 if __name__ == "__main__":
-    # Name the case the subfolder where this script is located
-    casename = os.path.dirname(os.path.realpath(__file__)).split("/")[-1]
+    # Name the case the subfolder
+    casename = os.path.split(os.getcwd())[-1]
     # Path for files on Dropbox
-    dbdir = os.path.join("/OpenFOAM/solvedCases", casename)
+    dbdir = os.path.join("OpenFOAM", "solvedCases", casename)
 
     # Create Dropbox client    
     token = get_token()    
