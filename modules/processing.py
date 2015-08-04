@@ -280,6 +280,34 @@ def log_perf(logname="all_perf.csv", mode="a", verbose=True):
                                   ypmean=yplus["mean"],
                                   ddt_scheme=ddt_scheme))
 
+def read_funky_log():
+    """Parse `funkyDoCalc` logs for recovery term averages."""
+    with open("log.funkyDoCalc.0") as f:
+        for line in f.readlines():
+            try:
+                line = line.replace("=", " ")
+                line = line.split()
+                if line[0] == "planeAverageAdvectionY":
+                    y_adv = float(line[-1])
+                elif line[0] == "weightedAverage":
+                    z_adv = float(line[-1])
+                elif line[0] == "planeAverageTurbTrans":
+                    turb_trans = float(line[-1])
+            except IndexError:
+                pass
+    with open("log.funkyDoCalc.1") as f:
+        for line in f.readlines():
+            try:
+                line = line.replace("=", " ")
+                line = line.split()
+                if line[0] == "weightedAverage":
+                    visc_trans = float(line[-1])
+                elif line[0] == "planeAveragePressureGradient":
+                    pressure_trans = float(line[-1])
+            except IndexError:
+                pass
+    return {"y_adv" : y_adv, "z_adv" : z_adv, "turb_trans" : turb_trans,
+            "visc_trans" : visc_trans, "pressure_trans" : pressure_trans}
 
 if __name__ == "__main__":
     pass
