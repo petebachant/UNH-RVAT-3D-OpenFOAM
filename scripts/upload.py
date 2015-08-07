@@ -66,10 +66,10 @@ def compress_dir(directory, files="all"):
             tf.add(os.path.join(directory, f))
         
 if __name__ == "__main__":
-    # Name the case the subfolder where this script is located
-    casename = os.path.dirname(os.path.realpath(__file__)).split("/")[-1]
+    # Name the case the subfolder
+    casename = os.path.split(os.getcwd())[-1]
     # Path for files on Dropbox
-    dbdir = os.path.join("/OpenFOAM/solvedCases", casename)
+    dbdir = os.path.join("OpenFOAM", "solvedCases", casename)
 
     # Create Dropbox client    
     token = get_token()    
