@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -f 10/UMean ]
+if [ ! -f 9.98/UMean ]
 then
     scripts/timeAverage
 fi
@@ -10,4 +10,4 @@ python scripts/gensampledict.py
 sample -latestTime | tee log.sample
 funkyDoCalc system/funkyDoCalcDict.0 -latestTime | tee log.funkyDoCalc.0
 funkyDoCalc system/funkyDoCalcDict.1 -latestTime | tee log.funkyDoCalc.1
-
+funkyDoCalc system/funkyDoCalcDict.2 -latestTime | tee log.funkyDoCalc.2

@@ -44,16 +44,4 @@ planeAverageAdvectionY
     accumulations (weightedAverage);
 }
 
-planeAverageTurbTrans
-{
-    type swakExpression;
-    outputControlMode timeStep;
-    outputInterval 1;
-    valueType surface;
-    surfaceName testPlane;
-    verbose true;
-    expression "1.0/UMean.x*nutMean*laplacianUMeanX";
-    accumulations (weightedAverage);
-}
-
 // ************************************************************************* //

@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-planeAverageTurbTrans
+planeAveragePressureGradient
 {
     type swakExpression;
     outputControlMode timeStep;
@@ -28,11 +28,11 @@ planeAverageTurbTrans
         interpolate true;
     };
     verbose true;
-    expression "1.0/UMean.x*nutMean*laplacianUMeanX";
+    expression "-gradPMeanX/UMean.x";
     accumulations (weightedAverage);
 }
 
-planeAverageViscTrans
+planeAverageUx
 {
     type swakExpression;
     outputControlMode timeStep;
@@ -40,7 +40,7 @@ planeAverageViscTrans
     valueType surface;
     surfaceName testPlane;
     verbose true;
-    expression "1.0/UMean.x*1e-6*laplacianUMeanX";
+    expression "UMean.x";
     accumulations (weightedAverage);
 }
 

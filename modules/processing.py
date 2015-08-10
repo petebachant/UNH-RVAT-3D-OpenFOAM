@@ -291,8 +291,6 @@ def read_funky_log():
                     y_adv = float(line[-1])
                 elif line[0] == "weightedAverage":
                     z_adv = float(line[-1])
-                elif line[0] == "planeAverageTurbTrans":
-                    turb_trans = float(line[-1])
             except IndexError:
                 pass
     with open("log.funkyDoCalc.1") as f:
@@ -301,8 +299,17 @@ def read_funky_log():
                 line = line.replace("=", " ")
                 line = line.split()
                 if line[0] == "weightedAverage":
+                    turb_trans = float(line[-1])
+                elif line[0] == "planeAverageViscTrans":
                     visc_trans = float(line[-1])
-                elif line[0] == "planeAveragePressureGradient":
+            except IndexError:
+                pass
+    with open("log.funkyDoCalc.2") as f:
+        for line in f.readlines():
+            try:
+                line = line.replace("=", " ")
+                line = line.split()
+                if line[0] == "weightedAverage":
                     pressure_trans = float(line[-1])
             except IndexError:
                 pass
