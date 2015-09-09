@@ -94,7 +94,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
     mean_w = load_vel_map("w")
     y_R = np.round(np.asarray(mean_u.columns.values, dtype=float), decimals=4)
     z_H = np.asarray(mean_u.index.values, dtype=float)
-    plt.figure(figsize=(10,6))
+    plt.figure(figsize=(7.5, 4.5))
     # Add contours of mean velocity
     cs = plt.contourf(y_R, z_H, mean_u,
                       np.arange(0.15, 1.25, 0.05), cmap=plt.cm.coolwarm)
@@ -108,7 +108,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
     plt.hold(True)
     # Make quiver plot of v and w velocities
     Q = plt.quiver(y_R, z_H, mean_v, mean_w, width=0.0022,
-                   edgecolor="none")
+                   edgecolor="none", scale=3.0)
     plt.xlabel(r"$y/R$")
     plt.ylabel(r"$z/H$")
 #    plt.ylim(-0.2, 0.78)
@@ -119,7 +119,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
                       coordinates="figure",
                       fontproperties={"size": "small"})
     elif cb_orientation == "vertical":
-        plt.quiverkey(Q, 0.65, 0.055, 0.1, r"$0.1 U_\infty$",
+        plt.quiverkey(Q, 0.65, 0.07, 0.1, r"$0.1 U_\infty$",
                       labelpos="E",
                       coordinates="figure",
                       fontproperties={"size": "small"})
