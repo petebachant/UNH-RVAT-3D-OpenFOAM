@@ -23,7 +23,7 @@ ylabels = {"meanu" : r"$U/U_\infty$",
 def plot_perf():
     calc_perf(plot=True)
 
-def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures", 
+def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures",
                    savetype=".pdf"):
     """Plot mean streamwise velocity profile."""
     df = load_u_profile(z_H)
@@ -37,9 +37,9 @@ def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures",
     if save:
         if not os.path.isdir(savedir):
             os.makedirs(savedir)
-        plt.savefig(os.path.join(savedir, 
+        plt.savefig(os.path.join(savedir,
                     "u_profile_{}_SA".format(z_H) + savetype))
-                    
+
 def plot_k_profile(z_H=0.0, amount="total", newfig=True, save=False):
     """Plot turbulence kinetic energy profile."""
     df = load_k_profile(z_H)
@@ -71,7 +71,7 @@ def plot_turb_lines(half=False, color="gray"):
                    linewidth=3)
         plt.vlines(1, -0.5, 0.5, linestyles="solid", colors=color,
                    linewidth=3)
-                   
+
 def plot_exp_lines():
     color = "gray"
     linewidth = 2
@@ -83,10 +83,10 @@ def plot_exp_lines():
     plt.vlines(-3.0, 0.0, 0.625, linestyles="dashed", colors=color,
                linewidth=linewidth)
     plt.vlines(3.0, 0.0, 0.625, linestyles="dashed", colors=color,
-               linewidth=linewidth)    
-    
-    
-def plot_meancontquiv(save=False, show=False, savetype=".pdf", 
+               linewidth=linewidth)
+
+
+def plot_meancontquiv(save=False, show=False, savetype=".pdf",
                       cb_orientation="vertical"):
     """Plot mean contours/quivers of velocity."""
     mean_u = load_vel_map("u")
@@ -102,7 +102,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
         cb = plt.colorbar(cs, shrink=1, extend="both",
                           orientation="horizontal", pad=0.14)
     elif cb_orientation == "vertical":
-        cb = plt.colorbar(cs, shrink=1, extend="both", 
+        cb = plt.colorbar(cs, shrink=1, extend="both",
                           orientation="vertical", pad=0.02)
     cb.set_label(r"$U/U_{\infty}$")
     plt.hold(True)
@@ -133,7 +133,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
         plt.show()
     if save:
         plt.savefig("figures/meancontquiv"+savetype)
-        
+
 def plot_kcont(cb_orientation="vertical", newfig=True):
     """Plot contours of TKE."""
     k = load_k_map()
@@ -146,10 +146,10 @@ def plot_kcont(cb_orientation="vertical", newfig=True):
     plt.xlabel(r"$y/R$")
     plt.ylabel(r"$z/H$")
     if cb_orientation == "horizontal":
-        cb = plt.colorbar(cs, shrink=1, extend="both", 
+        cb = plt.colorbar(cs, shrink=1, extend="both",
                           orientation="horizontal", pad=0.3)
     elif cb_orientation == "vertical":
-        cb = plt.colorbar(cs, shrink=1, extend="both", 
+        cb = plt.colorbar(cs, shrink=1, extend="both",
                           orientation="vertical", pad=0.02)
     cb.set_label(r"$k/U_\infty^2$")
     plot_turb_lines(color="black")
@@ -158,6 +158,22 @@ def plot_kcont(cb_orientation="vertical", newfig=True):
     ax.set_aspect(2)
     plt.yticks([0,0.13,0.25,0.38,0.5,0.63])
     plt.tight_layout()
+
+
+def plot_spanwise_pressure(ax=None):
+    """Plot spanwise pressure distribution."""
+    df = pd.read_csv("processed/pressure_slice_9s.csv")
+    df = df[df["Points:0"] > -0.31]
+    df["z"] = df["Points:2"]
+    if ax is None:
+        fig, ax = plt.subplots()
+    ax.plot(df.z/H, -df.p, "o")
+    ax.set_xlabel("$z/H$")
+    ax.set_ylabel("$-p$")
+    try:
+        fig.tight_layout
+    except UnboundLocalError:
+        pass
 
 
 if __name__ == "__main__":
