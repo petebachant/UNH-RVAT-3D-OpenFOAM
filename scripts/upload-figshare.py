@@ -131,8 +131,7 @@ def upload_all(overwrite=False):
             print("Compressing {}".format(d))
             if f != "constant.gz" and f != "postProcessing.gz" and f != \
                     "log.pimpleDyMFoam":
-                compress_dir(d, files=["U", "p", "k", "nut", "uniform",
-                                       "polyMesh"])
+                compress_dir(d, files=["U", "p", "nut", "polyMesh"])
             elif f == "log.pimpleDyMFoam":
                 pass
             else:
