@@ -13,6 +13,7 @@ import json
 import os
 import re
 
+
 def upload_file(client, filename, dbdir):
     size = os.path.getsize(filename)
     with open(filename, "rb") as f:
@@ -24,10 +25,12 @@ def upload_file(client, filename, dbdir):
                 print(e)
     uploader.finish(os.path.join(dbdir, filename))
 
+
 def get_token():
     with open(os.path.join(os.path.expanduser("~"), ".dropboxrc")) as f:
         token = json.load(f)["token"]
     return token
+
 
 def get_local_dir_list():
     """Create list of local directories to compress and upload."""
@@ -41,6 +44,7 @@ def get_local_dir_list():
     local_dir_list.remove("0")
     return sorted(local_dir_list)
 
+
 def get_dropbox_contents(client, dbdir):
     try:
         folder_metadata = client.metadata(dbdir)
@@ -49,6 +53,7 @@ def get_dropbox_contents(client, dbdir):
         dbcontents = []
     return dbcontents
 
+
 def get_dropbox_filelist(client, dbdir):
     """Returns list of tuples of filenames and sizes."""
     dbcontents = get_dropbox_contents(client, dbdir)
@@ -56,7 +61,8 @@ def get_dropbox_filelist(client, dbdir):
     for f in dbcontents:
         dbfilelist.append(str(f["path"].split("/")[-1]))
     return dbfilelist
-        
+
+
 def compress_dir(directory, files="all"):
     with tarfile.open(directory+".gz", "w:gz") as tf:
         if files == "all":
@@ -64,24 +70,25 @@ def compress_dir(directory, files="all"):
         for f in files:
             print("Adding {} to {}".format(f, directory + ".gz"))
             tf.add(os.path.join(directory, f))
-        
+
+
 if __name__ == "__main__":
     # Name the case the subfolder where this script is located
     casename = os.path.dirname(os.path.realpath(__file__)).split("/")[-1]
     # Path for files on Dropbox
     dbdir = os.path.join("/OpenFOAM/solvedCases", casename)
 
-    # Create Dropbox client    
-    token = get_token()    
+    # Create Dropbox client
+    token = get_token()
     client = DropboxClient(token)
-    
+
     # Create list of local directories
     local_dirs = get_local_dir_list()
     local_files = [d + ".gz" for d in local_dirs]
-    
+
     # Create list of files on Dropbox
     db_files = get_dropbox_filelist(client, dbdir)
-    
+
     for d in local_dirs:
         if d != "log.pimpleDyMFoam":
             f = d + ".gz"
