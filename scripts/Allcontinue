@@ -3,7 +3,7 @@
 #SBATCH --time=48:00:00     # WALLTIME
 #SBATCH -N24 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
-#SBATCH --account=FY140434  # WC ID 
+#SBATCH --account=FY140434  # WC ID
 #SBATCH -p ec               # Queue name
 
 # Source tutorial run functions
@@ -26,5 +26,4 @@ python scripts/gendynmeshdict.py
 
 runParallel `getApplication` $nProc
 
-# python -c "from modules import processing; processing.log_perf()"
-
+# python -c "from pyurof3dsst import processing; processing.log_perf()"
