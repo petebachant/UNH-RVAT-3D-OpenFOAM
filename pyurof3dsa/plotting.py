@@ -9,7 +9,7 @@ from pxl import fdiff
 import sys
 import foampy
 import pandas as pd
-from modules.processing import *
+from .processing import *
 
 ylabels = {"meanu" : r"$U/U_\infty$",
            "stdu" : r"$\sigma_u/U_\infty$",

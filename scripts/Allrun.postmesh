@@ -3,7 +3,7 @@
 #SBATCH --time=92:00:00     # WALLTIME
 #SBATCH -N24 	            # Number of nodes
 #SBATCH --job-name UNH-RVAT-OpenFOAM
-#SBATCH --account=FY140434  # WC ID 
+#SBATCH --account=FY140434  # WC ID
 #SBATCH -p ec               # Queue name
 
 # Source tutorial run functions
@@ -28,4 +28,4 @@ runParallel `getApplication` $nProc
 mv log.yPlus log.yPlus.0
 runParallel yPlus $nProc -latestTime
 
-#python -c "from modules import processing; processing.log_perf()"
+#python -c "from pyurof3dsa import processing; processing.log_perf()"
