@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Plotting for UNH-RVAT 3D OpenFOAM simulation.
-"""
+"""Plotting for UNH-RVAT 3-D OpenFOAM simulation."""
 
 from __future__ import division, print_function
 import matplotlib.pyplot as plt

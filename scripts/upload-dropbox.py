@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+"""Upload case results to Dropbox
+
+Needs an access token to do so.
 """
-This script will upload case results to Dropbox, and needs an access
-token to do so.
-"""
+
 from __future__ import division, print_function
 from dropbox.client import DropboxClient
 from dropbox.rest import ErrorResponse

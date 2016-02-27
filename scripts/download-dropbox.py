@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-This script will download case results from Dropbox, and needs an access
-token to do so. The case will need to have the same name as the top-level
-directory. Note that the script should be run from the top-level directory,
-not the scripts directory.
+"""Download case results from Dropbox.
 
-This script should be run with Python 2.7. With Anaconda, first create a 
+Needs an access token to do so. The case will need to have the same name as the
+top-level directory. Note that the script should be run from the top-level
+directory, not the scripts directory.
+
+This script should be run with Python 2.7. With Anaconda, first create a
 conda env:
 ```
 conda create -n dropbox python=2.7
@@ -59,27 +58,27 @@ def get_dropbox_filelist(client, dbdir):
     for f in dbcontents:
         dbfilelist.append(str(f["path"].split("/")[-1]))
     return sorted(dbfilelist)
-        
+
 def uncompress_file(filename):
     with tarfile.open(filename, "r:gz") as tf:
         tf.extractall()
-        
+
 if __name__ == "__main__":
     # Name the case the subfolder
     casename = os.path.split(os.getcwd())[-1]
     # Path for files on Dropbox
     dbdir = os.path.join("OpenFOAM", "solvedCases", casename)
 
-    # Create Dropbox client    
-    token = get_token()    
+    # Create Dropbox client
+    token = get_token()
     client = DropboxClient(token)
-    
+
     # Create list of local files and directories
     local_items = os.listdir("./")
-    
+
     # Create list of files on Dropbox
     db_files = get_dropbox_filelist(client, dbdir)
-    
+
     for f in db_files:
         if not f in local_items and not f[:-3] in local_items:
             print("Downloading {}".format(f))
@@ -91,4 +90,3 @@ if __name__ == "__main__":
                 os.remove(f)
         else:
             print("{} already exists".format(f))
-
