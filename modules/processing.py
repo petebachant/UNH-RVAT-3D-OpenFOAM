@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Processing for UNH-RVAT 3D OpenFOAM simulation.
-"""
+"""Processing for UNH-RVAT 3-D OpenFOAM simulation."""
 
 from __future__ import division, print_function
 import matplotlib.pyplot as plt
@@ -29,7 +26,7 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanv" : r"$V/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
-           
+
 def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
     t, torque, drag = foampy.load_all_torque_drag()
     _t, theta, omega = foampy.load_theta_omega(t_interp=t)
@@ -53,7 +50,7 @@ def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
     cd = drag/(0.5*rho*area*U_infty**2)
     meancd = np.mean(cd[theta >= theta_0])
     if verbose:
-        print("Performance from {:.1f}--{:.1f} degrees:".format(theta_0, 
+        print("Performance from {:.1f}--{:.1f} degrees:".format(theta_0,
                                                                 theta.max()))
         print("Mean TSR = {:.3f}".format(meantsr))
         print("Mean C_P = {:.3f}".format(meancp))
@@ -68,14 +65,14 @@ def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
         plt.tight_layout()
         plt.show()
     if reached_theta_0:
-        return {"C_P" : meancp, 
-                "C_D" : meancd, 
+        return {"C_P" : meancp,
+                "C_D" : meancd,
                 "TSR" : meantsr}
     else:
-        return {"C_P" : "nan", 
-                "C_D" : "nan", 
+        return {"C_P" : "nan",
+                "C_D" : "nan",
                 "TSR" : "nan"}
-    
+
 def loadwake(time):
     """Loads wake data and returns y/R and statistics."""
     # Figure out if time is an int or float
@@ -93,7 +90,7 @@ def loadwake(time):
         z_H = float(fname.split("_")[1])
         data[z_H] = np.loadtxt(fpath, unpack=True)
     return data
-    
+
 def load_u_profile(z_H=0.0):
     """
     Loads data from the sampled mean velocity and returns it as a pandas
@@ -109,7 +106,7 @@ def load_u_profile(z_H=0.0):
     df["y_R"] = data[0]/R
     df["u"] = data[1]
     return df
-    
+
 def load_k_profile(z_H=0.0):
     """
     Loads data from the sampled `UPrime2Mean` and `kMean` (if available) and
@@ -134,7 +131,7 @@ def load_k_profile(z_H=0.0):
         df["k_modeled"] = np.zeros(len(df.y_R))*np.nan
         df["k_total"] = df.k_resolved
     return df
-    
+
 def load_vel_map(component="u"):
     """
     Loads all mean streamwise velocity profiles. Returns a `DataFrame` with
@@ -144,7 +141,7 @@ def load_vel_map(component="u"):
     columns = dict(u=1, v=2, w=3)
     sets_dir = os.path.join("postProcessing", "sets")
     latest_time = max(os.listdir(sets_dir))
-    data_dir = os.path.join(sets_dir, latest_time) 
+    data_dir = os.path.join(sets_dir, latest_time)
     flist = os.listdir(data_dir)
     z_H = []
     for fname in flist:
@@ -161,15 +158,15 @@ def load_vel_map(component="u"):
     vel = np.array(vel).reshape((len(z_H), len(y_R)))
     df = pd.DataFrame(vel, index=z_H, columns=y_R)
     return df
-    
+
 def load_k_map(amount="total"):
     """
-    Loads all TKE profiles. Returns a `DataFrame` with `z_H` as the index and 
+    Loads all TKE profiles. Returns a `DataFrame` with `z_H` as the index and
     `y_R` as columns.
     """
     sets_dir = os.path.join("postProcessing", "sets")
     latest_time = max(os.listdir(sets_dir))
-    data_dir = os.path.join(sets_dir, latest_time) 
+    data_dir = os.path.join(sets_dir, latest_time)
     flist = os.listdir(data_dir)
     z_H = []
     for fname in flist:
@@ -185,7 +182,7 @@ def load_k_map(amount="total"):
     k = np.array(k).reshape((len(z_H), len(y_R)))
     df = pd.DataFrame(k, index=z_H, columns=y_R)
     return df
-    
+
 def get_ncells(logname="log.checkMesh", keyword="cells"):
     if keyword == "cells":
         keyword = "cells:"
@@ -195,7 +192,7 @@ def get_ncells(logname="log.checkMesh", keyword="cells"):
             if ls and ls[0] == keyword:
                 value = ls[1]
                 return int(value)
-                
+
 def get_yplus(logname="log.yPlus"):
     with open(logname) as f:
         lines = f.readlines()
@@ -209,9 +206,9 @@ def get_yplus(logname="log.yPlus"):
     return {"min" : float(line[3]),
             "max" : float(line[5]),
             "mean" : float(line[7])}
-            
+
 def get_nx_nz():
-    blocks = foampy.dictionaries.read_text("constant/polyMesh/blockMeshDict", 
+    blocks = foampy.dictionaries.read_text("constant/polyMesh/blockMeshDict",
                                            "blocks")
     nx = int(blocks[3].replace("(", "").split()[0])
     nz = int(blocks[3].replace(")", "").split()[2])
@@ -223,25 +220,25 @@ def get_nlayers_expratio():
     expratio = foampy.dictionaries.read_single_line_value("snappyHexMeshDict",
             "expansionRatio")
     return nlayers, expratio
-    
+
 def get_ddt_scheme():
     block = foampy.dictionaries.read_text("system/fvSchemes", "ddtSchemes")
     val = block[2].replace(";", "").split()[1]
     return val
-    
+
 def get_max_courant_no():
-    if foampy.dictionaries.read_single_line_value("controlDict", 
+    if foampy.dictionaries.read_single_line_value("controlDict",
             "adjustTimeStep", valtype=str) == "yes":
-        return foampy.dictionaries.read_single_line_value("controlDict", 
+        return foampy.dictionaries.read_single_line_value("controlDict",
                                                           "maxCo")
     else:
         return "nan"
-        
+
 def get_deltat():
-    if foampy.dictionaries.read_single_line_value("controlDict", 
+    if foampy.dictionaries.read_single_line_value("controlDict",
                                                   "adjustTimeStep",
                                                   valtype=str) == "no":
-        return foampy.dictionaries.read_single_line_value("controlDict", 
+        return foampy.dictionaries.read_single_line_value("controlDict",
                                                           "deltaT")
     else:
         return "nan"
@@ -264,7 +261,7 @@ def log_perf(logname="all_perf.csv", mode="a", verbose=True):
         dt = get_deltat()
         ddt_scheme = get_ddt_scheme()
         val_string = "{dt},{maxco},{nx},{nz},{ncells},{nlayers},{expratio},{tsr},"\
-                + "{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n" 
+                + "{cp},{cd},{ypmin},{ypmax},{ypmean},{ddt_scheme}\n"
         f.write(val_string.format(dt=dt,
                                   maxco=maxco,
                                   nx=nx,

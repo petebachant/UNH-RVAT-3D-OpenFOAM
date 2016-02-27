@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Generate sampleDict for multiple cross-stream profiles
-"""
+"""Generate sampleDict for multiple cross-stream profiles."""
+
 from __future__ import division, print_function
 import numpy as np
 import os
@@ -41,12 +39,12 @@ FoamFile
 
 def main():
     z_array = np.linspace(zmin, zmax, nz)
-    
-    txt = header + "\n" 
+
+    txt = header + "\n"
     txt += "setFormat " + setformat + "; \n\n"
     txt += "interpolationScheme " + interpscheme + "; \n\n"
     txt += "sets \n ( \n"
-    
+
     for z in z_array:
         txt += "    " + "profile_" + str(z) + "\n"
         txt += "    { \n"
@@ -55,16 +53,16 @@ def main():
         txt += "        start       (" + str(x) + " " + str(ymin) + " " + str(z) + ");\n"
         txt += "        end         (" + str(x) + " " + str(ymax) + " " + str(z) + ");\n"
         txt += "        nPoints     " + str(ny) + ";\n    }\n\n"
-        
+
     txt += ");\n\n"
     txt += "fields \n(\n"
-    
+
     for field in fields:
         txt += "    " + field + "\n"
-        
+
     txt += "); \n\n"
     txt += "// *********************************************************************** // \n"
-    
+
     with open("system/sampleDict", "w") as f:
         f.write(txt)
 
