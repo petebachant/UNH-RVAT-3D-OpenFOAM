@@ -10,7 +10,6 @@ only way to know is to inspect the article on the Figshare web interface.
 
 from __future__ import division, print_function
 import requests
-from requests_oauthlib import OAuth1
 import os
 import json
 import tarfile
