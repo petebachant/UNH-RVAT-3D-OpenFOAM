@@ -1,6 +1,8 @@
 UNH-RVAT 3-D OpenFOAM case files
 ================================
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.47926.svg)](http://dx.doi.org/10.5281/zenodo.47926)
+
 These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
 `pimpleDyMFoam` solver. Note this is somewhat of a personal scratchpad for
 figuring out the settings, so this case may not run as-is on all
