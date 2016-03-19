@@ -2,9 +2,10 @@ UNH-RVAT 3-D OpenFOAM case files
 ================================
 
 These case files simulate the UNH-RVAT in three dimensions using OpenFOAM's
-`pimpleDyMFoam` solver. Note this is somewhat of a personal scratchpad for 
-figuring out the settings, so this case may not run as-is on all 
+`pimpleDyMFoam` solver. Note this is somewhat of a personal scratchpad for
+figuring out the settings, so this case may not run as-is on all
 systems.
+
 
 ## Usage
 
@@ -21,7 +22,8 @@ systems.
 
   * OpenFOAM 2.3.x
   * foamPy (available via `pip install foampy`)
-  
+
+
 ### Post-processing
 
   * swak4Foam
@@ -33,7 +35,9 @@ systems.
 
 ## License
 
+Code is MIT licensed. See `LICENSE` for details.
+
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" />
-</a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"/>
+</a><br />All other materials licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"/>
 Creative Commons Attribution 4.0 International License</a>.
