@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """This script uploads simulation results to Figshare.
 
-It should be run with a `.figsharerc` file in the user"s home directory.
+It should be run with a `.figsharerc` file in the user's home directory.
 `article` must be an existing article on Figshare created for this dataset.
 
 Note that no error checking is done, so if a file upload is incomplete, the
