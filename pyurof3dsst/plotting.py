@@ -17,8 +17,10 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
 
+
 def plot_perf():
     calc_perf(plot=True)
+
 
 def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures",
                    savetype=".pdf"):
@@ -37,6 +39,7 @@ def plot_u_profile(z_H=0.0, newfig=True, save=False, savedir="figures",
         plt.savefig(os.path.join(savedir,
                     "u_profile_{}_SA".format(z_H) + savetype))
 
+
 def plot_k_profile(z_H=0.0, amount="total", newfig=True, save=False):
     """Plot turbulence kinetic energy profile."""
     df = load_k_profile(z_H)
@@ -54,20 +57,13 @@ def plot_k_profile(z_H=0.0, amount="total", newfig=True, save=False):
         plt.savefig(os.path.join(savedir, "k_{}_profile_{}_SA{}".format(
                 amount, z_H, savetype)))
 
-def plot_turb_lines(half=False, color="gray"):
-    if half:
-        plt.hlines(0.5, -1, 1, linestyles="solid", linewidth=2)
-        plt.vlines(-1, 0, 0.5, linestyles="solid", linewidth=2)
-        plt.vlines(1, 0, 0.5, linestyles="solid", linewidth=2)
-    else:
-        plt.hlines(0.5, -1, 1, linestyles="solid", colors=color,
-                   linewidth=3)
-        plt.hlines(-0.5, -1, 1, linestyles="solid", colors=color,
-                   linewidth=3)
-        plt.vlines(-1, -0.5, 0.5, linestyles="solid", colors=color,
-                   linewidth=3)
-        plt.vlines(1, -0.5, 0.5, linestyles="solid", colors=color,
-                   linewidth=3)
+
+def plot_turb_lines(color="gray"):
+    plt.hlines(0.5, -1, 1, linestyles="solid", colors=color, linewidth=2)
+    plt.hlines(-0.5, -1, 1, linestyles="solid", colors=color, linewidth=2)
+    plt.vlines(-1, -0.5, 0.5, linestyles="solid", colors=color, linewidth=2)
+    plt.vlines(1, -0.5, 0.5, linestyles="solid", colors=color, linewidth=2)
+
 
 def plot_exp_lines():
     color = "gray"
@@ -91,7 +87,7 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
     mean_w = load_vel_map("w")
     y_R = np.round(np.asarray(mean_u.columns.values, dtype=float), decimals=4)
     z_H = np.asarray(mean_u.index.values, dtype=float)
-    plt.figure(figsize=(7.5, 4.5))
+    plt.figure(figsize=(7.5, 4.8))
     # Add contours of mean velocity
     cs = plt.contourf(y_R, z_H, mean_u,
                       np.arange(0.15, 1.25, 0.05), cmap=plt.cm.coolwarm)
@@ -108,15 +104,15 @@ def plot_meancontquiv(save=False, show=False, savetype=".pdf",
                    edgecolor="none", scale=3.0)
     plt.xlabel(r"$y/R$")
     plt.ylabel(r"$z/H$")
-#    plt.ylim(-0.2, 0.78)
-#    plt.xlim(-3.2, 3.2)
+    # plt.ylim(-0.2, 0.78)
+    # plt.xlim(-3.2, 3.2)
     if cb_orientation == "horizontal":
         plt.quiverkey(Q, 0.65, 0.26, 0.1, r"$0.1 U_\infty$",
                       labelpos="E",
                       coordinates="figure",
                       fontproperties={"size": "small"})
     elif cb_orientation == "vertical":
-        plt.quiverkey(Q, 0.65, 0.07, 0.1, r"$0.1 U_\infty$",
+        plt.quiverkey(Q, 0.65, 0.05, 0.1, r"$0.1 U_\infty$",
                       labelpos="E",
                       coordinates="figure",
                       fontproperties={"size": "small"})
@@ -137,7 +133,7 @@ def plot_kcont(cb_orientation="vertical", newfig=True):
     y_R = np.round(np.asarray(k.columns.values, dtype=float), decimals=4)
     z_H = np.asarray(k.index.values, dtype=float)
     if newfig:
-        plt.figure(figsize=(7.5, 1.9))
+        plt.figure(figsize=(7.5, 2.0))
     cs = plt.contourf(y_R, z_H, k, 20, cmap=plt.cm.coolwarm,
                       levels=np.linspace(0, 0.09, num=19))
     plt.xlabel(r"$y/R$")
