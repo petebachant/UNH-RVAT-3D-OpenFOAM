@@ -27,7 +27,8 @@ ylabels = {"meanu" : r"$U/U_\infty$",
            "meanw" : r"$W/U_\infty$",
            "meanuv" : r"$\overline{u'v'}/U_\infty^2$"}
 
-def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
+def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False,
+              export_csv=True):
     t, torque, drag = foampy.load_all_torque_drag()
     _t, theta, omega = foampy.load_theta_omega(t_interp=t)
     reached_theta_0 = True
@@ -49,6 +50,13 @@ def calc_perf(theta_0=360, plot=False, verbose=True, inertial=False):
     # Compute drag coefficient
     cd = drag/(0.5*rho*area*U_infty**2)
     meancd = np.mean(cd[theta >= theta_0])
+    if export_csv:
+        df = pd.DataFrame()
+        df["theta_deg"] = theta
+        df["tsr"] = tsr
+        df["cp"] = cp
+        df["cd"] = cd
+        df.to_csv("processed/perf.csv", index=False)
     if verbose:
         print("Performance from {:.1f}--{:.1f} degrees:".format(theta_0,
                                                                 theta.max()))
