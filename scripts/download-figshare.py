@@ -13,6 +13,7 @@ import json
 import os
 import re
 import wget
+import sys
 
 
 article = "2885308"
@@ -71,7 +72,13 @@ if __name__ == "__main__":
     # Create list of files on Figshare
     remote_files = get_uploaded_filenames()
 
-    for f in remote_files:
+    # If filename(s) are passed to script, download those
+    if len(sys.argv) > 1:
+        flist = sys.argv[1:]
+    else:
+        flist == remote_files
+
+    for f in flist:
         # File name could end with ".gz"
         if not f in local_items and not f[:-3] in local_items:
             print("Downloading {}".format(f))
